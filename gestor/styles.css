@@ -1,0 +1,1832 @@
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --bg-main: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  
+  --color-success-bg: #dcfce7;
+  --color-success-text: #166534;
+  --color-success-border: #86efac;
+
+  --color-danger-bg: #fee2e2;
+  --color-danger-text: #991b1b;
+  --color-danger-border: #fca5a5;
+
+  --color-warning-bg: #fef3c7;
+  --color-warning-text: #92400e;
+  --color-warning-border: #fcd34d;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  padding: 24px;
+}
+
+.app-container {
+  max-width: 98%;
+  width: 98%;
+  margin: 0 auto;
+}
+
+/* Selector de Equipos Superior */
+.team-switcher-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--card-bg);
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.team-switcher-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.team-switcher-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-team-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid #cbd5e1;
+  background-color: #f8fafc;
+  color: #475569;
+  transition: all 0.2s ease;
+}
+
+.btn-team-switch:hover {
+  border-color: #94a3b8;
+  background-color: #f1f5f9;
+}
+
+.btn-team-switch[data-team="darth_vader"].active {
+  background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
+  border-color: #e11d48;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(225, 29, 72, 0.35);
+}
+
+.btn-team-switch[data-team="fcb_david"].active {
+  background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+  border-color: #f59e0b;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+}
+
+.mini-crest {
+  width: 20px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* Header & Team Branding */
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-brand-area {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.team-crest-wrapper {
+  width: 60px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+  transition: transform 0.25s ease;
+}
+
+.team-crest-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.main-team-crest {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.header-title-area h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-title-area p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Body Themes */
+body.theme-darth_vader {
+  --primary: #e11d48;
+  --primary-hover: #be123c;
+}
+
+body.theme-fcb_david {
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-success {
+  background-color: #10b981;
+  color: #fff;
+}
+.btn-success:hover {
+  background-color: #059669;
+}
+
+.btn-outline {
+  background-color: #fff;
+  border-color: var(--border-color);
+  color: #334155;
+}
+.btn-outline:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.btn-backup {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff;
+}
+.btn-backup:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+}
+
+.title-with-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.badge-edition {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.badge-personal {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: #fff;
+}
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+/* Stats Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.stat-card .stat-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-top: 4px;
+  color: #0f172a;
+}
+
+.stat-card.stat-ok .stat-value {
+  color: #16a34a;
+}
+.stat-card.stat-danger .stat-value {
+  color: #dc2626;
+}
+.stat-card.stat-warning .stat-value {
+  color: #d97706;
+}
+
+/* Tabs Navigation */
+.tabs-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-btn:hover {
+  color: var(--primary);
+}
+
+.tab-btn.active {
+  color: var(--primary);
+}
+
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--primary);
+}
+
+/* Filter & Search Bar */
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: var(--card-bg);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.search-input {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  min-width: 260px;
+  outline: none;
+}
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.legend-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-success { background-color: #22c55e; }
+.dot-danger { background-color: #ef4444; }
+.dot-warning { background-color: #f59e0b; }
+.dot-neutral { background-color: #94a3b8; }
+
+/* Table Container */
+.table-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+thead th {
+  background-color: #f1f5f9;
+  color: #334155;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Columna de Acciones fija (Sticky) a la derecha para que NUNCA quede cortada */
+th:last-child,
+td:last-child {
+  position: sticky;
+  right: 0;
+  background-color: #ffffff;
+  z-index: 5;
+  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.08);
+}
+
+thead th:last-child {
+  background-color: #f1f5f9;
+  z-index: 15;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.15s;
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+tbody tr:hover td:last-child {
+  background-color: #f8fafc;
+}
+
+td {
+  padding: 10px 12px;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+/* Player Column */
+.player-name-cell {
+  min-width: 160px;
+}
+.player-name-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: transparent;
+  transition: all 0.2s;
+}
+.player-name-input:focus,
+.player-name-input:hover {
+  background: #fff;
+  border-color: var(--border-color);
+}
+
+/* New Player Form Card in Players Tab */
+.new-player-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.new-player-header {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.new-player-header h4 {
+  font-size: 1.05rem;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.new-player-header .text-muted {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.new-player-form-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(5, 1.2fr) auto;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+@media (max-width: 1200px) {
+  .new-player-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.new-player-form-grid label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+/* Skill Column Header */
+.skill-header {
+  min-width: 170px;
+  width: auto;
+}
+
+/* Skill Dropdown in Cell */
+.skill-slot-cell {
+  min-width: 170px;
+  width: auto;
+  padding: 8px 6px;
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.skill-select {
+  width: 100%;
+  min-width: 160px;
+  padding: 7px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.83rem;
+  font-weight: 500;
+  border: 1.5px solid var(--border-color);
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Status colors for select dropdowns */
+.skill-select.select-ok {
+  background-color: var(--color-success-bg);
+  color: var(--color-success-text);
+  border-color: var(--color-success-border);
+  font-weight: 600;
+}
+
+.skill-select.select-danger {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border-color: var(--color-danger-border);
+  font-weight: 600;
+}
+
+.skill-select.select-warning {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border-color: var(--color-warning-border);
+  font-weight: 600;
+}
+
+.skill-select.select-empty {
+  background-color: #fff;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+}
+
+/* Mini stock tag under select */
+.slot-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+}
+
+.slot-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.btn-consume-skill {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+
+.btn-consume-skill:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+.btn-consume-skill:active {
+  transform: scale(0.95);
+}
+
+.badge-ok {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+  border: 1px solid var(--color-success-border);
+}
+
+.badge-danger {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border: 1px solid var(--color-danger-border);
+}
+
+.badge-warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border: 1px solid var(--color-warning-border);
+}
+
+/* Status Summary Pill */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Skills Inventory Manager Tab */
+.inventory-container {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .inventory-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.new-skill-box {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  height: fit-content;
+}
+
+.new-skill-box h3 {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  color: #1e293b;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  outline: none;
+}
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* Inventory Table specific */
+.input-inline-skill {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: transparent;
+  transition: all 0.2s;
+}
+.input-inline-skill:focus,
+.input-inline-skill:hover {
+  background: #fff;
+  border-color: var(--border-color);
+}
+
+.input-inline-stock {
+  width: 75px;
+  padding: 6px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.toast {
+  background: #1e293b;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   ESTILOS PARA JUGADORES MODELO, MATCHES Y TRANSFERENCIAS
+   ========================================================================== */
+
+/* Badges de Match en la Tabla */
+.badge-match {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  letter-spacing: 0.2px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-partial-match {
+  background: #fef3c7;
+  color: #92400e !important;
+  border: 1px solid #fde68a;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  margin-top: 4px;
+}
+
+.btn-micro {
+  background: #7c3aed;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.btn-micro:hover {
+  background: #6d28d9;
+  transform: scale(1.04);
+}
+
+.match-pill-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+/* Selector de Plantilla en el formulario de Nuevo Jugador */
+.model-template-bar {
+  background: linear-gradient(to right, #f5f3ff, #ede9fe);
+  border: 1px solid #ddd6fe;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.model-template-bar label {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #5b21b6;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Pestaña de Jugadores Modelo */
+.models-container {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .models-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.model-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.model-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #c4b5fd;
+}
+
+.model-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7c3aed, #4f46e5);
+}
+
+.model-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.model-title-area h4 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.model-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.model-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e2e8f0;
+}
+
+.model-skill-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.model-skill-name {
+  font-weight: 600;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.model-matches-box {
+  background: #faf5ff;
+  border: 1px solid #f3e8ff;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  color: #6b21a8;
+}
+
+.model-matches-box strong {
+  color: #581c87;
+}
+
+.model-transfer-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.new-model-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.new-model-box h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+
+
+
+/* ========================================================================= */
+/* TEMA 1: DARTH VADER FC — BLEND 30 + 21 SUAVIZADO (CON BOTONES MATE SUAVES) */
+/* ========================================================================= */
+
+body.theme-darth_vader {
+  background-color: #0c0d12 !important;
+  color: #e2e8f0 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bg-main: #0c0d12;
+  --card-bg: #141722;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #232a3e;
+  --primary: #991b1b;
+  --primary-hover: #b91c1c;
+}
+
+body.theme-darth_vader .team-switcher-bar {
+  background: #131622;
+  border: 1px solid #232a3e;
+  border-left: 6px solid #991b1b;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.theme-darth_vader .team-switcher-label {
+  font-family: "Consolas", "Lucida Console", monospace;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+body.theme-darth_vader .btn-team-switch {
+  background: #131622;
+  border-color: #2e3852;
+  color: #94a3b8;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-size: 0.82rem;
+}
+
+body.theme-darth_vader .btn-team-switch:hover {
+  background: #1c2233;
+  color: #ffffff;
+  border-color: #3b4868;
+}
+
+body.theme-darth_vader .btn-team-switch[data-team="darth_vader"].active {
+  background: #991b1b !important;
+  border-color: #b91c1c !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
+}
+
+body.theme-darth_vader .app-header {
+  background: linear-gradient(135deg, #131622 0%, #1a1e2e 100%);
+  border: 1px solid #283148;
+  border-top: 3px solid #991b1b;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 14px;
+  padding: 18px 22px;
+}
+
+body.theme-darth_vader .header-title-area h1 {
+  color: #f8fafc;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(153, 27, 27, 0.35);
+}
+
+body.theme-darth_vader .header-title-area p {
+  color: #94a3b8;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-size: 0.85rem;
+}
+
+body.theme-darth_vader .badge-edition {
+  background: #260e15;
+  color: #fca5a5;
+  border: 1px solid #991b1b;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* Botones Suavizados y Mate para Darth Vader (Menos Brillantes) */
+body.theme-darth_vader .btn-success,
+body.theme-darth_vader #btn-export-excel {
+  background: #991b1b !important;
+  border: 1px solid #b91c1c !important;
+  color: #ffffff !important;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-weight: 800;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.theme-darth_vader .btn-success:hover,
+body.theme-darth_vader #btn-export-excel:hover {
+  background: #b91c1c !important;
+  border-color: #dc2626 !important;
+}
+
+body.theme-darth_vader .btn-primary,
+body.theme-darth_vader #btn-add-player {
+  background: #881337 !important;
+  border: 1px solid #9f1239 !important;
+  color: #ffffff !important;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-weight: 800;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.theme-darth_vader .btn-primary:hover,
+body.theme-darth_vader #btn-add-player:hover {
+  background: #9f1239 !important;
+}
+
+body.theme-darth_vader .btn-outline {
+  background: #141722 !important;
+  border: 1px solid #2e3852 !important;
+  color: #cbd5e1 !important;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-weight: 700;
+}
+
+body.theme-darth_vader .btn-outline:hover {
+  background: #1c2233 !important;
+  color: #ffffff !important;
+  border-color: #991b1b !important;
+}
+
+body.theme-darth_vader .btn-backup,
+body.theme-darth_vader #btn-export-backup {
+  background: #1e2436 !important;
+  border: 1px solid #334155 !important;
+  color: #cbd5e1 !important;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-weight: 700;
+  box-shadow: none !important;
+}
+
+body.theme-darth_vader .btn-backup:hover,
+body.theme-darth_vader #btn-export-backup:hover {
+  background: #283148 !important;
+  color: #ffffff !important;
+  border-color: #991b1b !important;
+}
+
+/* Tarjetas de Estadísticas */
+body.theme-darth_vader .stat-card {
+  background: #131622;
+  border: 1px solid #232a3e;
+  border-radius: 10px;
+}
+
+body.theme-darth_vader .stat-card:nth-child(1) { border-top: 3px solid #38bdf8; }
+body.theme-darth_vader .stat-card:nth-child(2) { border-top: 3px solid #10b981; }
+body.theme-darth_vader .stat-card:nth-child(3) { border-top: 3px solid #a855f7; }
+body.theme-darth_vader .stat-card:nth-child(4) { border-top: 3px solid #991b1b; }
+
+body.theme-darth_vader .stat-card .stat-label {
+  font-family: "Consolas", "Lucida Console", monospace;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+}
+
+body.theme-darth_vader .stat-card .stat-value {
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-weight: 900;
+  color: #f8fafc;
+}
+
+body.theme-darth_vader .stat-card.stat-ok .stat-value { color: #34d399; }
+body.theme-darth_vader .stat-card.stat-danger .stat-value { color: #fca5a5; }
+
+/* Pestañas */
+body.theme-darth_vader .tabs-nav {
+  border-bottom-color: #232a3e;
+}
+
+body.theme-darth_vader .tab-btn {
+  color: #94a3b8;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 700;
+}
+
+body.theme-darth_vader .tab-btn:hover {
+  color: #ffffff;
+}
+
+body.theme-darth_vader .tab-btn.active {
+  color: #fca5a5;
+}
+
+body.theme-darth_vader .tab-btn.active::after {
+  background-color: #991b1b;
+  height: 3px;
+}
+
+/* Controles, Formularios y Tablas */
+body.theme-darth_vader .controls-bar,
+body.theme-darth_vader .new-player-card,
+body.theme-darth_vader .table-card,
+body.theme-darth_vader .new-skill-box,
+body.theme-darth_vader .model-card,
+body.theme-darth_vader .new-model-box {
+  background: #131622;
+  border: 1px solid #232a3e;
+  color: #e2e8f0;
+}
+
+body.theme-darth_vader .new-player-header h4,
+body.theme-darth_vader .new-skill-box h3,
+body.theme-darth_vader .model-title-area h4,
+body.theme-darth_vader .new-model-box h3 {
+  color: #f8fafc;
+}
+
+body.theme-darth_vader .search-input,
+body.theme-darth_vader .form-control {
+  background: #0c0d12;
+  color: #f8fafc;
+  border: 1px solid #2d374f;
+}
+
+body.theme-darth_vader thead th {
+  background-color: #0f121c;
+  color: #94a3b8;
+  border-bottom: 2px solid #2d374f;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.5px;
+}
+
+body.theme-darth_vader th:last-child,
+body.theme-darth_vader td:last-child {
+  background-color: #131622 !important;
+  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.45);
+}
+
+body.theme-darth_vader thead th:last-child {
+  background-color: #0f121c !important;
+}
+
+body.theme-darth_vader tbody tr {
+  border-bottom: 1px solid #1c2234;
+}
+
+body.theme-darth_vader tbody tr:hover {
+  background-color: #181d2c;
+}
+
+body.theme-darth_vader tbody tr:hover td:last-child {
+  background-color: #181d2c !important;
+}
+
+body.theme-darth_vader .player-name-input {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+body.theme-darth_vader .player-name-input:focus,
+body.theme-darth_vader .player-name-input:hover {
+  background: #0c0d12;
+  border-color: #2d374f;
+}
+
+body.theme-darth_vader .skill-select,
+body.theme-darth_vader .skill-select.select-ok,
+body.theme-darth_vader .skill-select.select-warning,
+body.theme-darth_vader .skill-select.select-danger,
+body.theme-darth_vader .skill-select.select-empty {
+  background-color: #0c0d12;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #2d374f;
+  font-weight: 600;
+}
+
+body.theme-darth_vader .skill-select option {
+  background-color: #131622;
+  color: #ffffff !important;
+}
+
+body.theme-darth_vader .skill-select.select-ok {
+  background-color: rgba(5, 150, 105, 0.22);
+  border-color: #059669;
+}
+
+body.theme-darth_vader .skill-select.select-warning {
+  background-color: rgba(217, 119, 6, 0.22);
+  border-color: #d97706;
+}
+
+body.theme-darth_vader .skill-select.select-danger {
+  background-color: rgba(153, 27, 27, 0.28);
+  border-color: #991b1b;
+}
+
+body.theme-darth_vader .skill-select.select-empty {
+  background-color: #0c0d12;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 0.85;
+  border-color: #232a3e;
+}
+
+body.theme-darth_vader .input-inline-skill {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+body.theme-darth_vader .input-inline-skill:focus,
+body.theme-darth_vader .input-inline-skill:hover {
+  background: #0c0d12;
+  border-color: #2d374f;
+  color: #ffffff !important;
+}
+
+body.theme-darth_vader .input-inline-stock {
+  color: #ffffff !important;
+  background: #0c0d12;
+  border-color: #2d374f;
+}
+
+body.theme-darth_vader .slot-badge {
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-size: 0.72rem;
+}
+
+body.theme-darth_vader .badge-ok {
+  background: #064e3b;
+  color: #6ee7b7;
+  border: 1px solid #059669;
+}
+
+body.theme-darth_vader .badge-warning {
+  background: #78350f;
+  color: #fde68a;
+  border: 1px solid #d97706;
+}
+
+body.theme-darth_vader .badge-danger {
+  background: #450a0a;
+  color: #fca5a5;
+  border: 1px solid #991b1b;
+}
+
+body.theme-darth_vader .btn-consume-skill {
+  background: #1c0e14;
+  border: 1px solid #7f1d1d;
+  color: #fca5a5;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-weight: 800;
+  border-radius: 4px;
+}
+
+body.theme-darth_vader .btn-consume-skill:hover {
+  background: #991b1b;
+  color: #ffffff;
+  border-color: #b91c1c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+body.theme-darth_vader .status-pill.pill-ok {
+  background: #064e3b;
+  color: #6ee7b7;
+  font-family: "Consolas", "Lucida Console", monospace;
+}
+
+body.theme-darth_vader .status-pill.pill-danger {
+  background: #450a0a;
+  color: #fca5a5;
+  font-family: "Consolas", "Lucida Console", monospace;
+}
+
+body.theme-darth_vader .match-pill {
+  background: #260e15;
+  color: #fca5a5;
+  border: 1px solid #991b1b;
+  font-family: "Consolas", "Lucida Console", monospace;
+}
+
+body.theme-darth_vader .model-skills-list {
+  background: #0c0d12;
+  border-color: #232a3e;
+}
+
+body.theme-darth_vader .model-skill-name {
+  color: #ffffff !important;
+}
+
+body.theme-darth_vader .model-matches-box {
+  background: #1f132b;
+  border-color: #3b1d5c;
+  color: #d8b4fe;
+}
+
+
+/* ========================================================================= */
+/* TEMA 2: FCB DAVID — BLAUGRANA CLÁSICO (CAMP NOU 1899)                     */
+/* ========================================================================= */
+
+body.theme-fcb_david {
+  background-color: #0a1424 !important;
+  color: #e2e8f0 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bg-main: #0a1424;
+  --card-bg: #102138;
+  --text-main: #f8fafc;
+  --text-muted: #93c5fd;
+  --border-color: #1e3a5f;
+  --primary: #1d4ed8;
+  --primary-hover: #2563eb;
+}
+
+body.theme-fcb_david .team-switcher-bar {
+  background: #102138;
+  border: 1px solid #1e3a5f;
+  border-left: 6px solid #a50044;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.theme-fcb_david .team-switcher-label {
+  color: #93c5fd;
+}
+
+body.theme-fcb_david .btn-team-switch {
+  background: #102138;
+  border-color: #1e3a5f;
+  color: #93c5fd;
+}
+
+body.theme-fcb_david .btn-team-switch:hover {
+  background: #172d4d;
+  color: #ffffff;
+}
+
+body.theme-fcb_david .btn-team-switch[data-team="fcb_david"].active {
+  background: linear-gradient(135deg, #1d4ed8, #a50044) !important;
+  border-color: #edbb00 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(237, 187, 0, 0.35) !important;
+}
+
+body.theme-fcb_david .app-header {
+  background: linear-gradient(135deg, #0e1e34 0%, #1e1124 100%);
+  border: 1px solid #2e4365;
+  border-top: 3px solid #a50044;
+  border-bottom: 2px solid #1d4ed8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 14px;
+  padding: 18px 22px;
+}
+
+body.theme-fcb_david .header-title-area h1 {
+  color: #ffffff;
+  font-weight: 900;
+  text-shadow: 0 0 12px rgba(29, 78, 216, 0.35);
+}
+
+body.theme-fcb_david .header-title-area p {
+  color: #93c5fd;
+}
+
+body.theme-fcb_david .badge-edition {
+  background: #1e1124;
+  color: #fbcfe8;
+  border: 1px solid #a50044;
+  font-weight: 800;
+}
+
+/* Botones Blaugrana Clásico */
+body.theme-fcb_david .btn-success,
+body.theme-fcb_david #btn-export-excel {
+  background: #a50044 !important;
+  border: 1px solid #be123c !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(165, 0, 68, 0.35) !important;
+}
+
+body.theme-fcb_david .btn-success:hover,
+body.theme-fcb_david #btn-export-excel:hover {
+  background: #be123c !important;
+}
+
+body.theme-fcb_david .btn-primary,
+body.theme-fcb_david #btn-add-player {
+  background: #1d4ed8 !important;
+  border: 1px solid #2563eb !important;
+  color: #ffffff !important;
+  font-weight: 800;
+}
+
+body.theme-fcb_david .btn-primary:hover,
+body.theme-fcb_david #btn-add-player:hover {
+  background: #2563eb !important;
+}
+
+body.theme-fcb_david .btn-outline {
+  background: #102138 !important;
+  border: 1px solid #23436a !important;
+  color: #e2e8f0 !important;
+  font-weight: 700;
+}
+
+body.theme-fcb_david .btn-outline:hover {
+  background: #172d4d !important;
+  color: #ffffff !important;
+  border-color: #3b82f6 !important;
+}
+
+body.theme-fcb_david .btn-backup,
+body.theme-fcb_david #btn-export-backup {
+  background: #1e3a8a !important;
+  border: 1px solid #2563eb !important;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+body.theme-fcb_david .btn-backup:hover,
+body.theme-fcb_david #btn-export-backup:hover {
+  background: #1d4ed8 !important;
+}
+
+/* Tarjetas de Estadísticas */
+body.theme-fcb_david .stat-card {
+  background: #102138;
+  border: 1px solid #1e3a5f;
+  border-radius: 10px;
+}
+
+body.theme-fcb_david .stat-card:nth-child(1) { border-top: 3px solid #38bdf8; }
+body.theme-fcb_david .stat-card:nth-child(2) { border-top: 3px solid #edbb00; }
+body.theme-fcb_david .stat-card:nth-child(3) { border-top: 3px solid #a50044; }
+body.theme-fcb_david .stat-card:nth-child(4) { border-top: 3px solid #f43f5e; }
+
+body.theme-fcb_david .stat-card .stat-label {
+  color: #93c5fd;
+}
+
+body.theme-fcb_david .stat-card .stat-value {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+body.theme-fcb_david .stat-card.stat-ok .stat-value { color: #4ade80; }
+body.theme-fcb_david .stat-card.stat-danger .stat-value { color: #f87171; }
+
+/* Pestañas */
+body.theme-fcb_david .tabs-nav {
+  border-bottom-color: #1e3a5f;
+}
+
+body.theme-fcb_david .tab-btn {
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+body.theme-fcb_david .tab-btn:hover {
+  color: #ffffff;
+}
+
+body.theme-fcb_david .tab-btn.active {
+  color: #60a5fa;
+}
+
+body.theme-fcb_david .tab-btn.active::after {
+  background-color: #1d4ed8;
+  height: 3px;
+}
+
+/* Controles, Formularios y Tablas */
+body.theme-fcb_david .controls-bar,
+body.theme-fcb_david .new-player-card,
+body.theme-fcb_david .table-card,
+body.theme-fcb_david .new-skill-box,
+body.theme-fcb_david .model-card,
+body.theme-fcb_david .new-model-box {
+  background: #102138;
+  border: 1px solid #1e3a5f;
+  color: #e2e8f0;
+}
+
+body.theme-fcb_david .new-player-header h4,
+body.theme-fcb_david .new-skill-box h3,
+body.theme-fcb_david .model-title-area h4,
+body.theme-fcb_david .new-model-box h3 {
+  color: #f8fafc;
+}
+
+body.theme-fcb_david .search-input,
+body.theme-fcb_david .form-control {
+  background: #0a1424;
+  color: #f8fafc;
+  border: 1px solid #23436a;
+}
+
+body.theme-fcb_david thead th {
+  background-color: #0c1a2e;
+  color: #93c5fd;
+  border-bottom: 2px solid #1e3a5f;
+  font-size: 0.76rem;
+}
+
+body.theme-fcb_david th:last-child,
+body.theme-fcb_david td:last-child {
+  background-color: #102138 !important;
+  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.45);
+}
+
+body.theme-fcb_david thead th:last-child {
+  background-color: #0c1a2e !important;
+}
+
+body.theme-fcb_david tbody tr {
+  border-bottom: 1px solid #162c4b;
+}
+
+body.theme-fcb_david tbody tr:hover {
+  background-color: #172d4d;
+}
+
+body.theme-fcb_david tbody tr:hover td:last-child {
+  background-color: #172d4d !important;
+}
+
+body.theme-fcb_david .player-name-input {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+body.theme-fcb_david .player-name-input:focus,
+body.theme-fcb_david .player-name-input:hover {
+  background: #0a1424;
+  border-color: #23436a;
+}
+
+body.theme-fcb_david .skill-select,
+body.theme-fcb_david .skill-select.select-ok,
+body.theme-fcb_david .skill-select.select-warning,
+body.theme-fcb_david .skill-select.select-danger,
+body.theme-fcb_david .skill-select.select-empty {
+  background-color: #0a1424;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #23436a;
+  font-weight: 600;
+}
+
+body.theme-fcb_david .skill-select option {
+  background-color: #102138;
+  color: #ffffff !important;
+}
+
+body.theme-fcb_david .skill-select.select-ok {
+  background-color: rgba(5, 150, 105, 0.25);
+  border-color: #059669;
+}
+
+body.theme-fcb_david .skill-select.select-warning {
+  background-color: rgba(217, 119, 6, 0.25);
+  border-color: #d97706;
+}
+
+body.theme-fcb_david .skill-select.select-danger {
+  background-color: rgba(165, 0, 68, 0.28);
+  border-color: #a50044;
+}
+
+body.theme-fcb_david .skill-select.select-empty {
+  background-color: #0a1424;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 0.85;
+  border-color: #1e3a5f;
+}
+
+body.theme-fcb_david .input-inline-skill {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+body.theme-fcb_david .input-inline-skill:focus,
+body.theme-fcb_david .input-inline-skill:hover {
+  background: #0a1424;
+  border-color: #23436a;
+  color: #ffffff !important;
+}
+
+body.theme-fcb_david .input-inline-stock {
+  color: #ffffff !important;
+  background: #0a1424;
+  border-color: #23436a;
+}
+
+body.theme-fcb_david .badge-ok {
+  background: #064e3b;
+  color: #6ee7b7;
+  border: 1px solid #059669;
+}
+
+body.theme-fcb_david .badge-warning {
+  background: #78350f;
+  color: #fde68a;
+  border: 1px solid #d97706;
+}
+
+body.theme-fcb_david .badge-danger {
+  background: #4c0519;
+  color: #fecaca;
+  border: 1px solid #a50044;
+}
+
+body.theme-fcb_david .btn-consume-skill {
+  background: #260c18;
+  border: 1px solid #a50044;
+  color: #fbcfe8;
+  font-weight: 800;
+  border-radius: 4px;
+}
+
+body.theme-fcb_david .btn-consume-skill:hover {
+  background: #a50044;
+  color: #ffffff;
+  border-color: #be123c;
+}
+
+body.theme-fcb_david .status-pill.pill-ok {
+  background: #064e3b;
+  color: #6ee7b7;
+}
+
+body.theme-fcb_david .status-pill.pill-danger {
+  background: #4c0519;
+  color: #fecaca;
+}
+
+body.theme-fcb_david .match-pill {
+  background: #172554;
+  color: #bfdbfe;
+  border: 1px solid #3b82f6;
+}
+
+body.theme-fcb_david .model-skills-list {
+  background: #0a1424;
+  border-color: #1e3a5f;
+}
+
+body.theme-fcb_david .model-skill-name {
+  color: #ffffff !important;
+}
+
+body.theme-fcb_david .model-matches-box {
+  background: #172554;
+  border-color: #1e3a8a;
+  color: #bfdbfe;
+}

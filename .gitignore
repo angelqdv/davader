@@ -1,0 +1,11 @@
+# Dependencias y temporales
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+
+# No subir binarios de más de 50MB directo a git (alojar en GitHub Releases)
+*.exe
+dist/
+dist_personal/
+build/

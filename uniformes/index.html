@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D.A.V.A.D.E.R. — Compendio de Uniformes eFootball</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .uniformes-hero {
+      background: linear-gradient(135deg, rgba(12,13,18,0.95), rgba(20,23,34,0.95)), radial-gradient(circle at top right, rgba(153,27,27,0.25), transparent 60%);
+      border: 1px solid #232a3e;
+      border-radius: 16px;
+      padding: 32px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .filters-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      background: #131722;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid #232a3e;
+    }
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-btn {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid #2d374f;
+      background: #0c0d12;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      background: #1e2436;
+      color: #fff;
+    }
+    .filter-btn.active {
+      background: #991b1b;
+      color: #fff;
+      border-color: #b91c1c;
+      box-shadow: 0 0 12px rgba(153,27,27,0.4);
+    }
+    .kits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 22px;
+    }
+    .kit-card {
+      background: #131622;
+      border: 1px solid #232a3e;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .kit-card:hover {
+      transform: translateY(-4px);
+      border-color: #991b1b;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+    .kit-preview-box {
+      height: 210px;
+      background: radial-gradient(circle at center, #1e2436 0%, #0c0d12 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-bottom: 1px solid #232a3e;
+      padding: 16px;
+    }
+    .kit-badge-type {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-family: "Consolas", monospace;
+    }
+    .badge-local { background: #1e293b; color: #38bdf8; border: 1px solid #334155; }
+    .badge-visitante { background: #2e1065; color: #d8b4fe; border: 1px solid #581c87; }
+    .badge-portero { background: #450a0a; color: #fca5a5; border: 1px solid #991b1b; }
+    .badge-especial { background: #422006; color: #fde68a; border: 1px solid #ca8a04; }
+
+    .kit-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 12px;
+    }
+    .kit-team-name {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .kit-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+    .kit-desc {
+      font-size: 0.83rem;
+      color: #94a3b8;
+      line-height: 1.45;
+      flex: 1;
+    }
+    .color-swatches {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .color-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .kit-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .btn-kit {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #334155;
+      background: #1c2132;
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+    }
+    .btn-kit:hover {
+      background: #991b1b;
+      color: #fff;
+      border-color: #b91c1c;
+    }
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-content {
+      background: #131622;
+      border: 2px solid #991b1b;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 680px;
+      padding: 28px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .modal-close:hover { color: #fff; }
+    .formula-box {
+      background: #0c0d12;
+      border: 1px solid #232a3e;
+      border-left: 4px solid #991b1b;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: "Consolas", monospace;
+      font-size: 0.85rem;
+      color: #f8fafc;
+      margin-top: 10px;
+      word-break: break-all;
+    }
+    .notice-sync {
+      background: linear-gradient(90deg, #181226 0%, #151d2f 100%);
+      border: 1px dashed #6366f1;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 36px;
+      font-size: 0.85rem;
+      color: #c7d2fe;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+  </style>
+</head>
+<body class="theme-darth_vader">
+
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-crest">⚡</span>
+        <span class="brand-name">D.A.V.A.D.E.R.</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">🏠 Inicio</a>
+        <a href="../gestor/index.html">📊 Gestor Web</a>
+        <a href="index.html" class="active">👕 Uniformes</a>
+        <a href="../descargas/index.html">💾 Descargas</a>
+        <a href="../temas/index.html">🎨 35 Temas</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-container">
+    <header class="uniformes-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="badge-tag">Compendio Oficial eFootball</span>
+          <h1 style="font-size: 2rem; font-weight: 900; color: #fff; margin: 8px 0;">👕 Colección de Uniformes & Kits</h1>
+          <p style="color: #94a3b8; max-width: 650px; font-size: 0.95rem;">
+            Catálogo técnico de indumentarias de autor para <strong>Darth Vader FC</strong> y <strong>FCB David</strong>. Incluye paletas RGB oficiales, texturas tácticas y fórmulas listas para exportar a eFootball.
+          </p>
+        </div>
+        <a href="../index.html" class="btn-primary" style="text-decoration: none;">← Volver al Hub Central</a>
+      </div>
+    </header>
+
+    <!-- Barra de Filtros y Búsqueda -->
+    <div class="filters-bar">
+      <div class="filter-pills" id="team-filter-group">
+        <button class="filter-btn active" onclick="setFilter('all', this)">Todos (<span id="count-all">0</span>)</button>
+        <button class="filter-btn" onclick="setFilter('dv', this)">⚔️ Darth Vader FC</button>
+        <button class="filter-btn" onclick="setFilter('fcb', this)">🔵🔴 FCB David</button>
+        <button class="filter-btn" onclick="setFilter('local', this)">Titular</button>
+        <button class="filter-btn" onclick="setFilter('visitante', this)">Suplente</button>
+        <button class="filter-btn" onclick="setFilter('portero', this)">Portero</button>
+        <button class="filter-btn" onclick="setFilter('especial', this)">Especiales</button>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <input 
+          type="text" 
+          id="search-kits" 
+          class="search-input" 
+          placeholder="🔍 Buscar uniforme o color..." 
+          oninput="onSearchInput(this.value)"
+        />
+      </div>
+    </div>
+
+    <!-- Rejilla de Kits -->
+    <div class="kits-grid" id="kits-container">
+      <!-- Inyectado dinámicamente con uniformes.json -->
+    </div>
+
+    <!-- Aviso de Integración para la otra conversación -->
+    <div class="notice-sync">
+      <span style="font-size: 1.8rem;">📦</span>
+      <div>
+        <strong style="color: #ffffff; display: block; margin-bottom: 3px;">¿Creaste nuevos uniformes en tu otra conversación?</strong>
+        <span>
+          Es tan simple como agregar la nueva entrada en <code>davader/uniformes/uniformes.json</code> o arrastrar la imagen a la carpeta <code>assets/</code>. Aparecerá aquí al instante sin tener que tocar el código del sitio.
+        </span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de Detalle de Kit -->
+  <div id="kit-modal" class="modal-backdrop" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeKitModal()">✕</button>
+      <div id="modal-body-content"></div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p><strong>D.A.V.A.D.E.R.</strong> — <em>David And Vader Applications, Database & eFootball Resources</em></p>
+      <p class="copyright">Creador: David Peñuela • Compatible con eFootball 2026/2027 • GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="uniformes.js"></script>
+</body>
+</html>

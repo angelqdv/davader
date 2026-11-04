@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D.A.V.A.D.E.R. — Centro de Descargas Desktop</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .downloads-hero {
+      background: linear-gradient(135deg, rgba(12,13,18,0.95), rgba(20,23,34,0.95)), radial-gradient(circle at top right, rgba(56,189,248,0.2), transparent 60%);
+      border: 1px solid #232a3e;
+      border-radius: 16px;
+      padding: 32px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .featured-release-card {
+      background: linear-gradient(135deg, #131622 0%, #1a1e2f 100%);
+      border: 2px solid #991b1b;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 30px;
+      position: relative;
+      box-shadow: 0 12px 35px rgba(153,27,27,0.25);
+    }
+    .release-badge-current {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: #450a0a;
+      color: #fca5a5;
+      border: 1px solid #991b1b;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      font-family: "Consolas", monospace;
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 20px 0;
+      background: #0c0d12;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #232a3e;
+    }
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .spec-label {
+      font-size: 0.74rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-family: "Consolas", monospace;
+    }
+    .spec-val {
+      font-size: 0.95rem;
+      color: #f8fafc;
+      font-weight: 800;
+    }
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      background: #131622;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #232a3e;
+    }
+    .history-table th {
+      background: #0c0d12;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.78rem;
+      font-family: "Consolas", monospace;
+      color: #94a3b8;
+      border-bottom: 1px solid #232a3e;
+    }
+    .history-table td {
+      padding: 14px 16px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #1a2030;
+      color: #cbd5e1;
+    }
+    .history-table tr:hover {
+      background: #171c2c;
+    }
+  </style>
+</head>
+<body class="theme-darth_vader">
+
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-crest">⚡</span>
+        <span class="brand-name">D.A.V.A.D.E.R.</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">🏠 Inicio</a>
+        <a href="../gestor/index.html">📊 Gestor Web</a>
+        <a href="../uniformes/index.html">👕 Uniformes</a>
+        <a href="index.html" class="active">💾 Descargas</a>
+        <a href="../temas/index.html">🎨 35 Temas</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-container">
+    <header class="downloads-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="badge-tag">Versión Portátil para Windows</span>
+          <h1 style="font-size: 2rem; font-weight: 900; color: #fff; margin: 8px 0;">💾 Centro de Descargas Desktop</h1>
+          <p style="color: #94a3b8; max-width: 650px; font-size: 0.95rem;">
+            Ejecutables portables oficiales del <strong>Gestor de Habilidades eFootball</strong>. Sin instaladores, sin dependencias previas y con persistencia de datos local garantizada.
+          </p>
+        </div>
+        <a href="../index.html" class="btn-primary" style="text-decoration: none;">← Volver al Hub Central</a>
+      </div>
+    </header>
+
+    <!-- Versión Destacada v1.2.1 -->
+    <div class="featured-release-card">
+      <span class="release-badge-current">⭐ ÚLTIMA VERSIÓN ESTABLE</span>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+        <span style="font-size: 1.8rem;">📦</span>
+        <h2 style="color: #fff; font-size: 1.5rem; font-weight: 900;">Gestor de Habilidades Personal v1.2.1</h2>
+      </div>
+      <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">
+        Incluye la interfaz limpia optimizada (sin banner de perfiles en jugadores), colores de texto de habilidades en blanco puro, botones carmesí mate para Darth Vader FC y el tema Blaugrana Clásico 1899 para FCB David.
+      </p>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span class="spec-label">Archivo</span>
+          <span class="spec-val">Gestor_Habilidades_Personal_v1.2.1_Portable.exe</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Sistema Operativo</span>
+          <span class="spec-val">Windows 10 / 11 (64-bit)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Formato</span>
+          <span class="spec-val">Portable (Sin Instalación)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Tamaño</span>
+          <span class="spec-val">~95.4 MB</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+        <a id="download-btn-v121" href="https://github.com/TU_USUARIO/davader/releases/download/v1.2.1/Gestor_Habilidades_Personal_v1.2.1_Portable.exe" class="btn-primary" style="text-decoration: none; font-size: 0.95rem; padding: 12px 24px;">
+          ⬇️ Descargar v1.2.1 Portable (.exe)
+        </a>
+        <a href="../gestor/index.html" class="btn-secondary" style="text-decoration: none; font-size: 0.95rem; padding: 12px 20px;">
+          🌐 O Probarlo Online en el Navegador
+        </a>
+      </div>
+      <small style="display: block; color: #64748b; margin-top: 10px; font-size: 0.78rem;">
+        * Al subir el repositorio a GitHub, vincula este botón directamente a la Release de tu repositorio.
+      </small>
+    </div>
+
+    <!-- Historial de Versiones -->
+    <h3 style="color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 12px;">📜 Historial de Versiones y Rollback</h3>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Versión</th>
+          <th>Fecha</th>
+          <th>Novedades Principales</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color: #38bdf8;">v1.2.1</strong></td>
+          <td>Nov 2026</td>
+          <td>Texto blanco nítido en habilidades; formulario de jugadores optimizado sin banner redundante.</td>
+          <td><span style="color: #34d399; font-weight: 700;">Activa</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color: #cbd5e1;">v1.2.0</strong></td>
+          <td>Oct 2026</td>
+          <td>Temas definitivos integrados: Darth Vader (Blend 30 + 21 mate) y FCB David (Blaugrana 1899).</td>
+          <td><span style="color: #94a3b8;">Preservada</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color: #cbd5e1;">v1.1.0</strong></td>
+          <td>Oct 2026</td>
+          <td>Soporte multiequipo dinámico, botón "⬇️ Descontar" y auto-recuperación de habilidades.</td>
+          <td><span style="color: #94a3b8;">Preservada</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color: #cbd5e1;">v1.0.0</strong></td>
+          <td>Oct 2026</td>
+          <td>Lanzamiento inicial de la versión portátil con sincronización de inventario maestro.</td>
+          <td><span style="color: #94a3b8;">Preservada</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p><strong>D.A.V.A.D.E.R.</strong> — <em>David And Vader Applications, Database & eFootball Resources</em></p>
+      <p class="copyright">Creador: David Peñuela • Versión Desktop v1.2.1 • GitHub Pages</p>
+    </div>
+  </footer>
+
+</body>
+</html>

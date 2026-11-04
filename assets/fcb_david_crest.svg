@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="100%" height="100%">
+  <defs>
+    <!-- Degradados para FCB David -->
+    <linearGradient id="fcb-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fcd34d" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+
+    <linearGradient id="fcb-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <linearGradient id="fcb-garnet" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#991b1b" />
+      <stop offset="100%" stop-color="#581c87" />
+    </linearGradient>
+
+    <!-- Clip path para el interior del escudo -->
+    <clipPath id="inner-shield-clip">
+      <path d="M 100 12 Q 170 16 182 62 Q 185 140 100 205 Q 15 140 18 62 Q 30 16 100 12 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Escudo Base Exterior -->
+  <path d="M 100 6 Q 175 10 188 60 Q 192 145 100 215 Q 8 145 12 60 Q 25 10 100 6 Z" 
+        fill="#0f172a" stroke="url(#fcb-gold)" stroke-width="7" />
+
+  <!-- Contenido interior con Clip Path -->
+  <g clip-path="url(#inner-shield-clip)">
+    <!-- Mitad Superior Izquierda: Cruz de San Jorge moderna en rojo y blanco -->
+    <rect x="18" y="12" width="82" height="70" fill="#ffffff" />
+    <rect x="52" y="12" width="14" height="70" fill="#dc2626" />
+    <rect x="18" y="40" width="82" height="14" fill="#dc2626" />
+
+    <!-- Mitad Superior Derecha: Barras oro y rojo -->
+    <rect x="100" y="12" width="85" height="70" fill="#f59e0b" />
+    <rect x="117" y="12" width="10" height="70" fill="#dc2626" />
+    <rect x="137" y="12" width="10" height="70" fill="#dc2626" />
+    <rect x="157" y="12" width="10" height="70" fill="#dc2626" />
+
+    <!-- Franja Horizontal Central Dorada con siglas -->
+    <rect x="15" y="78" width="170" height="24" fill="url(#fcb-gold)" stroke="#78350f" stroke-width="1.5" />
+    <text x="100" y="95" font-family="'Impact', 'Arial Black', sans-serif" font-size="14" font-weight="900" 
+          letter-spacing="2.5" fill="#1e1b4b" text-anchor="middle">
+      FCB DAVID
+    </text>
+
+    <!-- Mitad Inferior: Franjas Verticales Blaugrana (Azul y Grana) -->
+    <g transform="translate(0, 102)">
+      <rect x="15" y="0" width="170" height="105" fill="#1e3a8a" />
+      <rect x="42" y="0" width="24" height="105" fill="#881337" />
+      <rect x="88" y="0" width="24" height="105" fill="#881337" />
+      <rect x="134" y="0" width="24" height="105" fill="#881337" />
+    </g>
+
+    <!-- Balón Clásico de Fútbol en el Centro Inferior -->
+    <g transform="translate(100, 148)">
+      <!-- Balón base dorado/blanco -->
+      <circle cx="0" cy="0" r="23" fill="#fffbeb" stroke="#d97706" stroke-width="2.5" />
+      <!-- Costuras y hexágonos del balón -->
+      <polygon points="0,-9 8,-3 5,6 -5,6 -8,-3" fill="#b45309" />
+      <line x1="0" y1="-9" x2="0" y2="-23" stroke="#b45309" stroke-width="2" />
+      <line x1="8" y1="-3" x2="20" y2="-10" stroke="#b45309" stroke-width="2" />
+      <line x1="5" y1="6" x2="16" y2="16" stroke="#b45309" stroke-width="2" />
+      <line x1="-5" y1="6" x2="-16" y2="16" stroke="#b45309" stroke-width="2" />
+      <line x1="-8" y1="-3" x2="-20" y2="-10" stroke="#b45309" stroke-width="2" />
+    </g>
+  </g>
+
+  <!-- Borde interior dorado fino -->
+  <path d="M 100 12 Q 170 16 182 62 Q 185 140 100 205 Q 15 140 18 62 Q 30 16 100 12 Z" 
+        fill="none" stroke="url(#fcb-gold)" stroke-width="2" opacity="0.9" />
+</svg>

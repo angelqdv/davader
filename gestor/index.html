@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de Habilidades y Jugadores - Versión Personal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Barra de Retorno al Hub D.A.V.A.D.E.R. -->
+  <div style="background: #090b10; border-bottom: 1px solid #1e2433; padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-family: -apple-system, sans-serif;">
+    <a href="../index.html" style="color: #38bdf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+      <span>←</span>
+      <span>Volver a D.A.V.A.D.E.R. Hub</span>
+    </a>
+    <div style="display: flex; gap: 14px;">
+      <a href="../uniformes/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">👕 Uniformes</a>
+      <a href="../descargas/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">💾 Descargas (.exe)</a>
+      <a href="../temas/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">🎨 35 Temas</a>
+    </div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Selector de Equipos Superior -->
+    <div class="team-switcher-bar">
+      <div class="team-switcher-label">
+        <span>🏆</span>
+        <span>Seleccionar Equipo:</span>
+      </div>
+      <div class="team-switcher-buttons">
+        <button class="btn-team-switch active" data-team="darth_vader" title="Cargar escuadrón Darth Vader">
+          <img src="assets/darth_vader_crest.svg" class="mini-crest" alt="Darth Vader" />
+          <span>⚔️ Darth Vader</span>
+        </button>
+        <button class="btn-team-switch" data-team="fcb_david" title="Cargar plantilla FCB David">
+          <img src="assets/fcb_david_crest.svg" class="mini-crest" alt="FCB David" />
+          <span>⚽ FCB David</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Encabezado Principal -->
+    <header class="app-header">
+      <div class="header-brand-area">
+        <div class="team-crest-wrapper">
+          <img id="team-badge-img" src="assets/darth_vader_crest.svg" alt="Escudo de Equipo" class="main-team-crest" />
+        </div>
+        <div class="header-title-area">
+          <div class="title-with-badge">
+            <h1 id="team-title">Darth Vader FC</h1>
+            <span class="badge-edition badge-personal" title="Edición Personal Portátil con datos y persistencia completa">🔒 Versión Personal v1.2.1</span>
+          </div>
+          <p id="team-subtitle">Control de stock en tiempo real y asignación interactiva de habilidades</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Input para cargar Excel -->
+        <input type="file" id="excel-file-input" accept=".xlsx, .xls, .csv" style="display: none;" />
+        <button class="btn btn-outline" onclick="document.getElementById('excel-file-input').click()" title="Subir archivo Excel o CSV">
+          📁 Cargar Excel
+        </button>
+
+        <!-- Botón para descargar Excel -->
+        <button id="btn-export-excel" class="btn btn-success" title="Descargar como archivo Excel .xlsx">
+          💾 Descargar Excel
+        </button>
+
+        <!-- Sistema de Respaldo JSON -->
+        <button id="btn-export-backup" class="btn btn-backup" onclick="exportBackup()" title="Exportar copia de seguridad completa en JSON para llevar a cualquier PC">
+          📦 Exportar Respaldo
+        </button>
+        <input type="file" id="backup-file-input" accept=".json" style="display: none;" onchange="importBackup(event)" />
+        <button class="btn btn-outline" onclick="document.getElementById('backup-file-input').click()" title="Importar o restaurar copia de seguridad desde archivo JSON">
+          📥 Importar Respaldo
+        </button>
+
+        <!-- Botón para agregar jugador -->
+        <button id="btn-add-player" class="btn btn-primary" title="Agregar un nuevo jugador">
+          ➕ Nuevo Jugador
+        </button>
+
+        <!-- Botón para restablecer datos originales -->
+        <button id="btn-reset" class="btn btn-outline" style="color: #64748b;" title="Restablecer a la plantilla inicial del equipo">
+          🔄 Restablecer
+        </button>
+      </div>
+    </header>
+
+    <!-- Tarjetas de Estadísticas Rápidas -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Habilidades Registradas</span>
+        <span class="stat-value" id="stat-total-skills">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Stock Total Inicial</span>
+        <span class="stat-value" id="stat-total-stock">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Habilidades Asignadas</span>
+        <span class="stat-value" id="stat-total-assigned">0</span>
+      </div>
+      <div class="stat-card" id="card-alerts">
+        <span class="stat-label">Alertas de Stock</span>
+        <span class="stat-value" id="stat-alerts">0</span>
+      </div>
+    </section>
+
+    <!-- Navegación por Pestañas -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="players">
+        👥 Asignación de Jugadores
+      </button>
+      <button class="tab-btn" data-tab="inventory">
+        📦 Inventario Maestro de Habilidades
+      </button>
+      <button class="tab-btn" data-tab="models">
+        ⭐ Jugadores Modelo (Perfiles)
+      </button>
+    </nav>
+
+    <!-- Contenedor Dinámico del Contenido -->
+    <main id="tab-content"></main>
+
+  </div>
+
+  <!-- Contenedor de Alertas Toast -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Librería SheetJS local para lectura y escritura de Excel sin internet -->
+  <script src="xlsx.full.min.js"></script>
+  <!-- Datos precargados del Google Sheet del usuario -->
+  <script src="datos_iniciales.js"></script>
+  <!-- Lógica de la aplicación -->
+  <script src="app.js"></script>
+</body>
+</html>
