@@ -44,7 +44,7 @@ Para publicar este sitio bajo tu cuenta de GitHub:
    git add .
    git commit -m "feat: D.A.V.A.D.E.R. portal inicial con Gestor Web, Uniformes y Descargas"
    git branch -M main
-   git remote add origin https://github.com/TU_USUARIO/davader.git
+   git remote add origin https://github.com/angelqdv/davader.git
    git push -u origin main
    ```
 
@@ -53,7 +53,7 @@ Para publicar este sitio bajo tu cuenta de GitHub:
    - En **Build and deployment** > **Branch**, selecciona `main` y la carpeta `/(root)`.
    - Haz clic en **Save**.
    - En 1-2 minutos tu portal estará en vivo en:
-     `https://TU_USUARIO.github.io/davader/`
+     `https://angelqdv.github.io/davader/`
 
 ---
 
