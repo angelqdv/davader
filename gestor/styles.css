@@ -264,6 +264,160 @@ body.theme-fcb_david {
   box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
 }
 
+.badge-comercial {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
+}
+
+/* Modal de Configuración de Equipo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 540px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transform: translateY(20px) scale(0.97);
+  transition: all 0.25s ease;
+  border: 1px solid var(--border-color);
+}
+
+.modal-overlay.active .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-field label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.modal-input:focus {
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+
+.crest-customizer-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px dashed #cbd5e1;
+}
+
+.crest-preview-img {
+  width: 64px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+  background: #ffffff;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.crest-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.modal-footer {
+  padding: 14px 20px;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 .btn-danger {
   background-color: #ef4444;
   color: #fff;
@@ -1072,761 +1226,3 @@ td {
   margin-bottom: 14px;
 }
 
-
-
-/* ========================================================================= */
-/* TEMA 1: DARTH VADER FC — BLEND 30 + 21 SUAVIZADO (CON BOTONES MATE SUAVES) */
-/* ========================================================================= */
-
-body.theme-darth_vader {
-  background-color: #0c0d12 !important;
-  color: #e2e8f0 !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --bg-main: #0c0d12;
-  --card-bg: #141722;
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
-  --border-color: #232a3e;
-  --primary: #991b1b;
-  --primary-hover: #b91c1c;
-}
-
-body.theme-darth_vader .team-switcher-bar {
-  background: #131622;
-  border: 1px solid #232a3e;
-  border-left: 6px solid #991b1b;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-body.theme-darth_vader .team-switcher-label {
-  font-family: "Consolas", "Lucida Console", monospace;
-  color: #94a3b8;
-  letter-spacing: 0.5px;
-}
-
-body.theme-darth_vader .btn-team-switch {
-  background: #131622;
-  border-color: #2e3852;
-  color: #94a3b8;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-size: 0.82rem;
-}
-
-body.theme-darth_vader .btn-team-switch:hover {
-  background: #1c2233;
-  color: #ffffff;
-  border-color: #3b4868;
-}
-
-body.theme-darth_vader .btn-team-switch[data-team="darth_vader"].active {
-  background: #991b1b !important;
-  border-color: #b91c1c !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
-}
-
-body.theme-darth_vader .app-header {
-  background: linear-gradient(135deg, #131622 0%, #1a1e2e 100%);
-  border: 1px solid #283148;
-  border-top: 3px solid #991b1b;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-  border-radius: 14px;
-  padding: 18px 22px;
-}
-
-body.theme-darth_vader .header-title-area h1 {
-  color: #f8fafc;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  text-shadow: 0 0 10px rgba(153, 27, 27, 0.35);
-}
-
-body.theme-darth_vader .header-title-area p {
-  color: #94a3b8;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-size: 0.85rem;
-}
-
-body.theme-darth_vader .badge-edition {
-  background: #260e15;
-  color: #fca5a5;
-  border: 1px solid #991b1b;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-/* Botones Suavizados y Mate para Darth Vader (Menos Brillantes) */
-body.theme-darth_vader .btn-success,
-body.theme-darth_vader #btn-export-excel {
-  background: #991b1b !important;
-  border: 1px solid #b91c1c !important;
-  color: #ffffff !important;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-weight: 800;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
-}
-
-body.theme-darth_vader .btn-success:hover,
-body.theme-darth_vader #btn-export-excel:hover {
-  background: #b91c1c !important;
-  border-color: #dc2626 !important;
-}
-
-body.theme-darth_vader .btn-primary,
-body.theme-darth_vader #btn-add-player {
-  background: #881337 !important;
-  border: 1px solid #9f1239 !important;
-  color: #ffffff !important;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-weight: 800;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
-}
-
-body.theme-darth_vader .btn-primary:hover,
-body.theme-darth_vader #btn-add-player:hover {
-  background: #9f1239 !important;
-}
-
-body.theme-darth_vader .btn-outline {
-  background: #141722 !important;
-  border: 1px solid #2e3852 !important;
-  color: #cbd5e1 !important;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-weight: 700;
-}
-
-body.theme-darth_vader .btn-outline:hover {
-  background: #1c2233 !important;
-  color: #ffffff !important;
-  border-color: #991b1b !important;
-}
-
-body.theme-darth_vader .btn-backup,
-body.theme-darth_vader #btn-export-backup {
-  background: #1e2436 !important;
-  border: 1px solid #334155 !important;
-  color: #cbd5e1 !important;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-weight: 700;
-  box-shadow: none !important;
-}
-
-body.theme-darth_vader .btn-backup:hover,
-body.theme-darth_vader #btn-export-backup:hover {
-  background: #283148 !important;
-  color: #ffffff !important;
-  border-color: #991b1b !important;
-}
-
-/* Tarjetas de Estadísticas */
-body.theme-darth_vader .stat-card {
-  background: #131622;
-  border: 1px solid #232a3e;
-  border-radius: 10px;
-}
-
-body.theme-darth_vader .stat-card:nth-child(1) { border-top: 3px solid #38bdf8; }
-body.theme-darth_vader .stat-card:nth-child(2) { border-top: 3px solid #10b981; }
-body.theme-darth_vader .stat-card:nth-child(3) { border-top: 3px solid #a855f7; }
-body.theme-darth_vader .stat-card:nth-child(4) { border-top: 3px solid #991b1b; }
-
-body.theme-darth_vader .stat-card .stat-label {
-  font-family: "Consolas", "Lucida Console", monospace;
-  letter-spacing: 0.5px;
-  color: #94a3b8;
-}
-
-body.theme-darth_vader .stat-card .stat-value {
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-weight: 900;
-  color: #f8fafc;
-}
-
-body.theme-darth_vader .stat-card.stat-ok .stat-value { color: #34d399; }
-body.theme-darth_vader .stat-card.stat-danger .stat-value { color: #fca5a5; }
-
-/* Pestañas */
-body.theme-darth_vader .tabs-nav {
-  border-bottom-color: #232a3e;
-}
-
-body.theme-darth_vader .tab-btn {
-  color: #94a3b8;
-  font-family: "Segoe UI", sans-serif;
-  font-weight: 700;
-}
-
-body.theme-darth_vader .tab-btn:hover {
-  color: #ffffff;
-}
-
-body.theme-darth_vader .tab-btn.active {
-  color: #fca5a5;
-}
-
-body.theme-darth_vader .tab-btn.active::after {
-  background-color: #991b1b;
-  height: 3px;
-}
-
-/* Controles, Formularios y Tablas */
-body.theme-darth_vader .controls-bar,
-body.theme-darth_vader .new-player-card,
-body.theme-darth_vader .table-card,
-body.theme-darth_vader .new-skill-box,
-body.theme-darth_vader .model-card,
-body.theme-darth_vader .new-model-box {
-  background: #131622;
-  border: 1px solid #232a3e;
-  color: #e2e8f0;
-}
-
-body.theme-darth_vader .new-player-header h4,
-body.theme-darth_vader .new-skill-box h3,
-body.theme-darth_vader .model-title-area h4,
-body.theme-darth_vader .new-model-box h3 {
-  color: #f8fafc;
-}
-
-body.theme-darth_vader .search-input,
-body.theme-darth_vader .form-control {
-  background: #0c0d12;
-  color: #f8fafc;
-  border: 1px solid #2d374f;
-}
-
-body.theme-darth_vader thead th {
-  background-color: #0f121c;
-  color: #94a3b8;
-  border-bottom: 2px solid #2d374f;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-size: 0.76rem;
-  letter-spacing: 0.5px;
-}
-
-body.theme-darth_vader th:last-child,
-body.theme-darth_vader td:last-child {
-  background-color: #131622 !important;
-  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.45);
-}
-
-body.theme-darth_vader thead th:last-child {
-  background-color: #0f121c !important;
-}
-
-body.theme-darth_vader tbody tr {
-  border-bottom: 1px solid #1c2234;
-}
-
-body.theme-darth_vader tbody tr:hover {
-  background-color: #181d2c;
-}
-
-body.theme-darth_vader tbody tr:hover td:last-child {
-  background-color: #181d2c !important;
-}
-
-body.theme-darth_vader .player-name-input {
-  color: #f8fafc;
-  font-weight: 700;
-}
-
-body.theme-darth_vader .player-name-input:focus,
-body.theme-darth_vader .player-name-input:hover {
-  background: #0c0d12;
-  border-color: #2d374f;
-}
-
-body.theme-darth_vader .skill-select,
-body.theme-darth_vader .skill-select.select-ok,
-body.theme-darth_vader .skill-select.select-warning,
-body.theme-darth_vader .skill-select.select-danger,
-body.theme-darth_vader .skill-select.select-empty {
-  background-color: #0c0d12;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #2d374f;
-  font-weight: 600;
-}
-
-body.theme-darth_vader .skill-select option {
-  background-color: #131622;
-  color: #ffffff !important;
-}
-
-body.theme-darth_vader .skill-select.select-ok {
-  background-color: rgba(5, 150, 105, 0.22);
-  border-color: #059669;
-}
-
-body.theme-darth_vader .skill-select.select-warning {
-  background-color: rgba(217, 119, 6, 0.22);
-  border-color: #d97706;
-}
-
-body.theme-darth_vader .skill-select.select-danger {
-  background-color: rgba(153, 27, 27, 0.28);
-  border-color: #991b1b;
-}
-
-body.theme-darth_vader .skill-select.select-empty {
-  background-color: #0c0d12;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  opacity: 0.85;
-  border-color: #232a3e;
-}
-
-body.theme-darth_vader .input-inline-skill {
-  color: #ffffff !important;
-  font-weight: 700;
-}
-
-body.theme-darth_vader .input-inline-skill:focus,
-body.theme-darth_vader .input-inline-skill:hover {
-  background: #0c0d12;
-  border-color: #2d374f;
-  color: #ffffff !important;
-}
-
-body.theme-darth_vader .input-inline-stock {
-  color: #ffffff !important;
-  background: #0c0d12;
-  border-color: #2d374f;
-}
-
-body.theme-darth_vader .slot-badge {
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-size: 0.72rem;
-}
-
-body.theme-darth_vader .badge-ok {
-  background: #064e3b;
-  color: #6ee7b7;
-  border: 1px solid #059669;
-}
-
-body.theme-darth_vader .badge-warning {
-  background: #78350f;
-  color: #fde68a;
-  border: 1px solid #d97706;
-}
-
-body.theme-darth_vader .badge-danger {
-  background: #450a0a;
-  color: #fca5a5;
-  border: 1px solid #991b1b;
-}
-
-body.theme-darth_vader .btn-consume-skill {
-  background: #1c0e14;
-  border: 1px solid #7f1d1d;
-  color: #fca5a5;
-  font-family: "Consolas", "Lucida Console", monospace;
-  font-weight: 800;
-  border-radius: 4px;
-}
-
-body.theme-darth_vader .btn-consume-skill:hover {
-  background: #991b1b;
-  color: #ffffff;
-  border-color: #b91c1c;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
-}
-
-body.theme-darth_vader .status-pill.pill-ok {
-  background: #064e3b;
-  color: #6ee7b7;
-  font-family: "Consolas", "Lucida Console", monospace;
-}
-
-body.theme-darth_vader .status-pill.pill-danger {
-  background: #450a0a;
-  color: #fca5a5;
-  font-family: "Consolas", "Lucida Console", monospace;
-}
-
-body.theme-darth_vader .match-pill {
-  background: #260e15;
-  color: #fca5a5;
-  border: 1px solid #991b1b;
-  font-family: "Consolas", "Lucida Console", monospace;
-}
-
-body.theme-darth_vader .model-skills-list {
-  background: #0c0d12;
-  border-color: #232a3e;
-}
-
-body.theme-darth_vader .model-skill-name {
-  color: #ffffff !important;
-}
-
-body.theme-darth_vader .model-matches-box {
-  background: #1f132b;
-  border-color: #3b1d5c;
-  color: #d8b4fe;
-}
-
-
-/* ========================================================================= */
-/* TEMA 2: FCB DAVID — BLAUGRANA CLÁSICO (CAMP NOU 1899)                     */
-/* ========================================================================= */
-
-body.theme-fcb_david {
-  background-color: #0a1424 !important;
-  color: #e2e8f0 !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --bg-main: #0a1424;
-  --card-bg: #102138;
-  --text-main: #f8fafc;
-  --text-muted: #93c5fd;
-  --border-color: #1e3a5f;
-  --primary: #1d4ed8;
-  --primary-hover: #2563eb;
-}
-
-body.theme-fcb_david .team-switcher-bar {
-  background: #102138;
-  border: 1px solid #1e3a5f;
-  border-left: 6px solid #a50044;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-body.theme-fcb_david .team-switcher-label {
-  color: #93c5fd;
-}
-
-body.theme-fcb_david .btn-team-switch {
-  background: #102138;
-  border-color: #1e3a5f;
-  color: #93c5fd;
-}
-
-body.theme-fcb_david .btn-team-switch:hover {
-  background: #172d4d;
-  color: #ffffff;
-}
-
-body.theme-fcb_david .btn-team-switch[data-team="fcb_david"].active {
-  background: linear-gradient(135deg, #1d4ed8, #a50044) !important;
-  border-color: #edbb00 !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 12px rgba(237, 187, 0, 0.35) !important;
-}
-
-body.theme-fcb_david .app-header {
-  background: linear-gradient(135deg, #0e1e34 0%, #1e1124 100%);
-  border: 1px solid #2e4365;
-  border-top: 3px solid #a50044;
-  border-bottom: 2px solid #1d4ed8;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-  border-radius: 14px;
-  padding: 18px 22px;
-}
-
-body.theme-fcb_david .header-title-area h1 {
-  color: #ffffff;
-  font-weight: 900;
-  text-shadow: 0 0 12px rgba(29, 78, 216, 0.35);
-}
-
-body.theme-fcb_david .header-title-area p {
-  color: #93c5fd;
-}
-
-body.theme-fcb_david .badge-edition {
-  background: #1e1124;
-  color: #fbcfe8;
-  border: 1px solid #a50044;
-  font-weight: 800;
-}
-
-/* Botones Blaugrana Clásico */
-body.theme-fcb_david .btn-success,
-body.theme-fcb_david #btn-export-excel {
-  background: #a50044 !important;
-  border: 1px solid #be123c !important;
-  color: #ffffff !important;
-  font-weight: 800;
-  box-shadow: 0 2px 8px rgba(165, 0, 68, 0.35) !important;
-}
-
-body.theme-fcb_david .btn-success:hover,
-body.theme-fcb_david #btn-export-excel:hover {
-  background: #be123c !important;
-}
-
-body.theme-fcb_david .btn-primary,
-body.theme-fcb_david #btn-add-player {
-  background: #1d4ed8 !important;
-  border: 1px solid #2563eb !important;
-  color: #ffffff !important;
-  font-weight: 800;
-}
-
-body.theme-fcb_david .btn-primary:hover,
-body.theme-fcb_david #btn-add-player:hover {
-  background: #2563eb !important;
-}
-
-body.theme-fcb_david .btn-outline {
-  background: #102138 !important;
-  border: 1px solid #23436a !important;
-  color: #e2e8f0 !important;
-  font-weight: 700;
-}
-
-body.theme-fcb_david .btn-outline:hover {
-  background: #172d4d !important;
-  color: #ffffff !important;
-  border-color: #3b82f6 !important;
-}
-
-body.theme-fcb_david .btn-backup,
-body.theme-fcb_david #btn-export-backup {
-  background: #1e3a8a !important;
-  border: 1px solid #2563eb !important;
-  color: #ffffff !important;
-  font-weight: 700;
-}
-
-body.theme-fcb_david .btn-backup:hover,
-body.theme-fcb_david #btn-export-backup:hover {
-  background: #1d4ed8 !important;
-}
-
-/* Tarjetas de Estadísticas */
-body.theme-fcb_david .stat-card {
-  background: #102138;
-  border: 1px solid #1e3a5f;
-  border-radius: 10px;
-}
-
-body.theme-fcb_david .stat-card:nth-child(1) { border-top: 3px solid #38bdf8; }
-body.theme-fcb_david .stat-card:nth-child(2) { border-top: 3px solid #edbb00; }
-body.theme-fcb_david .stat-card:nth-child(3) { border-top: 3px solid #a50044; }
-body.theme-fcb_david .stat-card:nth-child(4) { border-top: 3px solid #f43f5e; }
-
-body.theme-fcb_david .stat-card .stat-label {
-  color: #93c5fd;
-}
-
-body.theme-fcb_david .stat-card .stat-value {
-  color: #ffffff;
-  font-weight: 900;
-}
-
-body.theme-fcb_david .stat-card.stat-ok .stat-value { color: #4ade80; }
-body.theme-fcb_david .stat-card.stat-danger .stat-value { color: #f87171; }
-
-/* Pestañas */
-body.theme-fcb_david .tabs-nav {
-  border-bottom-color: #1e3a5f;
-}
-
-body.theme-fcb_david .tab-btn {
-  color: #93c5fd;
-  font-weight: 700;
-}
-
-body.theme-fcb_david .tab-btn:hover {
-  color: #ffffff;
-}
-
-body.theme-fcb_david .tab-btn.active {
-  color: #60a5fa;
-}
-
-body.theme-fcb_david .tab-btn.active::after {
-  background-color: #1d4ed8;
-  height: 3px;
-}
-
-/* Controles, Formularios y Tablas */
-body.theme-fcb_david .controls-bar,
-body.theme-fcb_david .new-player-card,
-body.theme-fcb_david .table-card,
-body.theme-fcb_david .new-skill-box,
-body.theme-fcb_david .model-card,
-body.theme-fcb_david .new-model-box {
-  background: #102138;
-  border: 1px solid #1e3a5f;
-  color: #e2e8f0;
-}
-
-body.theme-fcb_david .new-player-header h4,
-body.theme-fcb_david .new-skill-box h3,
-body.theme-fcb_david .model-title-area h4,
-body.theme-fcb_david .new-model-box h3 {
-  color: #f8fafc;
-}
-
-body.theme-fcb_david .search-input,
-body.theme-fcb_david .form-control {
-  background: #0a1424;
-  color: #f8fafc;
-  border: 1px solid #23436a;
-}
-
-body.theme-fcb_david thead th {
-  background-color: #0c1a2e;
-  color: #93c5fd;
-  border-bottom: 2px solid #1e3a5f;
-  font-size: 0.76rem;
-}
-
-body.theme-fcb_david th:last-child,
-body.theme-fcb_david td:last-child {
-  background-color: #102138 !important;
-  box-shadow: -4px 0 8px -2px rgba(0, 0, 0, 0.45);
-}
-
-body.theme-fcb_david thead th:last-child {
-  background-color: #0c1a2e !important;
-}
-
-body.theme-fcb_david tbody tr {
-  border-bottom: 1px solid #162c4b;
-}
-
-body.theme-fcb_david tbody tr:hover {
-  background-color: #172d4d;
-}
-
-body.theme-fcb_david tbody tr:hover td:last-child {
-  background-color: #172d4d !important;
-}
-
-body.theme-fcb_david .player-name-input {
-  color: #ffffff;
-  font-weight: 700;
-}
-
-body.theme-fcb_david .player-name-input:focus,
-body.theme-fcb_david .player-name-input:hover {
-  background: #0a1424;
-  border-color: #23436a;
-}
-
-body.theme-fcb_david .skill-select,
-body.theme-fcb_david .skill-select.select-ok,
-body.theme-fcb_david .skill-select.select-warning,
-body.theme-fcb_david .skill-select.select-danger,
-body.theme-fcb_david .skill-select.select-empty {
-  background-color: #0a1424;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #23436a;
-  font-weight: 600;
-}
-
-body.theme-fcb_david .skill-select option {
-  background-color: #102138;
-  color: #ffffff !important;
-}
-
-body.theme-fcb_david .skill-select.select-ok {
-  background-color: rgba(5, 150, 105, 0.25);
-  border-color: #059669;
-}
-
-body.theme-fcb_david .skill-select.select-warning {
-  background-color: rgba(217, 119, 6, 0.25);
-  border-color: #d97706;
-}
-
-body.theme-fcb_david .skill-select.select-danger {
-  background-color: rgba(165, 0, 68, 0.28);
-  border-color: #a50044;
-}
-
-body.theme-fcb_david .skill-select.select-empty {
-  background-color: #0a1424;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  opacity: 0.85;
-  border-color: #1e3a5f;
-}
-
-body.theme-fcb_david .input-inline-skill {
-  color: #ffffff !important;
-  font-weight: 700;
-}
-
-body.theme-fcb_david .input-inline-skill:focus,
-body.theme-fcb_david .input-inline-skill:hover {
-  background: #0a1424;
-  border-color: #23436a;
-  color: #ffffff !important;
-}
-
-body.theme-fcb_david .input-inline-stock {
-  color: #ffffff !important;
-  background: #0a1424;
-  border-color: #23436a;
-}
-
-body.theme-fcb_david .badge-ok {
-  background: #064e3b;
-  color: #6ee7b7;
-  border: 1px solid #059669;
-}
-
-body.theme-fcb_david .badge-warning {
-  background: #78350f;
-  color: #fde68a;
-  border: 1px solid #d97706;
-}
-
-body.theme-fcb_david .badge-danger {
-  background: #4c0519;
-  color: #fecaca;
-  border: 1px solid #a50044;
-}
-
-body.theme-fcb_david .btn-consume-skill {
-  background: #260c18;
-  border: 1px solid #a50044;
-  color: #fbcfe8;
-  font-weight: 800;
-  border-radius: 4px;
-}
-
-body.theme-fcb_david .btn-consume-skill:hover {
-  background: #a50044;
-  color: #ffffff;
-  border-color: #be123c;
-}
-
-body.theme-fcb_david .status-pill.pill-ok {
-  background: #064e3b;
-  color: #6ee7b7;
-}
-
-body.theme-fcb_david .status-pill.pill-danger {
-  background: #4c0519;
-  color: #fecaca;
-}
-
-body.theme-fcb_david .match-pill {
-  background: #172554;
-  color: #bfdbfe;
-  border: 1px solid #3b82f6;
-}
-
-body.theme-fcb_david .model-skills-list {
-  background: #0a1424;
-  border-color: #1e3a5f;
-}
-
-body.theme-fcb_david .model-skill-name {
-  color: #ffffff !important;
-}
-
-body.theme-fcb_david .model-matches-box {
-  background: #172554;
-  border-color: #1e3a8a;
-  color: #bfdbfe;
-}

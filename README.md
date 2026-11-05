@@ -11,21 +11,20 @@
 **D.A.V.A.D.E.R.** es el centro integral y portal web creado para centralizar todas las aplicaciones, recursos, indumentarias y herramientas tácticas desarrolladas para el ecosistema **eFootball**:
 
 1. **📊 Gestor de Habilidades Web (`/gestor`)**:
-   - Aplicación web interactiva ejecutable en cualquier navegador (PC o móvil).
-   - Soporte multiequipo: **Darth Vader FC** (estilo carbón grafito y botones carmesí mate) y **FCB David** (Blaugrana Clásico 1899).
+   - Aplicación web oficial en su **Versión Comercial v1.1**.
+   - Lista en limpio con equipos 100% personalizables (modal *⚙️ Configurar Equipo* para personalizar nombres, subtítulos y cargar escudos).
    - Control de inventario maestro (41 habilidades), stock disponible en tiempo real, alertas y botón *⬇️ Descontar*.
-   - Persistencia local en LocalStorage.
+   - Persistencia local en LocalStorage y soporte de carga/descarga Excel.
 
 2. **👕 Compendio de Uniformes (`/uniformes`)**:
    - Catálogo técnico de equipaciones (Titular, Suplente, Portero y Especiales).
    - Fichas de diseño con paletas RGB, cortes de cuello, pantalones, medias y fórmulas para el editor de eFootball.
-   - Visor dinámico conectado a `uniformes.json` para agregar fácilmente nuevos kits.
+   - Visor dinámico conectado a `uniformes.json` para sincronizar fácilmente los kits de tu otra conversación.
 
 3. **💾 Centro de Descargas Desktop (`/descargas`)**:
-   - Enlaces a los ejecutables portables oficiales (`.exe`) para Windows 10/11 sin necesidad de instalación.
+   - Enlaces a los ejecutables portables oficiales (`Gestor_Habilidades_Comercial_v1.1_Portable.exe`) para Windows 10/11 sin necesidad de instalación.
 
-4. **🎨 Catálogo de 35 Temas Visuales (`/temas`)**:
-   - Muestrario interactivo con las 35 variantes gráficas creadas para Darth Vader FC, Star Wars y el FC Barcelona.
+*(Nota: La ruta `/temas/` se mantiene activa en el proyecto como repositorio maestro de diseño interno, sin exponerse en la navegación pública).*
 
 ---
 

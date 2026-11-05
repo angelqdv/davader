@@ -1,41 +1,66 @@
-// Gestor de Habilidades y Jugadores - Lógica Principal (Multi-Equipo)
+// Gestor de Habilidades y Jugadores - Versión Comercial v1.0
+// Lógica Principal con Equipos Personalizables (Nombres, Subtítulos y Escudos) y Base Limpia
 
 function getTeamKey() {
   if (typeof window !== 'undefined' && window.location) {
     const params = new URLSearchParams(window.location.search);
     const paramTeam = params.get('team');
-    if (paramTeam && (paramTeam === 'fcb_david' || paramTeam === 'darth_vader')) {
+    if (paramTeam && (paramTeam === 'team_1' || paramTeam === 'team_2')) {
       return paramTeam;
-    }
-    if (window.location.pathname.toLowerCase().includes('fcb_david')) {
-      return 'fcb_david';
     }
   }
   if (typeof localStorage !== 'undefined') {
-    return localStorage.getItem('gestor_active_team') || 'darth_vader';
+    return localStorage.getItem('gestor_comercial_active_team') || 'team_1';
   }
-  return 'darth_vader';
+  return 'team_1';
+}
+
+function getAllTeamsConfig() {
+  const defaults = typeof DEFAULT_TEAMS_CONFIG !== 'undefined' ? DEFAULT_TEAMS_CONFIG : (global.DEFAULT_TEAMS_CONFIG || {});
+  if (typeof localStorage !== 'undefined') {
+    const saved = localStorage.getItem('gestor_comercial_teams_config');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object') {
+          return {
+            team_1: { ...(defaults.team_1 || {}), ...(parsed.team_1 || {}) },
+            team_2: { ...(defaults.team_2 || {}), ...(parsed.team_2 || {}) }
+          };
+        }
+      } catch (e) {
+        console.warn('Error leyendo gestor_comercial_teams_config', e);
+      }
+    }
+  }
+  return JSON.parse(JSON.stringify(defaults));
+}
+
+function saveAllTeamsConfig(cfg) {
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem('gestor_comercial_teams_config', JSON.stringify(cfg));
+  }
 }
 
 function getTeamConfig(teamKey) {
-  const configs = typeof TEAMS_CONFIG !== 'undefined' ? TEAMS_CONFIG : (global.TEAMS_CONFIG || {});
-  return configs[teamKey] || configs['darth_vader'] || {
-    id: 'darth_vader',
-    name: 'Darth Vader FC',
-    shortName: 'Darth Vader',
-    subtitle: 'Gestor de Habilidades y Jugadores - Darth Vader',
-    badge: 'assets/darth_vader_crest.svg',
+  const configs = getAllTeamsConfig();
+  return configs[teamKey] || configs['team_1'] || {
+    id: teamKey || 'team_1',
+    name: 'Equipo Principal',
+    shortName: 'Equipo 1',
+    subtitle: 'Control de stock en tiempo real y asignación interactiva de habilidades',
+    badge: 'assets/team1_crest.svg',
     defaultSkills: typeof DEFAULT_SKILLS !== 'undefined' ? DEFAULT_SKILLS : [],
-    defaultPlayers: typeof DEFAULT_PLAYERS !== 'undefined' ? DEFAULT_PLAYERS : []
+    defaultPlayers: []
   };
 }
 
 function getTeamStorageKey(teamKey) {
-  return 'gestor_team_' + (teamKey || 'darth_vader') + '_v3';
+  return 'gestor_comercial_team_' + (teamKey || 'team_1') + '_v1';
 }
 
 let state = {
-  currentTeam: 'darth_vader',
+  currentTeam: 'team_1',
   skills: [],
   players: [],
   modelPlayers: [],
@@ -51,6 +76,8 @@ appRoot.state = state;
 appRoot.initState = initState;
 appRoot.switchTeam = switchTeam;
 appRoot.getTeamConfig = getTeamConfig;
+appRoot.getAllTeamsConfig = getAllTeamsConfig;
+appRoot.saveAllTeamsConfig = saveAllTeamsConfig;
 appRoot.updateTeamUI = updateTeamUI;
 appRoot.computeInventoryStats = computeInventoryStats;
 appRoot.evaluateSlotStatus = evaluateSlotStatus;
@@ -68,13 +95,107 @@ appRoot.addNewModelPlayer = addNewModelPlayer;
 appRoot.deleteModelPlayer = deleteModelPlayer;
 appRoot.transferModelToPlayer = transferModelToPlayer;
 appRoot.applyModelToNewPlayerForm = applyModelToNewPlayerForm;
+appRoot.saveSkillRow = saveSkillRow;
 appRoot.clearPlayerSkills = clearPlayerSkills;
 appRoot.consumePlayerSkill = consumePlayerSkill;
-appRoot.saveSkillRow = saveSkillRow;
 appRoot.exportBackup = exportBackup;
 appRoot.importBackup = importBackup;
+appRoot.openTeamConfigModal = openTeamConfigModal;
+appRoot.closeTeamConfigModal = closeTeamConfigModal;
+appRoot.handleCrestFileUpload = handleCrestFileUpload;
+appRoot.resetTeamCrestToDefault = resetTeamCrestToDefault;
+appRoot.saveTeamConfigFromModal = saveTeamConfigFromModal;
 
-// Inicializar estado desde LocalStorage o desde la configuración del equipo
+// ─────────────────────────────────────────────────────────────────
+// PERSONALIZACIÓN DINÁMICA DE EQUIPOS (MODAL)
+// ─────────────────────────────────────────────────────────────────
+
+let tempUploadedCrest = null;
+
+function openTeamConfigModal() {
+  const teamConf = getTeamConfig(state.currentTeam);
+  const modal = document.getElementById('team-config-modal');
+  if (!modal) return;
+
+  const nameInput = document.getElementById('cfg-team-name');
+  const shortInput = document.getElementById('cfg-team-short');
+  const subInput = document.getElementById('cfg-team-subtitle');
+  const previewImg = document.getElementById('cfg-crest-preview');
+
+  if (nameInput) nameInput.value = teamConf.name || '';
+  if (shortInput) shortInput.value = teamConf.shortName || '';
+  if (subInput) subInput.value = teamConf.subtitle || '';
+  if (previewImg) previewImg.src = teamConf.badge || (state.currentTeam === 'team_1' ? 'assets/team1_crest.svg' : 'assets/team2_crest.svg');
+
+  tempUploadedCrest = null;
+  modal.classList.add('active');
+}
+
+function closeTeamConfigModal() {
+  const modal = document.getElementById('team-config-modal');
+  if (modal) modal.classList.remove('active');
+  tempUploadedCrest = null;
+}
+
+function handleCrestFileUpload(event) {
+  const file = event && event.target && event.target.files && event.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    showToast('Por favor selecciona un archivo de imagen válido (PNG, JPG, SVG, WebP)', 'warning');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const base64Data = e.target.result;
+    tempUploadedCrest = base64Data;
+    const previewImg = document.getElementById('cfg-crest-preview');
+    if (previewImg) previewImg.src = base64Data;
+    showToast('Imagen cargada. Haz clic en "Guardar Cambios" para aplicarla', 'info');
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetTeamCrestToDefault() {
+  const defaultBadge = state.currentTeam === 'team_1' ? 'assets/team1_crest.svg' : 'assets/team2_crest.svg';
+  tempUploadedCrest = defaultBadge;
+  const previewImg = document.getElementById('cfg-crest-preview');
+  if (previewImg) previewImg.src = defaultBadge;
+}
+
+function saveTeamConfigFromModal() {
+  const nameInput = document.getElementById('cfg-team-name');
+  const shortInput = document.getElementById('cfg-team-short');
+  const subInput = document.getElementById('cfg-team-subtitle');
+
+  const newName = (nameInput && nameInput.value.trim()) || (state.currentTeam === 'team_1' ? 'Equipo Principal' : 'Equipo Secundario');
+  const newShort = (shortInput && shortInput.value.trim()) || newName;
+  const newSub = (subInput && subInput.value.trim()) || 'Control de stock en tiempo real y asignación interactiva';
+
+  const allConfigs = getAllTeamsConfig();
+  if (!allConfigs[state.currentTeam]) {
+    allConfigs[state.currentTeam] = { id: state.currentTeam };
+  }
+
+  allConfigs[state.currentTeam].name = newName;
+  allConfigs[state.currentTeam].shortName = newShort;
+  allConfigs[state.currentTeam].subtitle = newSub;
+
+  if (tempUploadedCrest) {
+    allConfigs[state.currentTeam].badge = tempUploadedCrest;
+  }
+
+  saveAllTeamsConfig(allConfigs);
+  updateTeamUI();
+  closeTeamConfigModal();
+  showToast(`¡Configuración de "${newName}" guardada con éxito!`, 'success');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// INICIALIZACIÓN Y PERSISTENCIA
+// ─────────────────────────────────────────────────────────────────
+
 function initState(teamKey) {
   state.currentTeam = teamKey || getTeamKey();
   const storageKey = getTeamStorageKey(state.currentTeam);
@@ -87,7 +208,6 @@ function initState(teamKey) {
   let loadedDeletedModelPlayerIds = [];
 
   if (typeof localStorage !== 'undefined') {
-    // 1. Intentar cargar desde la clave de almacenamiento del equipo actual
     const saved = localStorage.getItem(storageKey);
     if (saved) {
       try {
@@ -111,44 +231,17 @@ function initState(teamKey) {
         console.warn('Error leyendo LocalStorage para ' + state.currentTeam, e);
       }
     }
-
-    // 2. Si no había datos guardados en la clave v3, recuperar de versiones anteriores para no perder cambios del usuario
-    if (!loadedSkills || loadedSkills.length === 0) {
-      const legacyKeys = [
-        'gestor_team_' + state.currentTeam + '_v2',
-        'gestor_team_' + state.currentTeam + '_v1',
-        'gestor_habilidades_state_v2',
-        'gestor_habilidades_state_v1',
-        'gestor_habilidades_state'
-      ];
-      for (const legKey of legacyKeys) {
-        const legacySaved = localStorage.getItem(legKey);
-        if (legacySaved) {
-          try {
-            const parsedLeg = JSON.parse(legacySaved);
-            if (parsedLeg && Array.isArray(parsedLeg.skills) && parsedLeg.skills.length > 0) {
-              loadedSkills = parsedLeg.skills;
-              if (!loadedPlayers && Array.isArray(parsedLeg.players) && parsedLeg.players.length > 0) {
-                loadedPlayers = parsedLeg.players;
-              }
-              console.log('Datos restaurados desde versión anterior:', legKey);
-              break;
-            }
-          } catch (e) {}
-        }
-      }
-    }
   }
 
-  // Establecer habilidades y jugadores base
+  // Establecer habilidades y jugadores base (en limpio si es la primera vez)
   if (!loadedSkills || loadedSkills.length === 0) {
-    state.skills = JSON.parse(JSON.stringify(teamConf.defaultSkills));
+    state.skills = JSON.parse(JSON.stringify(teamConf.defaultSkills || []));
   } else {
     state.skills = loadedSkills;
   }
 
   if (!loadedPlayers) {
-    state.players = JSON.parse(JSON.stringify(teamConf.defaultPlayers));
+    state.players = JSON.parse(JSON.stringify(teamConf.defaultPlayers || []));
   } else {
     state.players = loadedPlayers;
   }
@@ -156,14 +249,11 @@ function initState(teamKey) {
   state.deletedModelPlayerIds = loadedDeletedModelPlayerIds || [];
 
   // Cargar perfiles modelo
-  const defaultModels = typeof DEFAULT_MODEL_PLAYERS !== 'undefined' ? DEFAULT_MODEL_PLAYERS
-    : (teamConf.defaultModelPlayers || []);
+  const defaultModels = typeof DEFAULT_MODEL_PLAYERS !== 'undefined' ? DEFAULT_MODEL_PLAYERS : [];
   if (!loadedModelPlayers) {
     state.modelPlayers = JSON.parse(JSON.stringify(defaultModels));
-    // Filtrar eliminados si es que estamos en el caso base pero había borrados
     state.modelPlayers = state.modelPlayers.filter(m => !state.deletedModelPlayerIds.includes(m.id));
   } else {
-    // Fusionar: conservar los del usuario + asegurar que los predeterminados existan, salvo los borrados
     const existingIds = new Set(loadedModelPlayers.map(m => m.id));
     const merged = [...loadedModelPlayers];
     defaultModels.forEach(dm => {
@@ -176,62 +266,7 @@ function initState(teamKey) {
 
   state.deletedSkillIds = loadedDeletedSkillIds || [];
 
-  // 2.5 NORMALIZACIÓN AUTOMÁTICA DE NOMBRES CORREGIDOS
-  // Asegura que si la aplicación se abre con datos antiguos en localStorage,
-  // los nombres con erratas se actualicen automáticamente al nombre ajustado oficial.
-  const SKILL_NAME_CORRECTIONS = {
-    'reamte al primer toque': 'remate al primer toque',
-    'paase medido (hueco)': 'pase medido (hueco)',
-    'bloqueado': 'bloqueador',
-    'espirut de lucha': 'espiritu de lucha',
-    'saque e banda largo': 'saque de banda largo',
-    'especialsita en penales': 'especialista en penales'
-  };
-
-  state.skills.forEach(s => {
-    const key = (s.name || '').toLowerCase().trim();
-    if (SKILL_NAME_CORRECTIONS[key]) {
-      const oldName = s.name;
-      s.name = SKILL_NAME_CORRECTIONS[key];
-      state.players.forEach(p => {
-        p.skills = (p.skills || []).map(ps => {
-          if (ps && ps.toLowerCase().trim() === oldName.toLowerCase().trim()) {
-            return s.name;
-          }
-          return ps;
-        });
-      });
-      (state.modelPlayers || []).forEach(m => {
-        m.skills = (m.skills || []).map(ms => {
-          if (ms && ms.toLowerCase().trim() === oldName.toLowerCase().trim()) {
-            return s.name;
-          }
-          return ms;
-        });
-      });
-    }
-  });
-
-  state.players.forEach(p => {
-    p.skills = (p.skills || []).map(ps => {
-      if (!ps) return '';
-      const key = ps.toLowerCase().trim();
-      return SKILL_NAME_CORRECTIONS[key] || ps;
-    });
-  });
-
-  (state.modelPlayers || []).forEach(m => {
-    m.skills = (m.skills || []).map(ms => {
-      if (!ms) return '';
-      const key = ms.toLowerCase().trim();
-      return SKILL_NAME_CORRECTIONS[key] || ms;
-    });
-  });
-
-  // 3. RECUPERACIÓN Y FUSIÓN GARANTIZADA DE HABILIDADES
-  // Añade habilidades predeterminadas NUEVAS que no existan en el estado actual,
-  // pero respeta los renombres que el usuario haya hecho (compara por ID primero, luego por nombre)
-  // y respeta las eliminaciones intencionales (deletedSkillIds).
+  // RECUPERACIÓN Y FUSIÓN GARANTIZADA DE HABILIDADES
   let addedCount = 0;
   const existingSkillNames = new Set(state.skills.map(s => (s.name || '').toLowerCase().trim()));
   const existingSkillIds   = new Set(state.skills.map(s => s.id));
@@ -239,14 +274,10 @@ function initState(teamKey) {
 
   (teamConf.defaultSkills || []).forEach(defSkill => {
     if (!defSkill || !defSkill.name) return;
-    // Si fue eliminada intencionalmente, no la volvemos a agregar
     if (defSkill.id && deletedSkillIdsSet.has(defSkill.id)) return;
-    // Si el ID ya está en el estado, el usuario puede haberlo renombrado → respetar el cambio
     if (defSkill.id && existingSkillIds.has(defSkill.id)) return;
-    // Si el nombre (tal como viene del default) ya existe, también saltar
     const key = defSkill.name.toLowerCase().trim();
     if (existingSkillNames.has(key)) return;
-    // Solo agregar si realmente es una habilidad completamente nueva
     state.skills.push({
       id: defSkill.id || ('skill_' + (state.skills.length + 1) + '_' + Date.now()),
       name: defSkill.name,
@@ -257,8 +288,7 @@ function initState(teamKey) {
     addedCount++;
   });
 
-  // 4. Asegurar que cualquier habilidad asignada en las fichas de los jugadores (ej. patadon el largo)
-  // esté registrada formalmente en el listado maestro para evitar que aparezca como "No registrada".
+  // Asegurar registro de habilidades de jugadores
   state.players.forEach(p => {
     (p.skills || []).forEach(skName => {
       if (skName && skName.trim() !== '') {
@@ -278,10 +308,6 @@ function initState(teamKey) {
 
   saveState();
   updateTeamUI();
-
-  if (addedCount > 0) {
-    console.log(`Se fusionaron y aseguraron ${addedCount} habilidades en el inventario.`);
-  }
 }
 
 function saveState() {
@@ -294,7 +320,7 @@ function saveState() {
       deletedSkillIds: state.deletedSkillIds,
       deletedModelPlayerIds: state.deletedModelPlayerIds
     }));
-    localStorage.setItem('gestor_active_team', state.currentTeam);
+    localStorage.setItem('gestor_comercial_active_team', state.currentTeam);
   }
 }
 
@@ -309,6 +335,7 @@ function switchTeam(newTeamKey) {
 
 function updateTeamUI() {
   if (typeof document === 'undefined') return;
+  const allConfigs = getAllTeamsConfig();
   const teamConf = getTeamConfig(state.currentTeam);
   
   const titleEl = document.getElementById('team-title');
@@ -323,21 +350,31 @@ function updateTeamUI() {
     badgeImg.alt = 'Escudo ' + teamConf.name;
   }
 
+  // Actualizar los textos y escudos en los botones del selector superior
+  ['team_1', 'team_2'].forEach(tKey => {
+    const conf = allConfigs[tKey];
+    if (conf) {
+      const nameSpan = document.getElementById('switch-name-' + tKey);
+      if (nameSpan) nameSpan.textContent = conf.shortName || conf.name;
+      const imgEl = document.getElementById('switch-img-' + tKey);
+      if (imgEl && conf.badge) imgEl.src = conf.badge;
+    }
+  });
+
   // Marcar botón activo en el selector de equipo
   document.querySelectorAll('.btn-team-switch').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.team === state.currentTeam);
   });
-
-  // Clases temáticas en el body
-  document.body.classList.remove('theme-darth_vader', 'theme-fcb_david');
-  document.body.classList.add('theme-' + state.currentTeam);
 }
 
 function resetToDefault() {
   const teamConf = getTeamConfig(state.currentTeam);
-  if (confirm(`¿Estás seguro de restablecer los datos de ${teamConf.name} a su plantilla inicial?`)) {
-    state.skills = JSON.parse(JSON.stringify(teamConf.defaultSkills));
-    state.players = JSON.parse(JSON.stringify(teamConf.defaultPlayers));
+  if (confirm(`¿Estás seguro de restablecer los datos de ${teamConf.name} a su plantilla inicial vacía?`)) {
+    state.skills = JSON.parse(JSON.stringify(teamConf.defaultSkills || []));
+    state.players = [];
+    state.modelPlayers = [];
+    state.deletedSkillIds = [];
+    state.deletedModelPlayerIds = [];
     saveState();
     render();
     showToast(`Datos de ${teamConf.name} restablecidos correctamente`, 'info');
@@ -354,13 +391,14 @@ function exportBackup() {
     const backup = {
       version: 1,
       appName: 'Gestor de Habilidades y Jugadores',
-      edition: 'personal',
+      edition: 'comercial',
       exportDate: new Date().toISOString(),
       activeTeam: state.currentTeam,
+      teamsConfig: getAllTeamsConfig(),
       teamsData: {}
     };
 
-    const teamKeys = ['darth_vader', 'fcb_david'];
+    const teamKeys = ['team_1', 'team_2'];
     teamKeys.forEach(tKey => {
       const storageKey = getTeamStorageKey(tKey);
       if (typeof localStorage !== 'undefined') {
@@ -373,7 +411,6 @@ function exportBackup() {
       }
     });
 
-    // Asegurar que el equipo activo tenga la data más reciente del estado
     backup.teamsData[state.currentTeam] = {
       skills: state.skills,
       players: state.players,
@@ -390,13 +427,13 @@ function exportBackup() {
     const dateStr = now.toISOString().slice(0, 10);
     const timeStr = now.toTimeString().slice(0, 5).replace(':', '');
     a.href = url;
-    a.download = `Respaldo_Gestor_Personal_${dateStr}_${timeStr}.json`;
+    a.download = `Respaldo_Gestor_Comercial_${dateStr}_${timeStr}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    showToast('📦 Respaldo exportado exitosamente', 'success');
+    showToast('📦 Respaldo comercial exportado exitosamente', 'success');
   } catch (err) {
     console.error('Error exportando respaldo:', err);
     showToast('Error al exportar la copia de seguridad', 'danger');
@@ -418,32 +455,23 @@ function importBackup(event) {
         return;
       }
 
-      const teamCount = backup.teamsData ? Object.keys(backup.teamsData).length : 1;
-      const confirmMsg = `¿Deseas restaurar esta copia de seguridad? Se reemplazarán los datos guardados en este equipo (${teamCount} equipo(s) detectado(s)).`;
-      if (!confirm(confirmMsg)) {
+      if (!confirm('¿Deseas restaurar esta copia de seguridad? Se reemplazarán los datos guardados en los equipos.')) {
         event.target.value = '';
         return;
       }
 
       if (typeof localStorage !== 'undefined') {
+        if (backup.teamsConfig) {
+          saveAllTeamsConfig(backup.teamsConfig);
+        }
         if (backup.teamsData) {
           Object.keys(backup.teamsData).forEach(tKey => {
             const storageKey = getTeamStorageKey(tKey);
             localStorage.setItem(storageKey, JSON.stringify(backup.teamsData[tKey]));
           });
-        } else if (Array.isArray(backup.skills)) {
-          const storageKey = getTeamStorageKey(state.currentTeam);
-          localStorage.setItem(storageKey, JSON.stringify({
-            skills: backup.skills,
-            players: backup.players || [],
-            modelPlayers: backup.modelPlayers || [],
-            deletedSkillIds: backup.deletedSkillIds || [],
-            deletedModelPlayerIds: backup.deletedModelPlayerIds || []
-          }));
         }
-
         if (backup.activeTeam) {
-          localStorage.setItem('gestor_active_team', backup.activeTeam);
+          localStorage.setItem('gestor_comercial_active_team', backup.activeTeam);
           state.currentTeam = backup.activeTeam;
         }
       }
@@ -1150,6 +1178,16 @@ function renderPlayersTab(stats) {
         <h4>➕ Agregar Nuevo Jugador</h4>
         <span class="text-muted">Ingresa el nombre y selecciona sus 5 habilidades:</span>
       </div>
+      ${state.modelPlayers && state.modelPlayers.length > 0 ? `
+      <div class="model-template-bar">
+        <span class="model-template-label">📋 Usar perfil modelo:</span>
+        <select id="model-template-select" onchange="applyModelToNewPlayerForm(this.value)" class="form-control" style="width:auto; font-size:0.85rem;">
+          <option value="">-- Sin plantilla --</option>
+          ${state.modelPlayers.map(m => `<option value="${m.id}">${escapeHtml(m.name)}</option>`).join('')}
+        </select>
+        <span class="text-muted" style="font-size:0.8rem;">Autocompleta las 5 habilidades del perfil seleccionado</span>
+      </div>
+      ` : ''}
       <form id="form-add-player-full" onsubmit="handleCreateFullPlayer(event)" class="new-player-form-grid">
         <div>
           <label for="full-player-name">Nombre del Jugador:</label>
@@ -1757,3 +1795,89 @@ document.addEventListener('DOMContentLoaded', () => {
     btnReset.addEventListener('click', resetToDefault);
   }
 });
+
+// ─────────────────────────────────────────────────────────────────
+// BLOQUEO DE SEGURIDAD Y CONTROL DE MODIFICACIÓN ESTRUCTURAL
+// ─────────────────────────────────────────────────────────────────
+
+const MASTER_KEY = 'Mila889*';
+const CREATOR_EMAIL = 'davidpenuela@gmail.com';
+
+function openSecurityLockModal() {
+  const modal = document.getElementById('security-lock-modal');
+  const input = document.getElementById('security-key-input');
+  const msg = document.getElementById('security-msg');
+  if (msg) { msg.textContent = ''; msg.style.color = ''; }
+  if (input) input.value = '';
+  if (modal) {
+    modal.classList.add('active');
+    setTimeout(() => { if (input) input.focus(); }, 150);
+  }
+}
+
+function closeSecurityLockModal() {
+  const modal = document.getElementById('security-lock-modal');
+  if (modal) modal.classList.remove('active');
+}
+
+function submitSecurityKey() {
+  const input = document.getElementById('security-key-input');
+  const msg = document.getElementById('security-msg');
+  const enteredKey = (input && input.value) || '';
+
+  const isSuccess = (enteredKey === MASTER_KEY);
+
+  // Enviar alerta de intento/petición de modificación al correo oficial del creador
+  try {
+    const payload = JSON.stringify({
+      to: CREATOR_EMAIL,
+      subject: `[Alerta] Intento de Modificación de Estructura - Gestor Comercial v1.0`,
+      fecha: new Date().toLocaleString(),
+      autorizado: isSuccess ? 'SÍ (Clave Maestra Correcta)' : 'NO (Intento Bloqueado)',
+      claveIngresada: isSuccess ? '*** CORRECTA ***' : (enteredKey.length > 0 ? enteredKey.slice(0, 15) : '(Vacía)'),
+      userAgent: (typeof navigator !== 'undefined' ? navigator.userAgent : 'Desconocido')
+    });
+
+    if (typeof fetch !== 'undefined') {
+      fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CREATOR_EMAIL), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: payload
+      }).catch(() => {});
+    }
+  } catch (e) {}
+
+  if (isSuccess) {
+    if (msg) {
+      msg.textContent = '✅ Clave correcta. Acceso de desarrollo autorizado.';
+      msg.style.color = '#10b981';
+    }
+    showToast('🔓 Modo de modificación estructural desbloqueado.', 'success');
+    setTimeout(() => {
+      closeSecurityLockModal();
+    }, 1000);
+  } else {
+    if (msg) {
+      msg.textContent = '❌ Clave incorrecta. El intento de modificación no autorizada fue registrado.';
+      msg.style.color = '#ef4444';
+    }
+    showToast('Acceso denegado. Intento registrado y notificado.', 'danger');
+  }
+}
+
+appRoot.openSecurityLockModal = openSecurityLockModal;
+appRoot.closeSecurityLockModal = closeSecurityLockModal;
+appRoot.submitSecurityKey = submitSecurityKey;
+
+// Bloquear menú contextual de clic derecho
+if (typeof document !== 'undefined') {
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Atajos para solicitar clave si se intenta abrir inspector
+  document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || (e.ctrlKey && e.altKey && (e.key === 'm' || e.key === 'M'))) {
+      e.preventDefault();
+      openSecurityLockModal();
+    }
+  });
+}

@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestor de Habilidades y Jugadores - Versión Personal</title>
+  <title>Gestor de Habilidades y Jugadores - Versión Comercial v1.1</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Barra de Retorno al Hub D.A.V.A.D.E.R. -->
-  <div style="background: #090b10; border-bottom: 1px solid #1e2433; padding: 8px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-family: -apple-system, sans-serif;">
+  <div style="background: #090b10; border-bottom: 1px solid #1e2433; padding: 10px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
     <a href="../index.html" style="color: #38bdf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
       <span>←</span>
       <span>Volver a D.A.V.A.D.E.R. Hub</span>
     </a>
-    <div style="display: flex; gap: 14px;">
+    <div style="display: flex; gap: 16px;">
       <a href="../uniformes/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">👕 Uniformes</a>
       <a href="../descargas/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">💾 Descargas (.exe)</a>
-      <a href="../temas/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">🎨 35 Temas</a>
     </div>
   </div>
 
@@ -28,14 +27,14 @@
         <span>🏆</span>
         <span>Seleccionar Equipo:</span>
       </div>
-      <div class="team-switcher-buttons">
-        <button class="btn-team-switch active" data-team="darth_vader" title="Cargar escuadrón Darth Vader">
-          <img src="assets/darth_vader_crest.svg" class="mini-crest" alt="Darth Vader" />
-          <span>⚔️ Darth Vader</span>
+      <div class="team-switcher-buttons" id="team-switcher-buttons">
+        <button class="btn-team-switch active" data-team="team_1" onclick="switchTeam('team_1')" title="Cargar Equipo Principal">
+          <img src="assets/team1_crest.svg" class="mini-crest" id="switch-img-team_1" alt="Equipo 1" />
+          <span id="switch-name-team_1">Equipo Principal</span>
         </button>
-        <button class="btn-team-switch" data-team="fcb_david" title="Cargar plantilla FCB David">
-          <img src="assets/fcb_david_crest.svg" class="mini-crest" alt="FCB David" />
-          <span>⚽ FCB David</span>
+        <button class="btn-team-switch" data-team="team_2" onclick="switchTeam('team_2')" title="Cargar Equipo Secundario">
+          <img src="assets/team2_crest.svg" class="mini-crest" id="switch-img-team_2" alt="Equipo 2" />
+          <span id="switch-name-team_2">Equipo Secundario</span>
         </button>
       </div>
     </div>
@@ -43,13 +42,16 @@
     <!-- Encabezado Principal -->
     <header class="app-header">
       <div class="header-brand-area">
-        <div class="team-crest-wrapper">
-          <img id="team-badge-img" src="assets/darth_vader_crest.svg" alt="Escudo de Equipo" class="main-team-crest" />
+        <div class="team-crest-wrapper" onclick="openTeamConfigModal()" title="Haz clic para personalizar el escudo">
+          <img id="team-badge-img" src="assets/team1_crest.svg" alt="Escudo de Equipo" class="main-team-crest" />
         </div>
         <div class="header-title-area">
           <div class="title-with-badge">
-            <h1 id="team-title">Darth Vader FC</h1>
-            <span class="badge-edition badge-personal" title="Edición Personal Portátil con datos y persistencia completa">🔒 Versión Personal v1.2.1</span>
+            <h1 id="team-title">Equipo Principal</h1>
+            <span class="badge-edition badge-comercial" title="Versión Comercial v1.1 - Lista en limpio con equipos personalizables">💼 Versión Comercial v1.1</span>
+            <button class="btn btn-outline btn-sm" onclick="openTeamConfigModal()" title="Personalizar nombre, subtítulo y escudo del equipo">
+              ⚙️ Configurar Equipo
+            </button>
           </div>
           <p id="team-subtitle">Control de stock en tiempo real y asignación interactiva de habilidades</p>
         </div>
@@ -82,7 +84,7 @@
         </button>
 
         <!-- Botón para restablecer datos originales -->
-        <button id="btn-reset" class="btn btn-outline" style="color: #64748b;" title="Restablecer a la plantilla inicial del equipo">
+        <button id="btn-reset" class="btn btn-outline" style="color: #64748b;" title="Restablecer a la plantilla limpia del equipo">
           🔄 Restablecer
         </button>
       </div>
@@ -126,14 +128,84 @@
 
   </div>
 
+  <!-- Modal de Configuración de Equipo -->
+  <div id="team-config-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>⚙️ Personalizar Equipo</h3>
+        <button class="modal-close-btn" onclick="closeTeamConfigModal()" title="Cerrar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-field">
+          <label for="cfg-team-name">Nombre del Equipo</label>
+          <input type="text" id="cfg-team-name" class="modal-input" placeholder="Ej. Real Madrid, Mi Club FC" />
+        </div>
+        <div class="modal-field">
+          <label for="cfg-team-short">Nombre Corto (Botones y Pestañas)</label>
+          <input type="text" id="cfg-team-short" class="modal-input" placeholder="Ej. Real Madrid" />
+        </div>
+        <div class="modal-field">
+          <label for="cfg-team-subtitle">Subtítulo / Lema</label>
+          <input type="text" id="cfg-team-subtitle" class="modal-input" placeholder="Ej. Control de stock en tiempo real..." />
+        </div>
+        <div class="modal-field">
+          <label>Escudo / Logo del Equipo</label>
+          <div class="crest-customizer-box">
+            <img id="cfg-crest-preview" class="crest-preview-img" src="assets/team1_crest.svg" alt="Vista previa escudo" />
+            <div class="crest-actions">
+              <input type="file" id="cfg-crest-file" accept="image/*" style="display: none;" onchange="handleCrestFileUpload(event)" />
+              <button class="btn btn-primary btn-sm" onclick="document.getElementById('cfg-crest-file').click()">
+                🖼️ Subir Imagen (PNG/JPG/SVG/WebP)
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="resetTeamCrestToDefault()">
+                ↺ Restaurar Escudo Predeterminado
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeTeamConfigModal()">Cancelar</button>
+        <button class="btn btn-success" onclick="saveTeamConfigFromModal()">💾 Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Bloqueo de Seguridad y Modificación -->
+  <div id="security-lock-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header" style="background: #18181b; color: #ffffff;">
+        <h3 style="color: #ffffff;">🔒 Protección de Código y Estructura</h3>
+        <button class="modal-close-btn" style="color: #cbd5e1;" onclick="closeSecurityLockModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9rem; color: #475569; margin: 0; line-height: 1.5;">
+          Esta aplicación es propiedad intelectual privada de <strong>David Peñuela</strong>. Su arquitectura, lógica y núcleo están bloqueados contra modificaciones no autorizadas.
+        </p>
+        <p style="font-size: 0.85rem; color: #64748b; margin: 0; line-height: 1.4;">
+          Para desbloquear el modo de modificación estructural, ingresa la clave maestra del creador:
+        </p>
+        <div class="modal-field">
+          <label for="security-key-input">Clave de Modificación</label>
+          <input type="password" id="security-key-input" class="modal-input" placeholder="Ingresa la clave maestra..." onkeydown="if(event.key==='Enter') submitSecurityKey();" />
+        </div>
+        <p id="security-msg" style="font-size: 0.82rem; margin: 0; min-height: 18px;"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeSecurityLockModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="submitSecurityKey()">🔓 Verificar y Desbloquear</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Contenedor de Alertas Toast -->
   <div id="toast-container" class="toast-container"></div>
 
   <!-- Librería SheetJS local para lectura y escritura de Excel sin internet -->
   <script src="xlsx.full.min.js"></script>
-  <!-- Datos precargados del Google Sheet del usuario -->
+  <!-- Datos precargados en limpio -->
   <script src="datos_iniciales.js"></script>
-  <!-- Lógica de la aplicación -->
+  <!-- Lógica de la aplicación comercial -->
   <script src="app.js"></script>
 </body>
 </html>
