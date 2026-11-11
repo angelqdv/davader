@@ -11,12 +11,12 @@
     </linearGradient>
   </defs>
 
-  <!-- D — forma exterior (sin recuadro cuadrado rígido, con resplandor carmesí) -->
+  <!-- D — forma exterior con resplandor carmesí -->
   <path d="M16 12 L52 12 C78 12 90 28 90 50 C90 72 78 88 52 88 L16 88 Z"
         fill="#0c0d12" stroke="url(#d-border-grad)" stroke-width="3.5"/>
 
-  <!-- Casco Darth Vader ampliado al máximo (scale 0.48, sin recortar, centrado geométrico en 53, 58) -->
-  <g transform="translate(53, 58) scale(0.48)">
+  <!-- Casco Darth Vader calibrado por el usuario (scale 0.54, horizontal 50.5, vertical 52.5) -->
+  <g transform="translate(50.5, 52.5) scale(0.54)">
     <!-- Cúpula principal -->
     <path d="M -45 -15 C -45 -55 -25 -65 0 -65 C 25 -65 45 -55 45 -15
              C 45 5 52 25 56 32 L -56 32 C -52 25 -45 5 -45 -15 Z"
