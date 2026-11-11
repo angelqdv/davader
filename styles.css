@@ -148,19 +148,15 @@ body {
   font-size: 0.95rem;
   font-weight: 700;
   margin-bottom: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  display: block;
 }
 
 .acronym-logo {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.18em;
   display: inline-block;
-  vertical-align: middle;
-  filter: drop-shadow(0 0 6px rgba(225, 29, 72, 0.65));
+  margin-right: 5px;
 }
 
 .hero-desc {
