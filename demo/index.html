@@ -26,13 +26,13 @@
     }
 
         /* Ocultar barra superior cuando se incrusta en iframe */
-    body.in-iframe {
+    html.in-iframe, body.in-iframe {
       padding: 10px;
     }
-    body.in-iframe .demo-back-nav {
+    html.in-iframe .demo-back-nav, body.in-iframe .demo-back-nav {
       display: none !important;
     }
-    body.in-iframe .demo-header {
+    html.in-iframe .demo-header, body.in-iframe .demo-header {
       margin-top: 0;
     }
     /* Encabezado */
@@ -392,21 +392,20 @@
       to { transform: translateX(0); opacity: 1; }
     }
   </style>
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add('in-iframe');
+    }
+  </script>
 </head>
 <body>
 
-    <!-- Barra de Navegación -->
-    <!-- Barra de Navegación al estilo D.A.V.A.D.E.R. -->
-  <nav class="demo-back-nav" style="width: 100%; max-width: 1200px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; background: #0c0d14; border: 1px solid #1f2537; border-radius: 10px; padding: 10px 18px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-    <a href="../index.html" style="display: inline-flex; align-items: center; gap: 8px; color: #38bdf8; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: color 0.2s;">
+  <!-- Barra de Retorno al Hub D.A.V.A.D.E.R. -->
+  <nav class="demo-back-nav" style="width: 100%; max-width: 1200px; margin-bottom: 16px;">
+    <a href="../index.html" style="display: inline-flex; align-items: center; gap: 8px; color: #38bdf8; font-weight: 700; font-size: 0.9rem; text-decoration: none; padding: 10px 18px; background: #0c0d14; border: 1px solid #1f2537; border-radius: 10px; transition: color 0.2s;">
       <span style="font-size: 1.1rem;">←</span>
       <span>Volver a D.A.V.A.D.E.R. Hub</span>
     </a>
-    <div style="display: flex; gap: 14px; font-size: 0.82rem;">
-      <a href="../gestor/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">📊 Gestor Web Comercial</a>
-      <a href="../uniformes/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">👕 Uniformes</a>
-      <a href="../descargas/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">💾 Descargas (.exe)</a>
-    </div>
   </nav>
 
   <div class="theater-wrapper">
