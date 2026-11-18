@@ -25,6 +25,16 @@
       gap: 16px;
     }
 
+        /* Ocultar barra superior cuando se incrusta en iframe */
+    body.in-iframe {
+      padding: 10px;
+    }
+    body.in-iframe .demo-back-nav {
+      display: none !important;
+    }
+    body.in-iframe .demo-header {
+      margin-top: 0;
+    }
     /* Encabezado */
     .demo-header {
       background: linear-gradient(135deg, #131722 0%, #1a1e2f 100%);
@@ -385,6 +395,20 @@
 </head>
 <body>
 
+    <!-- Barra de Navegación -->
+    <!-- Barra de Navegación al estilo D.A.V.A.D.E.R. -->
+  <nav class="demo-back-nav" style="width: 100%; max-width: 1200px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; background: #0c0d14; border: 1px solid #1f2537; border-radius: 10px; padding: 10px 18px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <a href="../index.html" style="display: inline-flex; align-items: center; gap: 8px; color: #38bdf8; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: color 0.2s;">
+      <span style="font-size: 1.1rem;">←</span>
+      <span>Volver a D.A.V.A.D.E.R. Hub</span>
+    </a>
+    <div style="display: flex; gap: 14px; font-size: 0.82rem;">
+      <a href="../gestor/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">📊 Gestor Web Comercial</a>
+      <a href="../uniformes/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">👕 Uniformes</a>
+      <a href="../descargas/index.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">💾 Descargas (.exe)</a>
+    </div>
+  </nav>
+
   <div class="theater-wrapper">
 
     <!-- Encabezado de la Demo -->
@@ -398,7 +422,7 @@
           Demostración integral: Carga de stock, creación de jugador con 5 habilidades, descuento en vivo, perfiles modelo y detección de match.
         </p>
       </div>
-      <span class="badge-demo">VISTA PREVIA DE VALIDACIÓN</span>
+      
     </header>
 
     <!-- Marco de Reproducción -->
@@ -495,7 +519,7 @@
             <span>↺</span>
             <span>Reiniciar</span>
           </button>
-          <span style="font-family: monospace; font-size: 0.85rem; color: #94a3b8;" id="timer-label">00:00 / 01:20</span>
+          <span style="font-family: monospace; font-size: 0.85rem; color: #94a3b8;" id="timer-label">00:00 / 02:40</span>
         </div>
 
         <!-- Selector de Escenas -->
@@ -525,7 +549,7 @@
     let isPlaying = true;
     let playbackSpeed = 1;
     let currentTime = 0;
-    const totalDuration = 80; // 80 segundos totales
+    const totalDuration = 160; // 160 segundos totales (velocidad reducida)
 
     let appState = {
       activeTab: 'players',
@@ -554,45 +578,45 @@
     const scriptEvents = [
       // ESCENA 1: Carga de Stock
       { t: 0,  scene: 1, text: "Escena 1: Accediendo al Inventario Maestro de Habilidades...", tab: 'players', action: 'move', x: 260, y: 195 },
-      { t: 2,  scene: 1, text: "Haciendo clic en la pestaña 'Inventario Maestro'...", tab: 'players', action: 'click', x: 260, y: 195 },
-      { t: 3,  scene: 1, text: "Visualizando catálogo de 41 habilidades oficiales sin stock.", tab: 'inventory', action: 'move', x: 340, y: 310 },
-      { t: 5,  scene: 1, text: "Asignando 3 unidades de stock a 'Doble toque'...", tab: 'inventory', action: 'type_stock', skill: 'dobleToque', val: 3, x: 380, y: 330 },
-      { t: 7,  scene: 1, text: "Guardando stock de 'Doble toque' con 💾...", tab: 'inventory', action: 'click_save', skill: 'dobleToque', x: 420, y: 330 },
-      { t: 9,  scene: 1, text: "Cargando 3 unidades a 'Pase al primer toque'...", tab: 'inventory', action: 'type_stock', skill: 'pasePrimerToque', val: 3, x: 380, y: 385 },
-      { t: 11, scene: 1, text: "Guardando stock de 'Pase al primer toque'...", tab: 'inventory', action: 'click_save', skill: 'pasePrimerToque', x: 420, y: 385 },
-      { t: 13, scene: 1, text: "Cargando stock a 'Interceptador', 'Marcaje' y 'Espíritu de lucha'...", tab: 'inventory', action: 'batch_stock', val: 3, x: 380, y: 440 },
-      { t: 16, scene: 1, text: "¡Inventario cargado! 15 unidades listas en stock para asignar.", tab: 'inventory', action: 'move', x: 480, y: 140 },
+      { t: 4,  scene: 1, text: "Haciendo clic en la pestaña 'Inventario Maestro'...", tab: 'players', action: 'click', x: 260, y: 195 },
+      { t: 6,  scene: 1, text: "Visualizando catálogo de 41 habilidades oficiales sin stock.", tab: 'inventory', action: 'move', x: 340, y: 310 },
+      { t: 10,  scene: 1, text: "Asignando 3 unidades de stock a 'Doble toque'...", tab: 'inventory', action: 'type_stock', skill: 'dobleToque', val: 3, x: 380, y: 330 },
+      { t: 14,  scene: 1, text: "Guardando stock de 'Doble toque' con 💾...", tab: 'inventory', action: 'click_save', skill: 'dobleToque', x: 420, y: 330 },
+      { t: 18,  scene: 1, text: "Cargando 3 unidades a 'Pase al primer toque'...", tab: 'inventory', action: 'type_stock', skill: 'pasePrimerToque', val: 3, x: 380, y: 385 },
+      { t: 22, scene: 1, text: "Guardando stock de 'Pase al primer toque'...", tab: 'inventory', action: 'click_save', skill: 'pasePrimerToque', x: 420, y: 385 },
+      { t: 26, scene: 1, text: "Cargando stock a 'Interceptador', 'Marcaje' y 'Espíritu de lucha'...", tab: 'inventory', action: 'batch_stock', val: 3, x: 380, y: 440 },
+      { t: 32, scene: 1, text: "¡Inventario cargado! 15 unidades listas en stock para asignar.", tab: 'inventory', action: 'move', x: 480, y: 140 },
 
       // ESCENA 2: Creación de Jugador
-      { t: 19, scene: 2, text: "Escena 2: Volviendo a la pestaña de 'Asignación de Jugadores'...", tab: 'inventory', action: 'click', x: 100, y: 195 },
-      { t: 21, scene: 2, text: "Sección '➕ Agregar Nuevo Jugador' lista para registro.", tab: 'players', action: 'move', x: 220, y: 270 },
-      { t: 23, scene: 2, text: "Escribiendo nombre del jugador: 'J. Kimmich'...", tab: 'players', action: 'type_player_name', name: 'J. Kimmich', x: 220, y: 270 },
-      { t: 26, scene: 2, text: "Seleccionando las 5 habilidades con stock previamente cargadas...", tab: 'players', action: 'select_5_skills', x: 450, y: 320 },
-      { t: 29, scene: 2, text: "Validación en vivo: Las 5 habilidades se muestran en verde (En Stock).", tab: 'players', action: 'move', x: 620, y: 320 },
-      { t: 31, scene: 2, text: "Haciendo clic en '➕ Guardar'...", tab: 'players', action: 'click_save_player', x: 740, y: 360 },
-      { t: 33, scene: 2, text: "¡Jugador 'J. Kimmich' registrado con éxito! Estado: 🟢 5/5 en stock.", tab: 'players', action: 'move', x: 500, y: 460 },
+      { t: 38, scene: 2, text: "Escena 2: Volviendo a la pestaña de 'Asignación de Jugadores'...", tab: 'inventory', action: 'click', x: 100, y: 195 },
+      { t: 42, scene: 2, text: "Sección '➕ Agregar Nuevo Jugador' lista para registro.", tab: 'players', action: 'move', x: 220, y: 270 },
+      { t: 46, scene: 2, text: "Escribiendo nombre del jugador: 'J. Kimmich'...", tab: 'players', action: 'type_player_name', name: 'J. Kimmich', x: 220, y: 270 },
+      { t: 52, scene: 2, text: "Seleccionando las 5 habilidades con stock previamente cargadas...", tab: 'players', action: 'select_5_skills', x: 450, y: 320 },
+      { t: 58, scene: 2, text: "Validación en vivo: Las 5 habilidades se muestran en verde (En Stock).", tab: 'players', action: 'move', x: 620, y: 320 },
+      { t: 62, scene: 2, text: "Haciendo clic en '➕ Guardar'...", tab: 'players', action: 'click_save_player', x: 740, y: 360 },
+      { t: 66, scene: 2, text: "¡Jugador 'J. Kimmich' registrado con éxito! Estado: 🟢 5/5 en stock.", tab: 'players', action: 'move', x: 500, y: 460 },
 
       // ESCENA 3: Descuento en Tiempo Real
-      { t: 36, scene: 3, text: "Escena 3: Probando el botón '⬇️ Descontar' en Pase al primer toque...", tab: 'players', action: 'move', x: 410, y: 475 },
-      { t: 39, scene: 3, text: "Haciendo clic en '⬇️ Descontar' para consumir 1 unidad del inventario...", tab: 'players', action: 'click_descontar', x: 410, y: 475 },
-      { t: 41, scene: 3, text: "¡Confirmación! Habilidad descontada del stock y casilla liberada a 'Seleccionar'.", tab: 'players', action: 'after_descontar', x: 410, y: 475 },
-      { t: 44, scene: 3, text: "El stock de Pase al primer toque bajó instantáneamente de 3 a 2 en vivo.", tab: 'players', action: 'move', x: 300, y: 140 },
+      { t: 72, scene: 3, text: "Escena 3: Probando el botón '⬇️ Descontar' en Pase al primer toque...", tab: 'players', action: 'move', x: 410, y: 475 },
+      { t: 78, scene: 3, text: "Haciendo clic en '⬇️ Descontar' para consumir 1 unidad del inventario...", tab: 'players', action: 'click_descontar', x: 410, y: 475 },
+      { t: 82, scene: 3, text: "¡Confirmación! Habilidad descontada del stock y casilla liberada a 'Seleccionar'.", tab: 'players', action: 'after_descontar', x: 410, y: 475 },
+      { t: 88, scene: 3, text: "El stock de Pase al primer toque bajó instantáneamente de 3 a 2 en vivo.", tab: 'players', action: 'move', x: 300, y: 140 },
 
       // ESCENA 4: Creación de Jugador Modelo
-      { t: 48, scene: 4, text: "Escena 4: Ingresando a '⭐ Jugadores Modelo (Perfiles)'...", tab: 'players', action: 'click', x: 480, y: 195 },
-      { t: 51, scene: 4, text: "Creando perfil táctico modelo: 'Extremo Desequilibrante'...", tab: 'models', action: 'type_model_name', name: 'Extremo Desequilibrante', x: 300, y: 260 },
-      { t: 55, scene: 4, text: "Asignando 5 habilidades de desborde y regate distintas...", tab: 'models', action: 'assign_model_skills', x: 500, y: 340 },
-      { t: 58, scene: 4, text: "Guardando perfil modelo con '➕ Guardar Perfil'...", tab: 'models', action: 'click_save_model', x: 680, y: 390 },
-      { t: 60, scene: 4, text: "¡Perfil 'Extremo Desequilibrante' guardado exitosamente!", tab: 'models', action: 'move', x: 350, y: 460 },
+      { t: 96, scene: 4, text: "Escena 4: Ingresando a '⭐ Jugadores Modelo (Perfiles)'...", tab: 'players', action: 'click', x: 480, y: 195 },
+      { t: 102, scene: 4, text: "Creando perfil táctico modelo: 'Extremo Desequilibrante'...", tab: 'models', action: 'type_model_name', name: 'Extremo Desequilibrante', x: 300, y: 260 },
+      { t: 110, scene: 4, text: "Asignando 5 habilidades de desborde y regate distintas...", tab: 'models', action: 'assign_model_skills', x: 500, y: 340 },
+      { t: 116, scene: 4, text: "Guardando perfil modelo con '➕ Guardar Perfil'...", tab: 'models', action: 'click_save_model', x: 680, y: 390 },
+      { t: 120, scene: 4, text: "¡Perfil 'Extremo Desequilibrante' guardado exitosamente!", tab: 'models', action: 'move', x: 350, y: 460 },
 
       // ESCENA 5: Jugador Receptor y Detección de Match
-      { t: 63, scene: 5, text: "Escena 5: Regresando a la plantilla para crear a 'L. Sané'...", tab: 'models', action: 'click', x: 100, y: 195 },
-      { t: 65, scene: 5, text: "Escribiendo nombre: 'L. Sané'...", tab: 'players', action: 'type_second_player', name: 'L. Sané', x: 220, y: 270 },
-      { t: 68, scene: 5, text: "Aplicando plantilla rápida 'Extremo Desequilibrante'...", tab: 'players', action: 'select_template_model', x: 450, y: 270 },
-      { t: 71, scene: 5, text: "Guardando a L. Sané con sus habilidades coincidentes...", tab: 'players', action: 'click_save_second', x: 740, y: 360 },
-      { t: 73, scene: 5, text: "Volviendo a '⭐ Jugadores Modelo' para comprobar la detección de Match...", tab: 'players', action: 'click', x: 480, y: 195 },
-      { t: 76, scene: 5, text: "🎯 ¡MATCH 5/5 DETECTADO! L. Sané es 100% compatible con el perfil.", tab: 'models', action: 'highlight_match', x: 380, y: 460 },
-      { t: 79, scene: 5, text: "Demostración completada con éxito. Ecosistema D.A.V.A.D.E.R. validado.", tab: 'models', action: 'finish', x: 500, y: 300 }
+      { t: 126, scene: 5, text: "Escena 5: Regresando a la plantilla para crear a 'L. Sané'...", tab: 'models', action: 'click', x: 100, y: 195 },
+      { t: 130, scene: 5, text: "Escribiendo nombre: 'L. Sané'...", tab: 'players', action: 'type_second_player', name: 'L. Sané', x: 220, y: 270 },
+      { t: 136, scene: 5, text: "Aplicando plantilla rápida 'Extremo Desequilibrante'...", tab: 'players', action: 'select_template_model', x: 450, y: 270 },
+      { t: 142, scene: 5, text: "Guardando a L. Sané con sus habilidades coincidentes...", tab: 'players', action: 'click_save_second', x: 740, y: 360 },
+      { t: 146, scene: 5, text: "Volviendo a '⭐ Jugadores Modelo' para comprobar la detección de Match...", tab: 'players', action: 'click', x: 480, y: 195 },
+      { t: 152, scene: 5, text: "🎯 ¡MATCH 5/5 DETECTADO! L. Sané es 100% compatible con el perfil.", tab: 'models', action: 'highlight_match', x: 380, y: 460 },
+      { t: 158, scene: 5, text: "Demostración completada con éxito. Ecosistema D.A.V.A.D.E.R. validado.", tab: 'models', action: 'finish', x: 500, y: 300 }
     ];
 
     // ─── RENDERIZADOR DE VISTAS EN EL SANDBOX ──────────────────────
@@ -825,7 +849,7 @@
       const toast = document.getElementById('mock-toast');
       document.getElementById('toast-text').textContent = msg;
       toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 2400);
+      setTimeout(() => { toast.style.display = 'none'; }, 3800);
     }
 
     // ─── MOTOR DE REPRODUCCIÓN Y EVENTOS ───────────────────────────
@@ -848,7 +872,7 @@
       // Formato tiempo
       const curM = Math.floor(currentTime / 60).toString().padStart(2, '0');
       const curS = Math.floor(currentTime % 60).toString().padStart(2, '0');
-      document.getElementById('timer-label').textContent = `${curM}:${curS} / 01:20`;
+      document.getElementById('timer-label').textContent = `${curM}:${curS} / 02:40`;
 
       // Buscar eventos correspondientes
       const nextEvent = scriptEvents[currentEventIdx];
@@ -877,7 +901,7 @@
       }
 
       // Mover cursor
-      moveCursor(ev.x, ev.y, 400);
+      moveCursor(ev.x, ev.y, 650);
 
       // Ejecutar lógica según acción
       switch (ev.action) {
@@ -1099,11 +1123,11 @@
 
     function rebuildStateUpTo(targetT) {
       // Reconstrucción rápida de datos según tiempo
-      if (targetT < 18) {
+      if (targetT < 36) {
         appState.activeTab = 'inventory';
         appState.players = [];
         appState.models = [];
-      } else if (targetT < 35) {
+      } else if (targetT < 70) {
         appState.activeTab = 'players';
         appState.skills.dobleToque.stock = 3;
         appState.skills.pasePrimerToque.stock = 3;
@@ -1111,7 +1135,7 @@
         appState.skills.marcaje.stock = 3;
         appState.skills.espirituLucha.stock = 3;
         appState.totalStock = 15;
-      } else if (targetT < 47) {
+      } else if (targetT < 94) {
         appState.activeTab = 'players';
         appState.players = [{
           id: 'p1',
@@ -1121,7 +1145,7 @@
         }];
         appState.totalStock = 15;
         appState.assignedCount = 5;
-      } else if (targetT < 62) {
+      } else if (targetT < 124) {
         appState.activeTab = 'models';
         appState.players = [{
           id: 'p1',

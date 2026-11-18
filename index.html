@@ -74,34 +74,6 @@
       </div>
     </section>
 
-    <!-- Sección Demo Interactiva del Gestor -->
-    <section class="demo-showcase">
-      <div class="demo-showcase-header">
-        <div>
-          <h2 class="demo-showcase-title">🎬 Demo en Video: Mira el Gestor en Acción</h2>
-          <p class="demo-showcase-subtitle">Demostración guiada de 80 segundos: carga de stock, creación de jugador, descuento en vivo, perfiles modelo y detección de match.</p>
-        </div>
-        <span class="badge-tag" style="background: #1a1127; color: #c084fc; border-color: #7c3aed;">DEMO INTERACTIVA</span>
-      </div>
-      <div class="demo-iframe-wrapper">
-        <iframe src="demo/index.html" class="demo-iframe" title="Demo Gestor de Habilidades eFootball" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="demo-cta-row">
-        <a href="gestor/index.html" class="btn-primary" style="flex: 1; justify-content: center;">
-          <span>▶️</span>
-          <span>Abrir Gestor Web Comercial</span>
-        </a>
-        <a href="descargas/index.html" class="btn-secondary" style="flex: 1; justify-content: center;">
-          <span>💾</span>
-          <span>Descargar Versión Desktop (.exe)</span>
-        </a>
-        <a href="demo/index.html" target="_blank" class="btn-secondary" style="flex: 1; justify-content: center;">
-          <span>🔗</span>
-          <span>Abrir Demo en Pantalla Completa</span>
-        </a>
-      </div>
-    </section>
-
     <!-- Módulos Principales de la Plataforma -->
     <section>
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
@@ -158,6 +130,36 @@
 
       </div>
     </section>
+
+    <!-- Demo Interactiva (Desplegable) -->
+    <details class="demo-collapsible">
+      <summary class="demo-collapsible-toggle">
+        <span class="demo-toggle-icon">🎬</span>
+        <span class="demo-toggle-title">Demo en Video: Mira el Gestor en Acción</span>
+        <span class="badge-tag" style="background: #1a1127; color: #c084fc; border-color: #7c3aed; margin-left: auto;">DEMO INTERACTIVA</span>
+        <span class="demo-chevron">▼</span>
+      </summary>
+      <div class="demo-collapsible-body">
+        <p class="demo-showcase-subtitle" style="margin-bottom: 16px;">Demostración guiada de ~2:40 minutos: carga de stock, creación de jugador, descuento en vivo, perfiles modelo y detección de match.</p>
+        <div class="demo-iframe-wrapper">
+          <iframe src="demo/index.html" class="demo-iframe" title="Demo Gestor de Habilidades eFootball" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="demo-cta-row">
+          <a href="gestor/index.html" class="btn-primary" style="flex: 1; justify-content: center;">
+            <span>▶️</span>
+            <span>Abrir Gestor Web Comercial</span>
+          </a>
+          <a href="descargas/index.html" class="btn-secondary" style="flex: 1; justify-content: center;">
+            <span>💾</span>
+            <span>Descargar Versión Desktop (.exe)</span>
+          </a>
+          <a href="demo/index.html" target="_blank" class="btn-secondary" style="flex: 1; justify-content: center;">
+            <span>🔗</span>
+            <span>Abrir Demo en Pantalla Completa</span>
+          </a>
+        </div>
+      </div>
+    </details>
 
   </main>
 
