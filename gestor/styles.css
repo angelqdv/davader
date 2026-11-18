@@ -1226,3 +1226,34 @@ td {
   margin-bottom: 14px;
 }
 
+
+
+/* Marca de Agua y Pie Oficial D.A.V.A.D.E.R. */
+.gestor-watermark-footer {
+  text-align: center;
+  padding: 24px 16px;
+  margin-top: 36px;
+  border-top: 1px solid var(--border-color, #1e2433);
+  font-size: 0.82rem;
+  color: #64748b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.gestor-watermark-footer strong {
+  color: #94a3b8;
+}
+
+.table-watermark-stamp {
+  display: block;
+  text-align: right;
+  font-size: 0.72rem;
+  color: #475569;
+  font-family: "Consolas", monospace;
+  margin-top: 6px;
+  padding-right: 6px;
+  user-select: none;
+  opacity: 0.75;
+}

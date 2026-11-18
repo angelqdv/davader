@@ -35,6 +35,28 @@
     html.in-iframe .demo-header, body.in-iframe .demo-header {
       margin-top: 0;
     }
+        /* Marca de agua flotante en la demo */
+    .demo-viewport-watermark {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      z-index: 99990;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(12, 14, 22, 0.88);
+      border: 1px solid rgba(225, 29, 72, 0.4);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      font-family: "Consolas", monospace;
+      color: #cbd5e1;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      user-select: none;
+    }
     /* Encabezado */
     .demo-header {
       background: linear-gradient(135deg, #131722 0%, #1a1e2f 100%);
@@ -427,6 +449,15 @@
     <!-- Marco de Reproducción -->
     <div class="video-viewport-frame" id="viewport-frame">
       
+      <!-- Marca de Agua Oficial -->
+      <div class="demo-viewport-watermark">
+        <svg viewBox="0 0 100 100" fill="none" style="width: 14px; height: 14px;">
+          <path d="M16 12 L52 12 C78 12 90 28 90 50 C90 72 78 88 52 88 L16 88 Z" fill="#0c0d12" stroke="#e11d48" stroke-width="6"/>
+          <path d="M 45 42 L 55 42 L 50 58 Z" fill="#f43f5e"/>
+        </svg>
+        <span>D.A.V.A.D.E.R. • © David Peñuela</span>
+      </div>
+      
       <!-- Puntero del Ratón Virtual -->
       <div id="virtual-cursor">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
@@ -615,7 +646,7 @@
       { t: 142, scene: 5, text: "Guardando a L. Sané con sus habilidades coincidentes...", tab: 'players', action: 'click_save_second', x: 740, y: 360 },
       { t: 146, scene: 5, text: "Volviendo a '⭐ Jugadores Modelo' para comprobar la detección de Match...", tab: 'players', action: 'click', x: 480, y: 195 },
       { t: 152, scene: 5, text: "🎯 ¡MATCH 5/5 DETECTADO! L. Sané es 100% compatible con el perfil.", tab: 'models', action: 'highlight_match', x: 380, y: 460 },
-      { t: 158, scene: 5, text: "Demostración completada con éxito. Ecosistema D.A.V.A.D.E.R. validado.", tab: 'models', action: 'finish', x: 500, y: 300 }
+      { t: 158, scene: 5, text: "Demostración Oficial completada • D.A.V.A.D.E.R. © 2026 David Peñuela • Todos los derechos reservados.", tab: 'models', action: 'finish', x: 500, y: 300 }
     ];
 
     // ─── RENDERIZADOR DE VISTAS EN EL SANDBOX ──────────────────────
