@@ -39,18 +39,19 @@
     }
     .specs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
       margin: 20px 0;
       background: #0c0d12;
-      padding: 16px;
+      padding: 18px;
       border-radius: 10px;
       border: 1px solid #232a3e;
     }
     .spec-item {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 4px;
+      min-width: 0; /* Evita que el contenedor desborde o se solape en CSS Grid */
     }
     .spec-label {
       font-size: 0.74rem;
@@ -58,20 +59,34 @@
       text-transform: uppercase;
       font-weight: 700;
       font-family: "Consolas", monospace;
+      letter-spacing: 0.5px;
     }
     .spec-val {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: #f8fafc;
       font-weight: 800;
+      word-break: break-word;
+      overflow-wrap: anywhere; /* Rompe nombres largos sin espacios como el .exe */
+    }
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 16px;
+      border-radius: 12px;
+      border: 1px solid #232a3e;
+      -webkit-overflow-scrolling: touch;
     }
     .history-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 16px;
       background: #131622;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #232a3e;
+      min-width: 600px;
+    }
+    @media (max-width: 680px) {
+      .specs-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
     }
     .history-table th {
       background: #0c0d12;
@@ -183,13 +198,12 @@
           🌐 O Probar Gestor Comercial Online
         </a>
       </div>
-      <small style="display: block; color: #64748b; margin-top: 10px; font-size: 0.78rem;">
-        * Al publicar en GitHub, vincula este enlace directamente a la Release de tu repositorio.
-      </small>
+
     </div>
 
     <!-- Historial de Versiones -->
     <h3 style="color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 12px;">📜 Historial de Versiones Oficiales</h3>
+    <div class="table-responsive">
     <table class="history-table">
       <thead>
         <tr>
@@ -214,6 +228,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </main>
 
   <footer class="app-footer">
