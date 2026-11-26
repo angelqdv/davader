@@ -1,170 +1,835 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D.A.V.A.D.E.R. — Compendio de Uniformes eFootball</title>
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="icon" href="../assets/davader_logo.svg">
+  <title id="docTitle">D.A.V.A.D.E.R. — eFootball Kits Compendium</title>
+  <link rel="icon" href="https://angelqdv.github.io/davader/assets/davader_logo.svg">
   <style>
-    .uniformes-hero {
-      background: linear-gradient(135deg, rgba(12,13,18,0.95), rgba(20,23,34,0.95)), radial-gradient(circle at top right, rgba(153,27,27,0.25), transparent 60%);
-      border: 1px solid #232a3e;
-      border-radius: 16px;
-      padding: 32px 28px;
-      margin-bottom: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* ==========================================================
+       D.A.V.A.D.E.R. Estilos Maestros Oficiales
+       ========================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .filters-bar {
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #08090d;
+      color: #e2e8f0;
+      min-height: 100vh;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(12, 13, 18, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1f2537;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
       justify-content: space-between;
-      margin-bottom: 24px;
-      background: #131722;
-      padding: 14px 18px;
-      border-radius: 12px;
-      border: 1px solid #232a3e;
-    }
-    .filter-pills {
-      display: flex;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 16px;
     }
-    .filter-btn {
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-crest {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(225, 29, 72, 0.55));
+      transition: filter 0.25s ease;
+    }
+
+    .nav-brand:hover .brand-crest {
+      filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.85));
+    }
+
+    .brand-text-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+      font-family: "Consolas", monospace;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
       padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background: #161c2b;
+      color: #fff;
+    }
+
+    .nav-links a.active {
+      background: #991b1b;
+      color: #fff;
+      border: 1px solid #b91c1c;
+      box-shadow: 0 0 12px rgba(153, 27, 27, 0.4);
+    }
+
+    /* Botón selector de idioma */
+    .lang-toggle-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #ffffff;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid #3b82f6;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+
+    .lang-toggle-btn:hover {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-color: #60a5fa;
+      box-shadow: 0 0 14px rgba(59, 130, 246, 0.5);
+    }
+
+    /* Page Container */
+    .page-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 28px 24px 60px;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero-hub {
+      background: radial-gradient(circle at 85% 20%, rgba(153, 27, 27, 0.32), transparent 55%),
+                  radial-gradient(circle at 15% 80%, rgba(29, 78, 216, 0.22), transparent 50%),
+                  #0d0f17;
+      border: 1px solid #242c3f;
+      border-radius: 20px;
+      padding: 38px 36px;
+      margin-bottom: 26px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1f1418;
+      color: #fca5a5;
+      border: 1px solid #991b1b;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-family: "Consolas", monospace;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-hub h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin: 12px 0 10px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-desc {
+      font-size: 0.98rem;
+      color: #94a3b8;
+      max-width: 820px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      background: #090a10;
+      border: 1px solid #20273a;
+      padding: 6px 14px;
       border-radius: 8px;
       font-size: 0.82rem;
       font-weight: 700;
+      color: #cbd5e1;
+    }
+
+    .stat-pill strong {
+      color: #e11d48;
+    }
+
+    /* Panel de Filtros Multitier */
+    .filters-master-panel {
+      background: #111420;
+      border: 1px solid #20273a;
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .search-inputs-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .search-input-box {
+      flex: 1;
+      background: #090a10;
       border: 1px solid #2d374f;
-      background: #0c0d12;
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      color: #f8fafc;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-input-box:focus {
+      border-color: #e11d48;
+      box-shadow: 0 0 12px rgba(225, 29, 72, 0.3);
+    }
+
+    /* ==========================================================
+       NIVEL 1: CONTINENTES — Chips horizontales + Select dropdown
+       ========================================================== */
+    .filter-section-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: #64748b;
+      font-family: "Consolas", monospace;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Fila flex: chips a la izquierda, select a la derecha */
+    .level1-flex-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    @media (min-width: 768px) {
+      .level1-flex-row {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+    }
+
+    .continents-pills-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex: 1;
+      align-items: center;
+    }
+
+    /* Chips de continente (Level 1) */
+    .filter-btn {
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 1px solid #1e293b;
+      background: #0f172a;
       color: #94a3b8;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
     }
+
     .filter-btn:hover {
-      background: #1e2436;
-      color: #fff;
+      background: #1e293b;
+      color: #ffffff;
+      border-color: #334155;
     }
+
     .filter-btn.active {
-      background: #991b1b;
-      color: #fff;
-      border-color: #b91c1c;
-      box-shadow: 0 0 12px rgba(153,27,27,0.4);
+      background: #7f1d1d;
+      color: #ffffff;
+      border-color: #991b1b;
+      box-shadow: 0 0 10px rgba(153, 27, 27, 0.4);
     }
+
+    .filter-btn-count {
+      background: rgba(255, 255, 255, 0.12);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.67rem;
+      font-family: "Consolas", monospace;
+      opacity: 0.85;
+    }
+
+    /* Select Level 1 (continentes, mismo estilo que el dropdown de ligas) */
+    .continent-dropdown-wrap {
+      width: 100%;
+      flex-shrink: 0;
+    }
+    @media (min-width: 768px) {
+      .continent-dropdown-wrap {
+        width: 220px;
+      }
+    }
+
+    .continent-dropdown-select {
+      width: 100%;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 7px 10px;
+      border-radius: 8px;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      appearance: auto;
+    }
+    .continent-dropdown-select:hover { border-color: #475569; }
+    .continent-dropdown-select:focus { border-color: #e11d48; outline: none; }
+    .continent-dropdown-select option,
+    .continent-dropdown-select optgroup {
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    /* ==========================================================
+       NIVEL 2: LIGAS — Carrusel horizontal estilo efscout
+       ========================================================== */
+    .subtier-container {
+      background: #0a0c14;
+      border: 1px solid #1c2234;
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .subtier-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subtier-title {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #38bdf8;
+      font-family: "Consolas", monospace;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Carrusel de ligas con scroll horizontal + flechas */
+    .leagues-carousel-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .carousel-arrow {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      line-height: 1;
+    }
+    .carousel-arrow:hover {
+      background: #334155;
+      color: #fff;
+      border-color: #475569;
+    }
+
+    .leagues-carousel-track {
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 2px 1px 4px;
+      flex: 1;
+      /* hide scrollbar */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .leagues-carousel-track::-webkit-scrollbar { display: none; }
+
+    /* Chips de liga (Level 2) — mismo estilo que antes */
+    .subtier-btn {
+      flex-shrink: 0;
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      border: 1px solid #1e293b;
+      background: #0f172a;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .subtier-btn:hover {
+      border-color: #334155;
+      color: #ffffff;
+      background: #1e293b;
+    }
+
+    .subtier-btn.active-all {
+      background: #7f1d1d;
+      color: #ffffff;
+      border-color: #991b1b;
+    }
+
+    .subtier-btn.active {
+      background: #0c4a6e;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+
+    .subtier-btn-count {
+      background: rgba(0, 0, 0, 0.30);
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-family: "Consolas", monospace;
+      opacity: 0.70;
+    }
+
+    /* Selector desplegable de todas las ligas (mantenerlo) */
+    .league-dropdown-wrap {
+      flex-shrink: 0;
+      margin-left: 2px;
+    }
+
+    .league-dropdown-select {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 5px 8px;
+      border-radius: 7px;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      appearance: auto;
+      max-width: 180px;
+    }
+    .league-dropdown-select:hover { border-color: #475569; }
+    .league-dropdown-select:focus { border-color: #e11d48; outline: none; }
+    .league-dropdown-select option,
+    .league-dropdown-select optgroup {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 4px 6px;
+    }
+
+    /* ==========================================================
+       FILTRO DE COLORES INTERACTIVO
+       ========================================================== */
+    .color-filter-box {
+      background: #090a10;
+      border: 1px solid #1a2030;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .color-filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .color-filter-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #f59e0b;
+      font-family: "Consolas", monospace;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .color-filter-active-label {
+      font-size: 0.74rem;
+      font-family: "Consolas", monospace;
+      color: #94a3b8;
+    }
+
+    .color-filter-active-label strong {
+      color: #f8fafc;
+    }
+
+    .color-dots-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-color-all {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      border: 1px solid #2d374f;
+      background: #121624;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-color-all:hover {
+      color: #fff;
+      border-color: #475569;
+    }
+
+    .btn-color-all.active {
+      background: #991b1b;
+      color: #ffffff;
+      border-color: #b91c1c;
+      box-shadow: 0 0 10px rgba(153, 27, 27, 0.4);
+    }
+
+    .color-separator {
+      width: 1px;
+      height: 18px;
+      background: #20273a;
+      margin: 0 2px;
+    }
+
+    .color-dot-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+    }
+
+    .color-dot-btn:hover {
+      transform: scale(1.18);
+    }
+
+    .color-dot-btn.active {
+      transform: scale(1.24);
+      border-color: #ffffff;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Cuadrícula de Equipos */
     .kits-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
       gap: 22px;
     }
+
     .kit-card {
-      background: #131622;
-      border: 1px solid #232a3e;
-      border-radius: 14px;
+      background: #111420;
+      border: 1px solid #20273a;
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .kit-card:hover {
-      transform: translateY(-4px);
-      border-color: #991b1b;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-    }
-    .kit-preview-box {
-      height: 210px;
-      background: radial-gradient(circle at center, #1e2436 0%, #0c0d12 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      border-bottom: 1px solid #232a3e;
-      padding: 16px;
-    }
-    .kit-badge-type {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-family: "Consolas", monospace;
-    }
-    .badge-local { background: #1e293b; color: #38bdf8; border: 1px solid #334155; }
-    .badge-visitante { background: #2e1065; color: #d8b4fe; border: 1px solid #581c87; }
-    .badge-portero { background: #450a0a; color: #fca5a5; border: 1px solid #991b1b; }
-    .badge-especial { background: #422006; color: #fde68a; border: 1px solid #ca8a04; }
 
-    .kit-body {
-      padding: 18px 20px;
+    .kit-card:hover {
+      transform: translateY(-5px);
+      border-color: #991b1b;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Encabezado de la Tarjeta (Arriba del uniforme) */
+    .kit-card-header {
+      padding: 16px 16px 14px 16px;
       display: flex;
       flex-direction: column;
-      flex: 1;
-      gap: 12px;
+      gap: 8px;
+      border-bottom: 1px solid #1a2233;
+      background: #111420;
     }
-    .kit-team-name {
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #94a3b8;
+
+    .kit-card-header-top {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
-    .kit-title {
-      font-size: 1.1rem;
+
+    .badge-category-mini {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #94a3b8;
+      background: #0b0e17;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid #1e293b;
+      white-space: nowrap;
+    }
+
+    .kit-league-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      background: #192033;
+      padding: 3px 8px;
+      border-radius: 5px;
+      display: inline-block;
+      border: 1px solid #2b3650;
+      max-width: 190px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .kit-team-title {
+      font-size: 1.15rem;
       font-weight: 800;
       color: #ffffff;
-      line-height: 1.3;
+      line-height: 1.25;
+      min-height: 2.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-    .kit-desc {
-      font-size: 0.83rem;
-      color: #94a3b8;
-      line-height: 1.45;
-      flex: 1;
-    }
-    .color-swatches {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-    .color-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.25);
-    }
-    .kit-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    .btn-kit {
-      flex: 1;
+
+    .btn-action-primary {
       padding: 8px 12px;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 0.8rem;
       font-weight: 700;
       text-align: center;
       cursor: pointer;
-      border: 1px solid #334155;
-      background: #1c2132;
-      color: #e2e8f0;
-      transition: all 0.2s ease;
-    }
-    .btn-kit:hover {
+      border: 1px solid #b91c1c;
       background: #991b1b;
-      color: #fff;
-      border-color: #b91c1c;
+      color: #ffffff;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.15s ease;
+      width: 100%;
     }
-    /* Modal */
+
+    .btn-action-primary:hover {
+      background: #b91c1c;
+      box-shadow: 0 0 12px rgba(185, 28, 28, 0.4);
+    }
+
+    /* Previsualización Principal de la Camiseta */
+    .kit-preview-box {
+      height: 220px;
+      background: radial-gradient(circle at center, #1a2032 0%, #08090d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-bottom: 1px solid #20273a;
+      padding: 14px;
+      cursor: pointer;
+    }
+
+    .kit-preview-img {
+      max-height: 180px;
+      max-width: 180px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.75));
+      transition: transform 0.25s ease;
+    }
+
+    .kit-card:hover .kit-preview-img {
+      transform: scale(1.06);
+    }
+
+    .badge-current-role {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: "Consolas", monospace;
+      background: rgba(153, 27, 27, 0.9);
+      border: 1px solid #b91c1c;
+      color: #ffffff;
+    }
+
+    .badge-color-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: "Consolas", monospace;
+      background: rgba(9, 10, 16, 0.85);
+      border: 1px solid #2d374f;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-color-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Selector de Camisetas Miniatura (En cada tarjeta) */
+    .kit-thumbnails-bar {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      background: #090a10;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .kit-thumb-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #141724;
+      border: 1px solid #262e42;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .kit-thumb-item:hover {
+      background: #20273a;
+      color: #ffffff;
+      border-color: #3d4968;
+    }
+
+    .kit-thumb-item.active {
+      background: #991b1b;
+      color: #ffffff;
+      border-color: #ef4444;
+    }
+
+    .kit-thumb-img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    /* Modal Visor */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.88);
       backdrop-filter: blur(8px);
       z-index: 9999;
       display: none;
@@ -172,19 +837,24 @@
       justify-content: center;
       padding: 20px;
     }
-    .modal-backdrop.open { display: flex; }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
     .modal-content {
-      background: #131622;
+      background: #111420;
       border: 2px solid #991b1b;
-      border-radius: 16px;
+      border-radius: 18px;
       width: 100%;
-      max-width: 680px;
+      max-width: 980px;
       padding: 28px;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
       position: relative;
     }
+
     .modal-close {
       position: absolute;
       top: 20px;
@@ -192,45 +862,147 @@
       background: transparent;
       border: none;
       color: #94a3b8;
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
     }
-    .modal-close:hover { color: #fff; }
-    .formula-box {
-      background: #0c0d12;
-      border: 1px solid #232a3e;
-      border-left: 4px solid #991b1b;
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-family: "Consolas", monospace;
-      font-size: 0.85rem;
-      color: #f8fafc;
-      margin-top: 10px;
-      word-break: break-all;
+
+    .modal-close:hover {
+      color: #ffffff;
+      background: #1f2537;
     }
-    .notice-sync {
-      background: linear-gradient(90deg, #181226 0%, #151d2f 100%);
-      border: 1px dashed #6366f1;
+
+    .modal-header-meta {
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #20273a;
+    }
+
+    .modal-team-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .modal-team-subtitle {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    .modal-kits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
+    }
+
+    .modal-kit-card {
+      background: #090a10;
+      border: 1px solid #20273a;
       border-radius: 12px;
-      padding: 16px 20px;
-      margin-top: 36px;
-      font-size: 0.85rem;
-      color: #c7d2fe;
+      padding: 14px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
+    }
+
+    .modal-kit-card img {
+      width: 100%;
+      max-width: 210px;
+      height: 210px;
+      object-fit: contain;
+      background: radial-gradient(circle at center, #161c2c 0%, #05060a 100%);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .modal-kit-badges-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .modal-kit-badge {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-family: "Consolas", monospace;
+      color: #fca5a5;
+    }
+
+    .modal-color-tag {
+      font-size: 0.72rem;
+      font-family: "Consolas", monospace;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #141724;
+      border: 1px solid #2b3650;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #cbd5e1;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    /* Footer */
+    .app-footer {
+      background: #0a0c12;
+      border-top: 1px solid #1a2030;
+      padding: 28px 20px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .footer-content strong {
+      color: #ffffff;
+    }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 6px;
     }
   </style>
 </head>
 <body class="theme-darth_vader">
 
+  <!-- Barra Superior de Navegación Oficial -->
   <nav class="top-nav">
     <div class="nav-container">
-      <a href="../index.html" class="nav-brand">
+      <a href="https://angelqdv.github.io/davader/index.html" class="nav-brand">
+        <!-- Logo Oficial D.A.V.A.D.E.R. -->
         <svg class="brand-crest" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="D.A.V.A.D.E.R. Logo">
           <defs>
-            <filter id="dvg_u" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.5" result="blur"/><feComposite in="SourceGraphic" in2="blur" operator="over"/></filter>
-            <linearGradient id="dvd_u" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f43f5e"/><stop offset="50%" stop-color="#e11d48"/><stop offset="100%" stop-color="#881337"/></linearGradient>
+            <filter id="dvg_u" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+            <linearGradient id="dvd_u" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f43f5e"/>
+              <stop offset="50%" stop-color="#e11d48"/>
+              <stop offset="100%" stop-color="#881337"/>
+            </linearGradient>
           </defs>
           <path d="M16 12 L52 12 C78 12 90 28 90 50 C90 72 78 88 52 88 L16 88 Z" fill="#0c0d12" stroke="url(#dvd_u)" stroke-width="3.5"/>
           <g transform="translate(50.5, 52.5) scale(0.54)">
@@ -248,75 +1020,817 @@
             <circle cx="5" cy="27" r="1.8" fill="#e11d48"/>
           </g>
         </svg>
-        <span class="brand-name">D.A.V.A.D.E.R.</span>
+        <div class="brand-text-col">
+          <span class="brand-name">D.A.V.A.D.E.R.</span>
+          <span class="brand-sub" id="brandSub">KITS • eFOOTBALL 2026/2027</span>
+        </div>
       </a>
       <div class="nav-links">
-        <a href="../index.html">🏠 Inicio</a>
-        <a href="../gestor/index.html">📊 Gestor Web Comercial</a>
-        <a href="index.html" class="active">👕 Uniformes</a>
-        <a href="../descargas/index.html">💾 Descargas</a>
+        <a href="https://angelqdv.github.io/davader/index.html" id="navHome">Home</a>
+        <a href="https://angelqdv.github.io/davader/descargas/" id="navDownloads">Downloads</a>
+        <a href="index.html" class="active" id="navKits">Kits</a>
+        <a href="https://angelqdv.github.io/davader/gestor/" id="navManager">Manager</a>
+        <a href="https://angelqdv.github.io/davader/temas/" id="navThemes">Themes</a>
+        <!-- Selector Bilingüe -->
+        <button class="lang-toggle-btn" id="langToggleBtn" onclick="toggleLanguage()" title="Change language / Cambiar idioma">
+          <span id="langBtnText">🌐 English (EN)</span>
+        </button>
       </div>
     </div>
   </nav>
 
-  <main class="page-container">
-    <header class="uniformes-hero">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
-        <div>
-          <span class="badge-tag">Compendio Oficial eFootball</span>
-          <h1 style="font-size: 2rem; font-weight: 900; color: #fff; margin: 8px 0;">👕 Colección de Uniformes & Kits</h1>
-          <p style="color: #94a3b8; max-width: 650px; font-size: 0.95rem;">
-            Catálogo técnico de indumentarias de autor para <strong>Darth Vader FC</strong> y <strong>FCB David</strong>. Incluye paletas RGB oficiales, texturas tácticas y fórmulas listas para exportar a eFootball.
-          </p>
-        </div>
-        <a href="../index.html" class="btn-primary" style="text-decoration: none;">← Volver al Hub Central</a>
+  <!-- Contenedor Principal -->
+  <div class="page-container">
+
+    <!-- Hero Hub -->
+    <header class="hero-hub">
+      <div class="badge-tag" id="heroBadge">Official eFootball Compendium</div>
+      <h1 id="heroTitle">eFootball Kit Gallery</h1>
+      <p class="hero-desc" id="heroDesc">
+        Complete catalog structured by continents, official leagues, and national teams.
+        Each kit maintains its native high-quality 512×512 format, ready for Dream Team and editing.
+      </p>
+      <div class="stats-row">
+        <div class="stat-pill"><span id="lblTotalKits">Total Kits:</span> <strong id="statTotalKits">3,369</strong></div>
+        <div class="stat-pill"><span id="lblTeams">Teams & Selections:</span> <strong id="statTeams">984</strong></div>
+        <div class="stat-pill"><span id="lblLeagues">Leagues & Tournaments:</span> <strong id="statLeagues">43</strong></div>
+        <div class="stat-pill"><span id="lblFormat">Format:</span> <strong>PNG 512×512</strong></div>
       </div>
     </header>
 
-    <!-- Barra de Filtros y Búsqueda -->
-    <div class="filters-bar">
-      <div class="filter-pills" id="team-filter-group">
-        <button class="filter-btn active" onclick="setFilter('all', this)">Todos (<span id="count-all">0</span>)</button>
-        <button class="filter-btn" onclick="setFilter('dv', this)">⚔️ Darth Vader FC</button>
-        <button class="filter-btn" onclick="setFilter('fcb', this)">🔵🔴 FCB David</button>
-        <button class="filter-btn" onclick="setFilter('local', this)">Titular</button>
-        <button class="filter-btn" onclick="setFilter('visitante', this)">Suplente</button>
-        <button class="filter-btn" onclick="setFilter('portero', this)">Portero</button>
-        <button class="filter-btn" onclick="setFilter('especial', this)">Especiales</button>
+    <!-- Master Panel de Filtros Multitier -->
+    <section class="filters-master-panel">
+      <!-- Buscador -->
+      <div class="search-inputs-row">
+        <input type="text" id="searchInput" class="search-input-box" placeholder="🔍 Search team by name or league (e.g. Arsenal, Real Madrid, Argentina, Boca Juniors, Vissel Kobe)...">
       </div>
 
-      <div style="display: flex; gap: 10px;">
-        <input 
-          type="text" 
-          id="search-kits" 
-          class="search-input" 
-          placeholder="🔍 Buscar uniforme o color..." 
-          oninput="onSearchInput(this.value)"
-        />
+      <!-- Nivel 1: Continentes — Chips + Dropdown -->
+      <div>
+        <div class="filter-section-title" id="level1Title">Level 1 &#8226; Continent / Category:</div>
+        <div class="level1-flex-row">
+          <div class="continents-pills-row" id="continentsRow"></div>
+          <div class="continent-dropdown-wrap">
+            <select id="continentDropdown" class="continent-dropdown-select" onchange="selectContinentFromDropdown(this.value)">
+              <!-- Dinamico -->
+            </select>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Rejilla de Kits -->
-    <div class="kits-grid" id="kits-container">
-      <!-- Inyectado dinámicamente con uniformes.json -->
-    </div>
-  </main>
+      <!-- Nivel 2: Ligas — Carrusel horizontal estilo efscout -->
+      <div class="subtier-container" id="subtierContainer">
+        <div class="subtier-header-bar">
+          <div class="subtier-title" id="subtierTitle">Level 2 &#8226; Leagues &amp; Divisions:</div>
+        </div>
+        <div class="leagues-carousel-wrap">
+          <button class="carousel-arrow" onclick="scrollLeaguesCarousel(-160)" title="Scroll left">&#8249;</button>
+          <div class="leagues-carousel-track" id="leaguesPillsRow"></div>
+          <button class="carousel-arrow" onclick="scrollLeaguesCarousel(160)" title="Scroll right">&#8250;</button>
+          <div class="league-dropdown-wrap">
+            <select id="leagueDropdown" class="league-dropdown-select" onchange="selectLeagueFromDropdown(this.value)">
+              <!-- Dinamico -->
+            </select>
+          </div>
+        </div>
+      </div>
 
-  <!-- Modal de Detalle de Kit -->
-  <div id="kit-modal" class="modal-backdrop" onclick="closeModalOnBackdrop(event)">
+      <!-- Filtro de Color de Camiseta -->
+      <div class="color-filter-box">
+        <div class="color-filter-header">
+          <div class="color-filter-title" id="colorFilterTitle">🎨 Kit Color Filter:</div>
+          <div class="color-filter-active-label">
+            <span id="lblFilterActive">Filter:</span> <strong id="colorActiveName">All Colors</strong>
+          </div>
+        </div>
+        <div class="color-dots-row" id="colorDotsRow">
+          <button class="btn-color-all active" id="btnColorAll" onclick="selectColorFilter('')">
+            <span id="txtAllColors">All</span>
+          </button>
+          <div class="color-separator"></div>
+          <button class="color-dot-btn" data-color="Red" onclick="selectColorFilter('Red')" title="Red / Rojo" style="background-color: #dc2626;"></button>
+          <button class="color-dot-btn" data-color="Blue" onclick="selectColorFilter('Blue')" title="Blue / Azul" style="background-color: #2563eb;"></button>
+          <button class="color-dot-btn" data-color="White" onclick="selectColorFilter('White')" title="White / Blanco" style="background-color: #f8fafc; border-color: #cbd5e1;"></button>
+          <button class="color-dot-btn" data-color="Black" onclick="selectColorFilter('Black')" title="Black / Negro" style="background-color: #18181b; border-color: #3f3f46;"></button>
+          <button class="color-dot-btn" data-color="Yellow" onclick="selectColorFilter('Yellow')" title="Yellow / Amarillo" style="background-color: #eab308;"></button>
+          <button class="color-dot-btn" data-color="Green" onclick="selectColorFilter('Green')" title="Green / Verde" style="background-color: #16a34a;"></button>
+          <button class="color-dot-btn" data-color="Orange" onclick="selectColorFilter('Orange')" title="Orange / Naranja" style="background-color: #ea580c;"></button>
+          <button class="color-dot-btn" data-color="LightBlue" onclick="selectColorFilter('LightBlue')" title="Light Blue / Celeste" style="background-color: #38bdf8;"></button>
+          <button class="color-dot-btn" data-color="Purple" onclick="selectColorFilter('Purple')" title="Purple / Morado" style="background-color: #9333ea;"></button>
+          <button class="color-dot-btn" data-color="Pink" onclick="selectColorFilter('Pink')" title="Pink / Rosa" style="background-color: #ec4899;"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cuadrícula de Equipos -->
+    <main class="kits-grid" id="kitsGrid"></main>
+
+  </div>
+
+  <!-- Modal Visor de Uniformes del Equipo -->
+  <div class="modal-backdrop" id="kitModal">
     <div class="modal-content">
-      <button class="modal-close" onclick="closeKitModal()">✕</button>
-      <div id="modal-body-content"></div>
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-header-meta">
+        <div class="modal-team-title" id="modalTeamName"></div>
+        <div class="modal-team-subtitle" id="modalTeamMeta"></div>
+      </div>
+      <div class="modal-kits-grid" id="modalKitsGrid"></div>
     </div>
   </div>
 
+  <!-- Pie de Página -->
   <footer class="app-footer">
     <div class="footer-content">
-      <p><strong>D.A.V.A.D.E.R.</strong> — <em>David And Vader Applications, Database & eFootball Resources</em></p>
-      <p class="copyright">Creador: David Peñuela • Compatible con eFootball 2026/2027 • GitHub Pages</p>
+      <p><strong id="footerBrand">D.A.V.A.D.E.R.</strong> — David And Vader Applications, Database & eFootball Resources</p>
+      <p class="copyright" id="footerCopy">Official eFootball kit and texture compendium. All rights reserved.</p>
     </div>
   </footer>
 
-  <script src="uniformes.js"></script>
+  <!-- Script de Navegación y Renderizado -->
+  <script src="catalogo_uniformes.js"></script>
+  <script>
+    // ==========================================================
+    // DICCIONARIOS DE IDIOMA PUROS (Inglés por defecto | Español)
+    // ==========================================================
+    const I18N = {
+      en: {
+        docTitle: "D.A.V.A.D.E.R. — eFootball Kits Compendium",
+        brandSub: "KITS • eFOOTBALL 2026/2027",
+        navHome: "Home",
+        navDownloads: "Downloads",
+        navKits: "Kits",
+        navManager: "Manager",
+        navThemes: "Themes",
+        langBtn: "🌐 English (EN)",
+        heroBadge: "Official eFootball Compendium",
+        heroTitle: "eFootball Kit Gallery",
+        heroDesc: "Complete catalog structured by continents, official leagues, and national teams. Each kit maintains its native high-quality 512×512 format, ready for Dream Team and editing.",
+        lblTotalKits: "Total Kits:",
+        lblTeams: "Teams & Selections:",
+        lblLeagues: "Leagues & Tournaments:",
+        lblFormat: "Format:",
+        searchPlaceholder: "🔍 Search team by name or league (e.g. Arsenal, Real Madrid, Argentina, Boca Juniors, Vissel Kobe)...",
+        level1Title: "Level 1 • Continent / Category:",
+        allContinents: "All Continents",
+        level2Prefix: "Level 2 • Leagues & Divisions in",
+        allLeagues: "All",
+        dropdownPrompt: "— Browse All Leagues —",
+        colorFilterTitle: "🎨 Kit Color Filter:",
+        lblFilterActive: "Filter:",
+        allColors: "All Colors",
+        txtAllColors: "All",
+        viewCollection: "View Full Collection",
+        availableKits: "available kits",
+        noResults: "No teams found matching the selected criteria.",
+        footerCopy: "Official eFootball kit and texture compendium. All rights reserved.",
+        continents: {
+          "": "All Continents",
+          "Europa": "Europe",
+          "Sudamerica": "South America",
+          "Norteamerica_y_Centroamerica": "North & Central America",
+          "Asia_-_Oceania": "Asia & Oceania",
+          "Africa": "Africa",
+          "Equipos_Nacionales": "National Teams",
+          "Otros": "Special & Referees"
+        },
+        colors: {
+          "": "All Colors",
+          "Red": "Red",
+          "Blue": "Blue",
+          "White": "White",
+          "Black": "Black",
+          "Yellow": "Yellow",
+          "Green": "Green",
+          "Orange": "Orange",
+          "LightBlue": "Light Blue",
+          "Purple": "Purple",
+          "Pink": "Pink",
+          "Other": "Other"
+        }
+      },
+      es: {
+        docTitle: "D.A.V.A.D.E.R. — Compendio de Uniformes eFootball",
+        brandSub: "UNIFORMES • eFOOTBALL 2026/2027",
+        navHome: "Inicio",
+        navDownloads: "Descargas",
+        navKits: "Uniformes",
+        navManager: "Gestor",
+        navThemes: "Temas",
+        langBtn: "🌐 Español (ES)",
+        heroBadge: "Compendio Oficial eFootball",
+        heroTitle: "Galería de Uniformes Oficiales",
+        heroDesc: "Catálogo completo estructurado por continentes, ligas oficiales y selecciones nacionales. Cada uniforme conserva su formato nativo 512×512 en alta calidad listo para Dream Team y edición.",
+        lblTotalKits: "Total Camisetas:",
+        lblTeams: "Equipos y Selecciones:",
+        lblLeagues: "Ligas y Torneos:",
+        lblFormat: "Formato:",
+        searchPlaceholder: "🔍 Buscar por nombre de equipo o liga (ej. Arsenal, Real Madrid, Argentina, Boca Juniors, Vissel Kobe)...",
+        level1Title: "Nivel 1 • Continente / Categoría:",
+        allContinents: "Todos los Continentes",
+        level2Prefix: "Nivel 2 • Ligas y Divisiones en",
+        allLeagues: "Todas",
+        dropdownPrompt: "— Ver todas las ligas —",
+        colorFilterTitle: "🎨 Filtro de Color de Camiseta:",
+        lblFilterActive: "Filtro:",
+        allColors: "Todos los Colores",
+        txtAllColors: "Todos",
+        viewCollection: "Ver Colección Completa",
+        availableKits: "uniformes disponibles",
+        noResults: "No se encontraron equipos con los criterios de búsqueda seleccionados.",
+        footerCopy: "Compendio oficial de texturas y uniformes eFootball. Todos los derechos reservados.",
+        continents: {
+          "": "Todos los Continentes",
+          "Europa": "Europa",
+          "Sudamerica": "Sudamérica",
+          "Norteamerica_y_Centroamerica": "Norteamérica y Centroamérica",
+          "Asia_-_Oceania": "Asia y Oceanía",
+          "Africa": "África",
+          "Equipos_Nacionales": "Selecciones Nacionales",
+          "Otros": "Especiales y Árbitros"
+        },
+        colors: {
+          "": "Todos los Colores",
+          "Red": "Rojo",
+          "Blue": "Azul",
+          "White": "Blanco",
+          "Black": "Negro",
+          "Yellow": "Amarillo",
+          "Green": "Verde",
+          "Orange": "Naranja",
+          "LightBlue": "Celeste",
+          "Purple": "Morado",
+          "Pink": "Rosa",
+          "Other": "Otro"
+        }
+      }
+    };
+
+    // Orden canónico de Continentes para Nivel 1
+    const CONTINENT_ORDER = [
+      "",
+      "Europa",
+      "Sudamerica",
+      "Norteamerica_y_Centroamerica",
+      "Asia_-_Oceania",
+      "Africa",
+      "Equipos_Nacionales",
+      "Otros"
+    ];
+
+    // ==========================================================
+    // MAPA DE LIGAS PRINCIPALES EN PRIMER PLANO POR CONTINENTE
+    // (Ligas de 1ª División / Élite visibles directamente)
+    // ==========================================================
+    const MAIN_LEAGUES_MAP = {
+      // Europa: Inglaterra, España, Italia, Francia, Países Bajos, Portugal, Turquía, Alemania
+      "Europa": [
+        "English_League",
+        "Spanish_League",
+        "Lega_Italia",
+        "Ligue_1_McDonalds",
+        "VriendenLoterij_Eredivisie",
+        "Liga_Portugal_Betclic",
+        "Trendyol_Super_Lig",
+        "Otros_de_Europa"
+      ],
+      // Sudamérica: Brasil Serie A, Argentina, Colombia, Chile
+      "Sudamerica": [
+        "Brasileirao_Betano",
+        "Argentine_League",
+        "Colombian_League",
+        "Chilean_League"
+      ],
+      // Asia y Oceanía: J1 League, Champions League (ACL Elite), Corea, Tailandia, Malasia
+      "Asia_-_Oceania": [
+        "MEIJI_YASUDA_J1_LEAGUE",
+        "AFC_Champions_League_Elite",
+        "Korean_League",
+        "Hilux_Revo_Thai_League",
+        "UNIFI_LIGA_SUPER"
+      ],
+      // Norteamérica: MLS, Liga MX
+      "Norteamerica_y_Centroamerica": [
+        "American_League",
+        "Otros_de_Norteamerica"
+      ],
+      // Selecciones: Europa, Sudamérica, África, Asia y Oceanía, Norteamérica
+      "Equipos_Nacionales": [
+        "Europa",
+        "Sudamerica",
+        "Africa",
+        "Asia_-_Oceania",
+        "Norteamerica_y_Centroamerica"
+      ],
+      // Especiales: Árbitros, Clubes del Mundo, Entrenamiento
+      "Otros": [
+        "Arbitros",
+        "Clubes_del_Mundo",
+        "Entrenamiento"
+      ],
+      // África: Liga de Marruecos
+      "Africa": [
+        "Moroccan_League"
+      ],
+      // Todos los Continentes: Principales ligas mundiales
+      "": [
+        "English_League",
+        "Spanish_League",
+        "Lega_Italia",
+        "Ligue_1_McDonalds",
+        "VriendenLoterij_Eredivisie",
+        "Brasileirao_Betano",
+        "Argentine_League",
+        "MEIJI_YASUDA_J1_LEAGUE",
+        "AFC_Champions_League_Elite"
+      ]
+    };
+
+    // Estado de la aplicación (Por defecto: Inglés 'en')
+    let currentLang = localStorage.getItem("davader_lang") || "en";
+    if (currentLang !== "en" && currentLang !== "es") {
+      currentLang = "en";
+    }
+
+    let selectedContinentFolder = "";
+    let selectedLeague = "";
+    let selectedColor = "";
+    let searchFilter = "";
+    let currentModalTeam = null;
+
+    // Elementos DOM
+    const docTitle = document.getElementById("docTitle");
+    const brandSub = document.getElementById("brandSub");
+    const navHome = document.getElementById("navHome");
+    const navDownloads = document.getElementById("navDownloads");
+    const navKits = document.getElementById("navKits");
+    const navManager = document.getElementById("navManager");
+    const navThemes = document.getElementById("navThemes");
+    const langBtnText = document.getElementById("langBtnText");
+    const heroBadge = document.getElementById("heroBadge");
+    const heroTitle = document.getElementById("heroTitle");
+    const heroDesc = document.getElementById("heroDesc");
+    const lblTotalKits = document.getElementById("lblTotalKits");
+    const lblTeams = document.getElementById("lblTeams");
+    const lblLeagues = document.getElementById("lblLeagues");
+    const lblFormat = document.getElementById("lblFormat");
+    const statTotalKits = document.getElementById("statTotalKits");
+    const statTeams = document.getElementById("statTeams");
+    const statLeagues = document.getElementById("statLeagues");
+    const searchInput = document.getElementById("searchInput");
+    const level1Title = document.getElementById("level1Title");
+    const continentsRow = document.getElementById("continentsRow");
+    const subtierTitle = document.getElementById("subtierTitle");
+    const leaguesPillsRow = document.getElementById("leaguesPillsRow");
+    const leagueDropdown = document.getElementById("leagueDropdown");
+    const colorFilterTitle = document.getElementById("colorFilterTitle");
+    const lblFilterActive = document.getElementById("lblFilterActive");
+    const colorActiveName = document.getElementById("colorActiveName");
+    const txtAllColors = document.getElementById("txtAllColors");
+    const btnColorAll = document.getElementById("btnColorAll");
+    const kitsGrid = document.getElementById("kitsGrid");
+    const modal = document.getElementById("kitModal");
+    const modalClose = document.getElementById("modalClose");
+    const modalTeamName = document.getElementById("modalTeamName");
+    const modalTeamMeta = document.getElementById("modalTeamMeta");
+    const modalKitsGrid = document.getElementById("modalKitsGrid");
+    const footerCopy = document.getElementById("footerCopy");
+
+    // ==========================================================
+    // CAMBIO DE IDIOMA GLOBAL (EN <-> ES)
+    // ==========================================================
+    function toggleLanguage() {
+      currentLang = (currentLang === "en") ? "es" : "en";
+      localStorage.setItem("davader_lang", currentLang);
+      applyLanguage();
+    }
+
+    function applyLanguage() {
+      const dict = I18N[currentLang];
+      document.documentElement.lang = currentLang;
+
+      // Actualizar Textos Estáticos
+      docTitle.textContent = dict.docTitle;
+      brandSub.textContent = dict.brandSub;
+      navHome.textContent = dict.navHome;
+      navDownloads.textContent = dict.navDownloads;
+      navKits.textContent = dict.navKits;
+      navManager.textContent = dict.navManager;
+      navThemes.textContent = dict.navThemes;
+      langBtnText.textContent = dict.langBtn;
+      heroBadge.textContent = dict.heroBadge;
+      heroTitle.textContent = dict.heroTitle;
+      heroDesc.textContent = dict.heroDesc;
+      lblTotalKits.textContent = dict.lblTotalKits;
+      lblTeams.textContent = dict.lblTeams;
+      lblLeagues.textContent = dict.lblLeagues;
+      lblFormat.textContent = dict.lblFormat;
+      searchInput.placeholder = dict.searchPlaceholder;
+      level1Title.textContent = dict.level1Title;
+      colorFilterTitle.textContent = dict.colorFilterTitle;
+      lblFilterActive.textContent = dict.lblFilterActive;
+      txtAllColors.textContent = dict.txtAllColors;
+      colorActiveName.textContent = dict.colors[selectedColor] || dict.allColors;
+      footerCopy.textContent = dict.footerCopy;
+
+      // Estadísticas
+      let totalKitsCount = 0;
+      CATALOG.forEach(t => totalKitsCount += t.uniformes.length);
+      const uniqueLeaguesCount = new Set(CATALOG.map(t => t.ligaFolder || t.liga_en)).size;
+
+      statTotalKits.textContent = totalKitsCount.toLocaleString(currentLang === "en" ? "en-US" : "es-ES");
+      statTeams.textContent = CATALOG.length.toLocaleString(currentLang === "en" ? "en-US" : "es-ES");
+      statLeagues.textContent = uniqueLeaguesCount.toString();
+
+      // Renderizar Niveles, Filtros y Cuadrícula
+      renderContinentsNivel1();
+      renderSubtierLeaguesDemoLayout();
+      renderTeams();
+
+      // Si el modal está abierto, refrescar su contenido
+      if (modal.classList.contains("open") && currentModalTeam) {
+        refreshModalContent();
+      }
+    }
+
+    // ==========================================================
+    // NIVEL 1: CONTINENTES Y CATEGORÍAS
+    // ==========================================================
+    function renderContinentsNivel1() {
+      const dict = I18N[currentLang];
+      let html = "";
+      let selectHtml = "";
+
+      CONTINENT_ORDER.forEach(cFolder => {
+        const count = cFolder === ""
+          ? CATALOG.length
+          : CATALOG.filter(t => t.continenteFolder === cFolder).length;
+        const label = dict.continents[cFolder] || cFolder;
+        const isActive = (selectedContinentFolder === cFolder) ? "active" : "";
+
+        html += `<button class="filter-btn ${isActive}" onclick="selectContinent('${cFolder}')"><span>${label}</span><span class="filter-btn-count">${count}</span></button>`;
+        selectHtml += `<option value="${cFolder}" ${selectedContinentFolder === cFolder ? 'selected' : ''}>${label} (${count})</option>`;
+      });
+
+      continentsRow.innerHTML = html;
+      const cDrop = document.getElementById('continentDropdown');
+      if (cDrop) cDrop.innerHTML = selectHtml;
+    }
+
+    function selectContinent(cFolder) {
+      selectedContinentFolder = cFolder;
+      selectedLeague = "";
+      renderContinentsNivel1();
+      renderSubtierLeaguesDemoLayout();
+      renderTeams();
+    }
+
+    function selectContinentFromDropdown(cFolder) {
+      selectedContinentFolder = cFolder;
+      selectedLeague = "";
+      renderContinentsNivel1();
+      renderSubtierLeaguesDemoLayout();
+      renderTeams();
+    }
+
+    function scrollLeaguesCarousel(amount) {
+      const track = document.getElementById('leaguesPillsRow');
+      if (track) track.scrollLeft += amount;
+    }
+
+    // ==========================================================
+    // NIVEL 2: OPCIÓN A (TOP CHIPS + SELECTOR DESPLEGABLE COMO EN EL DEMO)
+    // ==========================================================
+    function renderSubtierLeaguesDemoLayout() {
+      const dict = I18N[currentLang];
+      const isEn = (currentLang === "en");
+
+      // Filtrar equipos pertenecientes al continente seleccionado
+      const relevantTeams = selectedContinentFolder === "" 
+        ? CATALOG 
+        : CATALOG.filter(t => t.continenteFolder === selectedContinentFolder);
+
+      // Agrupar ligas y contar equipos
+      const leagueStats = {};
+      relevantTeams.forEach(t => {
+        const leagueKey = t.ligaFolder || (isEn ? t.liga_en : t.liga_es);
+        const leagueName = isEn ? (t.liga_en || t.liga) : (t.liga_es || t.liga);
+        if (!leagueStats[leagueKey]) {
+          leagueStats[leagueKey] = {
+            key: leagueKey,
+            displayName: leagueName,
+            count: 0
+          };
+        }
+        leagueStats[leagueKey].count++;
+      });
+
+      const contLabel = dict.continents[selectedContinentFolder] || dict.allContinents;
+      subtierTitle.textContent = `${dict.level2Prefix} [${contLabel}]:`;
+
+      const mainKeys = MAIN_LEAGUES_MAP[selectedContinentFolder] || [];
+      const primaryLeagues = [];
+      const allSortedLeagues = Object.values(leagueStats).sort((a, b) => 
+        a.displayName.localeCompare(b.displayName, currentLang)
+      );
+
+      // Extraer ligas principales en el orden de MAIN_LEAGUES_MAP
+      allSortedLeagues.forEach(l => {
+        if (mainKeys.includes(l.key)) {
+          primaryLeagues.push(l);
+        }
+      });
+
+      primaryLeagues.sort((a, b) => {
+        const idxA = mainKeys.indexOf(a.key);
+        const idxB = mainKeys.indexOf(b.key);
+        return (idxA !== -1 ? idxA : 999) - (idxB !== -1 ? idxB : 999);
+      });
+
+      // Si por alguna razón no hay claves en el mapa para esta categoría, tomar las top 6
+      const displayPrimary = primaryLeagues.length > 0 ? primaryLeagues : allSortedLeagues.slice(0, 6);
+
+      const totalLeagueTeams = relevantTeams.length;
+      let pillsHtml = `
+        <button class="subtier-btn ${selectedLeague === '' ? 'active-all' : ''}" onclick="selectLeagueFilter('')">
+          <span>${dict.allLeagues} (${totalLeagueTeams})</span>
+        </button>
+      `;
+
+      displayPrimary.forEach(l => {
+        const isActive = (selectedLeague === l.key) ? "active" : "";
+        pillsHtml += `
+          <button class="subtier-btn ${isActive}" onclick="selectLeagueFilter('${l.key}')">
+            <span>${l.displayName}</span>
+            <span class="subtier-btn-count">${l.count}</span>
+          </button>
+        `;
+      });
+
+      leaguesPillsRow.innerHTML = pillsHtml;
+
+      // Selector Desplegable a la derecha (Exactamente como en el Demo)
+      let selectHtml = `<option value="">${dict.dropdownPrompt} (${allSortedLeagues.length})</option>`;
+      allSortedLeagues.forEach(l => {
+        const isSelected = (selectedLeague === l.key) ? "selected" : "";
+        selectHtml += `<option value="${l.key}" ${isSelected}>${l.displayName} (${l.count})</option>`;
+      });
+
+      leagueDropdown.innerHTML = selectHtml;
+    }
+
+    // Evento al pulsar un chip de liga principal
+    function selectLeagueFilter(leagueKey) {
+      selectedLeague = leagueKey;
+      leagueDropdown.value = leagueKey;
+      renderSubtierLeaguesDemoLayout();
+      renderTeams();
+    }
+
+    // Evento al seleccionar una liga en el desplegable (Muestra los demás equipos inmediatamente)
+    function selectLeagueFromDropdown(leagueKey) {
+      selectedLeague = leagueKey;
+      renderSubtierLeaguesDemoLayout();
+      renderTeams();
+    }
+
+    // ==========================================================
+    // FILTRO DE COLORES
+    // ==========================================================
+    function selectColorFilter(color) {
+      selectedColor = color;
+      const dict = I18N[currentLang];
+
+      // Actualizar botón "Todos" y puntos circulares
+      btnColorAll.classList.toggle("active", !color);
+      document.querySelectorAll(".color-dot-btn").forEach(dot => {
+        dot.classList.toggle("active", dot.dataset.color === color);
+      });
+
+      colorActiveName.textContent = dict.colors[color] || dict.allColors;
+      renderTeams();
+    }
+
+    // ==========================================================
+    // RENDERIZADO DE LAS TARJETAS DE EQUIPO (GRID)
+    // ==========================================================
+    function renderTeams() {
+      const dict = I18N[currentLang];
+      const isEn = (currentLang === "en");
+      const query = searchFilter.toLowerCase().trim();
+
+      const filtered = CATALOG.filter(t => {
+        const matchCont = (selectedContinentFolder === "") || (t.continenteFolder === selectedContinentFolder);
+        const matchLeague = (selectedLeague === "") || (t.ligaFolder === selectedLeague || t.liga_en === selectedLeague || t.liga_es === selectedLeague);
+
+        // Filtro por color de camiseta
+        const matchColor = !selectedColor || t.uniformes.some(k => k.color_en === selectedColor);
+
+        if (!matchCont || !matchLeague || !matchColor) return false;
+        if (!query) return true;
+
+        const nameEn = (t.nombre_en || t.nombre || "").toLowerCase();
+        const nameEs = (t.nombre_es || t.nombre || "").toLowerCase();
+        const leagueEn = (t.liga_en || t.liga || "").toLowerCase();
+        const leagueEs = (t.liga_es || t.liga || "").toLowerCase();
+
+        return nameEn.includes(query) || nameEs.includes(query) || leagueEn.includes(query) || leagueEs.includes(query);
+      });
+
+      if (filtered.length === 0) {
+        kitsGrid.innerHTML = `<div class="no-results">${dict.noResults}</div>`;
+        return;
+      }
+
+      kitsGrid.innerHTML = filtered.map(t => {
+        const teamName = isEn ? (t.nombre_en || t.nombre) : (t.nombre_es || t.nombre);
+        const leagueName = isEn ? (t.liga_en || t.liga) : (t.liga_es || t.liga);
+        const continentName = isEn ? (t.continente_en || t.continente) : (t.continente_es || t.continente);
+
+        // Si hay un color seleccionado, mostrar directamente la camiseta que coincide con ese color
+        let activeKitIndex = 0;
+        if (selectedColor) {
+          const matchIdx = t.uniformes.findIndex(k => k.color_en === selectedColor);
+          if (matchIdx !== -1) activeKitIndex = matchIdx;
+        }
+
+        const activeKit = t.uniformes[activeKitIndex] || t.uniformes[0];
+        const previewUrl = encodeURI(activeKit.ruta);
+        const roleLabel = isEn ? (activeKit.rol_en || activeKit.rol) : (activeKit.rol_es || activeKit.rol);
+        const kitColorName = isEn ? (activeKit.color_en || "Color") : (activeKit.color_es || "Color");
+        const kitColorHex = activeKit.color_hex || "#64748b";
+
+        const cardKey = `${t.continenteFolder}_${t.equipo}`;
+
+        // Miniaturas en la barra inferior de la tarjeta
+        const thumbItems = t.uniformes.map((k, kIdx) => {
+          const kUrl = encodeURI(k.ruta);
+          const kRole = isEn ? (k.rol_en || k.rol) : (k.rol_es || k.rol);
+          const isActive = (kIdx === activeKitIndex) ? "active" : "";
+          const kColorName = isEn ? k.color_en : k.color_es;
+          return `
+            <div class="kit-thumb-item ${isActive}" 
+                 onclick="switchCardKit(event, '${t.continenteFolder}', '${t.equipo}', ${kIdx})"
+                 title="${kRole} (${kColorName})">
+              <img class="kit-thumb-img" src="${kUrl}" alt="${kRole}">
+              <span>${kRole}</span>
+            </div>
+          `;
+        }).join("");
+
+        return `
+          <div class="kit-card" id="card_${cardKey}">
+            <!-- Encabezado del Equipo: Liga, Categoría, Título y Botón Colección Completa (ARRIBA) -->
+            <div class="kit-card-header">
+              <div class="kit-card-header-top">
+                <span class="kit-league-tag" title="${leagueName}">${leagueName}</span>
+                <span class="badge-category-mini">${continentName}</span>
+              </div>
+              <h2 class="kit-team-title" title="${teamName}">${teamName}</h2>
+              <button class="btn-action-primary" onclick="openModal('${t.continenteFolder}', '${t.equipo}')">
+                ${dict.viewCollection} (${t.uniformes.length})
+              </button>
+            </div>
+
+            <!-- Vista Previa Principal de la Camiseta (CENTRO) -->
+            <div class="kit-preview-box" onclick="openModal('${t.continenteFolder}', '${t.equipo}')">
+              <!-- Insignia de Color -->
+              <span class="badge-color-tag" id="colorBadge_${cardKey}">
+                <span class="badge-color-dot" id="colorDot_${cardKey}" style="background-color: ${kitColorHex};"></span>
+                <span id="colorName_${cardKey}">${kitColorName}</span>
+              </span>
+
+              <!-- Insignia de Rol -->
+              <span class="badge-current-role" id="roleTag_${cardKey}">${roleLabel}</span>
+
+              <img class="kit-preview-img" 
+                   id="img_${cardKey}" 
+                   src="${previewUrl}" 
+                   alt="${teamName} - ${roleLabel}" 
+                   loading="lazy" 
+                   onerror="this.style.opacity='0.2'">
+            </div>
+
+            <!-- Selector de Camisetas en Miniatura (ABAJO) -->
+            <div class="kit-thumbnails-bar" id="thumbs_${cardKey}">
+              ${thumbItems}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Cambio interactivo de uniforme dentro de la tarjeta
+    function switchCardKit(event, cFolder, teamFolder, kitIndex) {
+      event.stopPropagation();
+      const team = CATALOG.find(t => t.continenteFolder === cFolder && t.equipo === teamFolder);
+      if (!team || !team.uniformes[kitIndex]) return;
+
+      const targetKit = team.uniformes[kitIndex];
+      const cardKey = `${cFolder}_${teamFolder}`;
+      const isEn = (currentLang === "en");
+      const roleLabel = isEn ? (targetKit.rol_en || targetKit.rol) : (targetKit.rol_es || targetKit.rol);
+      const kitColorName = isEn ? (targetKit.color_en || "Color") : (targetKit.color_es || "Color");
+      const kitColorHex = targetKit.color_hex || "#64748b";
+
+      const imgElem = document.getElementById(`img_${cardKey}`);
+      const tagElem = document.getElementById(`roleTag_${cardKey}`);
+      const colorDotElem = document.getElementById(`colorDot_${cardKey}`);
+      const colorNameElem = document.getElementById(`colorName_${cardKey}`);
+      const thumbsContainer = document.getElementById(`thumbs_${cardKey}`);
+
+      if (imgElem) imgElem.src = encodeURI(targetKit.ruta);
+      if (tagElem) tagElem.textContent = roleLabel;
+      if (colorDotElem) colorDotElem.style.backgroundColor = kitColorHex;
+      if (colorNameElem) colorNameElem.textContent = kitColorName;
+
+      if (thumbsContainer) {
+        const thumbButtons = thumbsContainer.querySelectorAll(".kit-thumb-item");
+        thumbButtons.forEach((b, i) => {
+          b.classList.toggle("active", i === kitIndex);
+        });
+      }
+    }
+
+    // ==========================================================
+    // MODAL DE DETALLE DEL EQUIPO (SIN BOTÓN DE DESCARGA)
+    // ==========================================================
+    function openModal(cFolder, teamFolder) {
+      const team = CATALOG.find(t => t.continenteFolder === cFolder && t.equipo === teamFolder);
+      if (!team) return;
+
+      currentModalTeam = team;
+      refreshModalContent();
+      modal.classList.add("open");
+    }
+
+    function refreshModalContent() {
+      if (!currentModalTeam) return;
+      const dict = I18N[currentLang];
+      const isEn = (currentLang === "en");
+      const t = currentModalTeam;
+
+      const teamName = isEn ? (t.nombre_en || t.nombre) : (t.nombre_es || t.nombre);
+      const leagueName = isEn ? (t.liga_en || t.liga) : (t.liga_es || t.liga);
+      const continentName = isEn ? (t.continente_en || t.continente) : (t.continente_es || t.continente);
+
+      modalTeamName.textContent = teamName;
+      modalTeamMeta.textContent = `${continentName} • ${leagueName} • ${t.uniformes.length} ${dict.availableKits}`;
+
+      modalKitsGrid.innerHTML = t.uniformes.map(k => {
+        const roleLabel = isEn ? (k.rol_en || k.rol) : (k.rol_es || k.rol);
+        const colorLabel = isEn ? k.color_en : k.color_es;
+        const colorHex = k.color_hex || "#64748b";
+
+        return `
+          <div class="modal-kit-card">
+            <img src="${encodeURI(k.ruta)}" alt="${teamName} - ${roleLabel}">
+            <div class="modal-kit-badges-row">
+              <span class="modal-kit-badge">${roleLabel}</span>
+              <span class="modal-color-tag">
+                <span class="badge-color-dot" style="background-color: ${colorHex};"></span>
+                <span>${colorLabel}</span>
+              </span>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    modalClose.onclick = () => {
+      modal.classList.remove("open");
+      currentModalTeam = null;
+    };
+
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("open");
+        currentModalTeam = null;
+      }
+    };
+
+    // Cerrar modal con tecla Escape
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) {
+        modal.classList.remove("open");
+        currentModalTeam = null;
+      }
+    });
+
+    // ==========================================================
+    // BUSCADOR EN TIEMPO REAL
+    // ==========================================================
+    searchInput.oninput = (e) => {
+      searchFilter = e.target.value;
+      renderTeams();
+    };
+
+    // ==========================================================
+    // INICIALIZACIÓN
+    // ==========================================================
+    applyLanguage();
+  </script>
 </body>
 </html>
+
+
