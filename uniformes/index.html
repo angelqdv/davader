@@ -922,11 +922,11 @@
       padding: 10px;
     }
 
-    .modal-kit-card img.modal-kit-silueta {
-      height: 190px;
+    .modal-kit-card img.modal-kit-combinada {
+      height: 430px;
     }
 
-    .modal-kit-silueta-label {
+    .modal-kit-combinada-label {
       font-size: 0.68rem;
       color: #94a3b8;
       font-family: "Consolas", monospace;
@@ -1195,7 +1195,7 @@
         allColors: "All Colors",
         txtAllColors: "All",
         viewCollection: "View Full Collection",
-        silhouetteLabel: "Shorts & socks",
+        silhouetteLabel: "Shirt, shorts & socks",
         availableKits: "available kits",
         noResults: "No teams found matching the selected criteria.",
         footerCopy: "eFootball kit and texture archive. Compiled and organized by D.A.V.A.D.E.R.",
@@ -1251,7 +1251,7 @@
         allColors: "Todos los Colores",
         txtAllColors: "Todos",
         viewCollection: "Ver Colección Completa",
-        silhouetteLabel: "Pantaloneta y medias",
+        silhouetteLabel: "Camiseta, pantaloneta y medias",
         availableKits: "uniformes disponibles",
         noResults: "No se encontraron equipos con los criterios de búsqueda seleccionados.",
         footerCopy: "Archivo de texturas y uniformes eFootball. Recopilación y organización por D.A.V.A.D.E.R.",
@@ -1868,9 +1868,8 @@
 
         return `
           <div class="modal-kit-card">
-            <img src="${encodeURI(k.ruta)}" alt="${teamName} - ${roleLabel}">
-            ${k.silueta ? `<img class="modal-kit-silueta" src="${encodeURI(k.silueta)}" alt="${teamName} - ${dict.silhouetteLabel}">` : ""}
-            ${k.silueta ? `<div class="modal-kit-silueta-label">${dict.silhouetteLabel}</div>` : ""}
+            ${k.combinada ? `<img class="modal-kit-combinada" src="${encodeURI(k.combinada)}" alt="${teamName} - ${dict.silhouetteLabel}">` : `<img src="${encodeURI(k.ruta)}" alt="${teamName} - ${roleLabel}">`}
+            ${k.combinada ? `<div class="modal-kit-combinada-label">${dict.silhouetteLabel}</div>` : ""}
             <div class="modal-kit-badges-row">
               <span class="modal-kit-badge">${roleLabel}</span>
               <span class="modal-color-tag">
