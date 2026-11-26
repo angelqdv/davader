@@ -41472,22 +41472,22 @@ const CATALOG = [
         "continente":  "Special \u0026 Referees"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 1",
-        "equipo":  "Uniforme_Entrenamiento_1",
-        "nombre":  "Uniforme Entrenamiento 1",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 1",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "BLUE LOCK 5604",
+        "equipo":  "BLUE_LOCK_5604",
+        "nombre":  "BLUE LOCK 5604",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "BLUE LOCK 5604",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_1/Uniforme_Entrenamiento_1_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/BLUE_LOCK_5604/BLUE_LOCK_5604_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_1_Local.png",
+                              "archivo":  "BLUE_LOCK_5604_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Red",
@@ -41495,9 +41495,9 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_1/Uniforme_Entrenamiento_1_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/BLUE_LOCK_5604/BLUE_LOCK_5604_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_1_Visitante.png",
+                              "archivo":  "BLUE_LOCK_5604_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "White",
@@ -41505,9 +41505,9 @@ const CATALOG = [
                               "color_hex":  "#f8fafc"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_1/Uniforme_Entrenamiento_1_Tercer_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Capitan_Tsubasa_5604/Capitan_Tsubasa_5604_Third.png",
                               "rol_es":  "Tercer Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_1_Tercer_Uniforme.png",
+                              "archivo":  "Capitan_Tsubasa_5604_Third.png",
                               "rol":  "Third Kit",
                               "rol_en":  "Third Kit",
                               "color_en":  "White",
@@ -41515,9 +41515,9 @@ const CATALOG = [
                               "color_hex":  "#f8fafc"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_1/Uniforme_Entrenamiento_1_Cuarto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Capitan_Tsubasa_5604/Capitan_Tsubasa_5604_Fourth.png",
                               "rol_es":  "Cuarto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_1_Cuarto_Uniforme.png",
+                              "archivo":  "Capitan_Tsubasa_5604_Fourth.png",
                               "rol":  "Fourth Kit",
                               "rol_en":  "Fourth Kit",
                               "color_en":  "Black",
@@ -41525,9 +41525,9 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_1/Uniforme_Entrenamiento_1_Quinto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Capitan_Tsubasa_5604/Capitan_Tsubasa_5604_Fourth_5.png",
                               "rol_es":  "Quinto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_1_Quinto_Uniforme.png",
+                              "archivo":  "Capitan_Tsubasa_5604_Fourth_5.png",
                               "rol":  "Fifth Kit",
                               "rol_en":  "Fifth Kit",
                               "color_en":  "White",
@@ -41535,9 +41535,9 @@ const CATALOG = [
                               "color_hex":  "#f8fafc"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_1/Uniforme_Entrenamiento_1_Sexto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Capitan_Tsubasa_5604/Capitan_Tsubasa_5604_Fourth_6.png",
                               "rol_es":  "Sexto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_1_Sexto_Uniforme.png",
+                              "archivo":  "Capitan_Tsubasa_5604_Fourth_6.png",
                               "rol":  "Sixth Kit",
                               "rol_en":  "Sixth Kit",
                               "color_en":  "White",
@@ -41545,9 +41545,9 @@ const CATALOG = [
                               "color_hex":  "#f8fafc"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_1/Uniforme_Entrenamiento_1_Septimo_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Coca_Cola_5604/Coca_Cola_5604_Fourth_7.png",
                               "rol_es":  "Séptimo Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_1_Septimo_Uniforme.png",
+                              "archivo":  "Coca_Cola_5604_Fourth_7.png",
                               "rol":  "Seventh Kit",
                               "rol_en":  "Seventh Kit",
                               "color_en":  "White",
@@ -41555,9 +41555,9 @@ const CATALOG = [
                               "color_hex":  "#f8fafc"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_1/Uniforme_Entrenamiento_1_Octavo_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Coca_Cola_5604/Coca_Cola_5604_Fourth_8.png",
                               "rol_es":  "Octavo Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_1_Octavo_Uniforme.png",
+                              "archivo":  "Coca_Cola_5604_Fourth_8.png",
                               "rol":  "Eighth Kit",
                               "rol_en":  "Eighth Kit",
                               "color_en":  "Black",
@@ -41565,25 +41565,25 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 10",
-        "equipo":  "Uniforme_Entrenamiento_10",
-        "nombre":  "Uniforme Entrenamiento 10",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 10",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "Leo Messi Edition 5613",
+        "equipo":  "Leo_Messi_Edition_5613",
+        "nombre":  "Leo Messi Edition 5613",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "Leo Messi Edition 5613",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_10/Uniforme_Entrenamiento_10_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Leo_Messi_Edition_5613/Leo_Messi_Edition_5613_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_10_Local.png",
+                              "archivo":  "Leo_Messi_Edition_5613_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Black",
@@ -41591,9 +41591,9 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_10/Uniforme_Entrenamiento_10_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Neymar_Jr_Edition_5613/Neymar_Jr_Edition_5613_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_10_Visitante.png",
+                              "archivo":  "Neymar_Jr_Edition_5613_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "Black",
@@ -41601,9 +41601,9 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_10/Uniforme_Entrenamiento_10_Tercer_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/eFootball_5613/eFootball_5613_Third.png",
                               "rol_es":  "Tercer Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_10_Tercer_Uniforme.png",
+                              "archivo":  "eFootball_5613_Third.png",
                               "rol":  "Third Kit",
                               "rol_en":  "Third Kit",
                               "color_en":  "LightBlue",
@@ -41611,9 +41611,9 @@ const CATALOG = [
                               "color_hex":  "#38bdf8"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_10/Uniforme_Entrenamiento_10_Cuarto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Leo_Messi_Edition_5613/Leo_Messi_Edition_5613_Fourth.png",
                               "rol_es":  "Cuarto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_10_Cuarto_Uniforme.png",
+                              "archivo":  "Leo_Messi_Edition_5613_Fourth.png",
                               "rol":  "Fourth Kit",
                               "rol_en":  "Fourth Kit",
                               "color_en":  "Black",
@@ -41621,9 +41621,9 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_10/Uniforme_Entrenamiento_10_Quinto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Neymar_Jr_Edition_5613/Neymar_Jr_Edition_5613_Fourth_5.png",
                               "rol_es":  "Quinto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_10_Quinto_Uniforme.png",
+                              "archivo":  "Neymar_Jr_Edition_5613_Fourth_5.png",
                               "rol":  "Fifth Kit",
                               "rol_en":  "Fifth Kit",
                               "color_en":  "Purple",
@@ -41631,9 +41631,9 @@ const CATALOG = [
                               "color_hex":  "#9333ea"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_10/Uniforme_Entrenamiento_10_Sexto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Leo_Messi_Edition_5613/Leo_Messi_Edition_5613_Fourth_6.png",
                               "rol_es":  "Sexto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_10_Sexto_Uniforme.png",
+                              "archivo":  "Leo_Messi_Edition_5613_Fourth_6.png",
                               "rol":  "Sixth Kit",
                               "rol_en":  "Sixth Kit",
                               "color_en":  "Blue",
@@ -41641,9 +41641,9 @@ const CATALOG = [
                               "color_hex":  "#2563eb"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_10/Uniforme_Entrenamiento_10_Septimo_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Lamine_Yamal_Edition_5613/Lamine_Yamal_Edition_5613_Fourth_7.png",
                               "rol_es":  "Séptimo Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_10_Septimo_Uniforme.png",
+                              "archivo":  "Lamine_Yamal_Edition_5613_Fourth_7.png",
                               "rol":  "Seventh Kit",
                               "rol_en":  "Seventh Kit",
                               "color_en":  "Blue",
@@ -41651,49 +41651,49 @@ const CATALOG = [
                               "color_hex":  "#2563eb"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 11",
-        "equipo":  "Uniforme_Entrenamiento_11",
-        "nombre":  "Uniforme Entrenamiento 11",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 11",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "eFootball FC KIT31UNV 5614",
+        "equipo":  "eFootball_FC_KIT31UNV_5614",
+        "nombre":  "eFootball FC KIT31UNV 5614",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "eFootball FC KIT31UNV 5614",
         "continenteFolder":  "Otros",
         "uniformes":  [ {
-                          "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_11/Uniforme_Entrenamiento_11_Local.png",
+                          "ruta":  "Otros/Uniformes_Especiales/eFootball_FC_KIT31UNV_5614/eFootball_FC_KIT31UNV_5614_Home.png",
                           "rol_es":  "Local",
-                          "archivo":  "Uniforme_Entrenamiento_11_Local.png",
+                          "archivo":  "eFootball_FC_KIT31UNV_5614_Home.png",
                           "rol":  "Home",
                           "rol_en":  "Home",
                           "color_en":  "LightBlue",
                           "color_es":  "Celeste",
                           "color_hex":  "#38bdf8"
                       } ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 2",
-        "equipo":  "Uniforme_Entrenamiento_2",
-        "nombre":  "Uniforme Entrenamiento 2",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 2",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "eFootball™ Duel 5605",
+        "equipo":  "eFootball_Duel_5605",
+        "nombre":  "eFootball™ Duel 5605",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "eFootball™ Duel 5605",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_2/Uniforme_Entrenamiento_2_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/eFootball_Duel_5605/eFootball_Duel_5605_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_2_Local.png",
+                              "archivo":  "eFootball_Duel_5605_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Blue",
@@ -41701,9 +41701,9 @@ const CATALOG = [
                               "color_hex":  "#2563eb"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_2/Uniforme_Entrenamiento_2_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Festive_23_5605/Festive_23_5605_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_2_Visitante.png",
+                              "archivo":  "Festive_23_5605_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "Black",
@@ -41711,9 +41711,9 @@ const CATALOG = [
                               "color_hex":  "#334155"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_2/Uniforme_Entrenamiento_2_Tercer_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Songkran_25_5605/Songkran_25_5605_Third.png",
                               "rol_es":  "Tercer Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_2_Tercer_Uniforme.png",
+                              "archivo":  "Songkran_25_5605_Third.png",
                               "rol":  "Third Kit",
                               "rol_en":  "Third Kit",
                               "color_en":  "LightBlue",
@@ -41721,9 +41721,9 @@ const CATALOG = [
                               "color_hex":  "#38bdf8"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_2/Uniforme_Entrenamiento_2_Cuarto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Nostalgia_15_5605/Nostalgia_15_5605_Fourth.png",
                               "rol_es":  "Cuarto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_2_Cuarto_Uniforme.png",
+                              "archivo":  "Nostalgia_15_5605_Fourth.png",
                               "rol":  "Fourth Kit",
                               "rol_en":  "Fourth Kit",
                               "color_en":  "Black",
@@ -41731,9 +41731,9 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_2/Uniforme_Entrenamiento_2_Quinto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/eFootball_30th_Anniversary_5605/eFootball_30th_Anniversary_5605_Fourth_5.png",
                               "rol_es":  "Quinto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_2_Quinto_Uniforme.png",
+                              "archivo":  "eFootball_30th_Anniversary_5605_Fourth_5.png",
                               "rol":  "Fifth Kit",
                               "rol_en":  "Fifth Kit",
                               "color_en":  "Black",
@@ -41741,25 +41741,25 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 3",
-        "equipo":  "Uniforme_Entrenamiento_3",
-        "nombre":  "Uniforme Entrenamiento 3",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 3",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "eFootball™ Origin (Open Edition) 5606",
+        "equipo":  "eFootball_Origin_Open_Edition_5606",
+        "nombre":  "eFootball™ Origin (Open Edition) 5606",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "eFootball™ Origin (Open Edition) 5606",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_3/Uniforme_Entrenamiento_3_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/eFootball_Origin_Open_Edition_5606/eFootball_Origin_Open_Edition_5606_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_3_Local.png",
+                              "archivo":  "eFootball_Origin_Open_Edition_5606_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Pink",
@@ -41767,9 +41767,9 @@ const CATALOG = [
                               "color_hex":  "#ec4899"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_3/Uniforme_Entrenamiento_3_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Carnival_24_5606/Carnival_24_5606_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_3_Visitante.png",
+                              "archivo":  "Carnival_24_5606_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "Purple",
@@ -41777,9 +41777,9 @@ const CATALOG = [
                               "color_hex":  "#9333ea"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_3/Uniforme_Entrenamiento_3_Tercer_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Carnival_25_5606/Carnival_25_5606_Third.png",
                               "rol_es":  "Tercer Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_3_Tercer_Uniforme.png",
+                              "archivo":  "Carnival_25_5606_Third.png",
                               "rol":  "Third Kit",
                               "rol_en":  "Third Kit",
                               "color_en":  "Green",
@@ -41787,25 +41787,25 @@ const CATALOG = [
                               "color_hex":  "#16a34a"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 4",
-        "equipo":  "Uniforme_Entrenamiento_4",
-        "nombre":  "Uniforme Entrenamiento 4",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 4",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "Lunar New Year '24 5607",
+        "equipo":  "Lunar_New_Year_24_5607",
+        "nombre":  "Lunar New Year '24 5607",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "Lunar New Year '24 5607",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_4/Uniforme_Entrenamiento_4_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Lunar_New_Year_24_5607/Lunar_New_Year_24_5607_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_4_Local.png",
+                              "archivo":  "Lunar_New_Year_24_5607_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Red",
@@ -41813,9 +41813,9 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_4/Uniforme_Entrenamiento_4_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Lunar_New_Year_24_5607/Lunar_New_Year_24_5607_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_4_Visitante.png",
+                              "archivo":  "Lunar_New_Year_24_5607_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "Red",
@@ -41823,9 +41823,9 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_4/Uniforme_Entrenamiento_4_Tercer_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Lunar_New_Year_25_5607/Lunar_New_Year_25_5607_Third.png",
                               "rol_es":  "Tercer Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_4_Tercer_Uniforme.png",
+                              "archivo":  "Lunar_New_Year_25_5607_Third.png",
                               "rol":  "Third Kit",
                               "rol_en":  "Third Kit",
                               "color_en":  "Red",
@@ -41833,9 +41833,9 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_4/Uniforme_Entrenamiento_4_Cuarto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Lunar_New_Year_25_2nd_5607/Lunar_New_Year_25_2nd_5607_Fourth.png",
                               "rol_es":  "Cuarto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_4_Cuarto_Uniforme.png",
+                              "archivo":  "Lunar_New_Year_25_2nd_5607_Fourth.png",
                               "rol":  "Fourth Kit",
                               "rol_en":  "Fourth Kit",
                               "color_en":  "Blue",
@@ -41843,9 +41843,9 @@ const CATALOG = [
                               "color_hex":  "#2563eb"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_4/Uniforme_Entrenamiento_4_Quinto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Lunar_New_Year_25_3rd_5607/Lunar_New_Year_25_3rd_5607_Fourth_5.png",
                               "rol_es":  "Quinto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_4_Quinto_Uniforme.png",
+                              "archivo":  "Lunar_New_Year_25_3rd_5607_Fourth_5.png",
                               "rol":  "Fifth Kit",
                               "rol_en":  "Fifth Kit",
                               "color_en":  "Purple",
@@ -41853,9 +41853,9 @@ const CATALOG = [
                               "color_hex":  "#9333ea"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_4/Uniforme_Entrenamiento_4_Sexto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Lunar_New_Year_25_4th_5607/Lunar_New_Year_25_4th_5607_Fourth_6.png",
                               "rol_es":  "Sexto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_4_Sexto_Uniforme.png",
+                              "archivo":  "Lunar_New_Year_25_4th_5607_Fourth_6.png",
                               "rol":  "Sixth Kit",
                               "rol_en":  "Sixth Kit",
                               "color_en":  "Red",
@@ -41863,25 +41863,25 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 5",
-        "equipo":  "Uniforme_Entrenamiento_5",
-        "nombre":  "Uniforme Entrenamiento 5",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 5",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "Aniquiladores FC 5608",
+        "equipo":  "Aniquiladores_FC_5608",
+        "nombre":  "Aniquiladores FC 5608",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "Aniquiladores FC 5608",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_5/Uniforme_Entrenamiento_5_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Aniquiladores_FC_5608/Aniquiladores_FC_5608_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_5_Local.png",
+                              "archivo":  "Aniquiladores_FC_5608_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Red",
@@ -41889,9 +41889,9 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_5/Uniforme_Entrenamiento_5_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Pio_FC_5608/Pio_FC_5608_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_5_Visitante.png",
+                              "archivo":  "Pio_FC_5608_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "White",
@@ -41899,25 +41899,25 @@ const CATALOG = [
                               "color_hex":  "#f8fafc"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 6",
-        "equipo":  "Uniforme_Entrenamiento_6",
-        "nombre":  "Uniforme Entrenamiento 6",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 6",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "eFootball™ X 5609",
+        "equipo":  "eFootball_X_5609",
+        "nombre":  "eFootball™ X 5609",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "eFootball™ X 5609",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_6/Uniforme_Entrenamiento_6_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/eFootball_X_5609/eFootball_X_5609_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_6_Local.png",
+                              "archivo":  "eFootball_X_5609_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Blue",
@@ -41925,9 +41925,9 @@ const CATALOG = [
                               "color_hex":  "#2563eb"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_6/Uniforme_Entrenamiento_6_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/eFootball_Origin_Noir_5609/eFootball_Origin_Noir_5609_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_6_Visitante.png",
+                              "archivo":  "eFootball_Origin_Noir_5609_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "Black",
@@ -41935,25 +41935,25 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 7",
-        "equipo":  "Uniforme_Entrenamiento_7",
-        "nombre":  "Uniforme Entrenamiento 7",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 7",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "eFootball™ Rouge 5610",
+        "equipo":  "eFootball_Rouge_5610",
+        "nombre":  "eFootball™ Rouge 5610",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "eFootball™ Rouge 5610",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_7/Uniforme_Entrenamiento_7_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/eFootball_Rouge_5610/eFootball_Rouge_5610_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_7_Local.png",
+                              "archivo":  "eFootball_Rouge_5610_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Pink",
@@ -41961,9 +41961,9 @@ const CATALOG = [
                               "color_hex":  "#ec4899"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_7/Uniforme_Entrenamiento_7_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Collab_Kit_Santanu_5610/Collab_Kit_Santanu_5610_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_7_Visitante.png",
+                              "archivo":  "Collab_Kit_Santanu_5610_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "Red",
@@ -41971,9 +41971,9 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_7/Uniforme_Entrenamiento_7_Tercer_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Collab_Kit_Burak_Senturk_5610/Collab_Kit_Burak_Senturk_5610_Third.png",
                               "rol_es":  "Tercer Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_7_Tercer_Uniforme.png",
+                              "archivo":  "Collab_Kit_Burak_Senturk_5610_Third.png",
                               "rol":  "Third Kit",
                               "rol_en":  "Third Kit",
                               "color_en":  "Blue",
@@ -41981,9 +41981,9 @@ const CATALOG = [
                               "color_hex":  "#2563eb"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_7/Uniforme_Entrenamiento_7_Cuarto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/Collab_Kit_Cusco_Rebel_5610/Collab_Kit_Cusco_Rebel_5610_Fourth.png",
                               "rol_es":  "Cuarto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_7_Cuarto_Uniforme.png",
+                              "archivo":  "Collab_Kit_Cusco_Rebel_5610_Fourth.png",
                               "rol":  "Fourth Kit",
                               "rol_en":  "Fourth Kit",
                               "color_en":  "Orange",
@@ -41991,49 +41991,49 @@ const CATALOG = [
                               "color_hex":  "#ea580c"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 8",
-        "equipo":  "Uniforme_Entrenamiento_8",
-        "nombre":  "Uniforme Entrenamiento 8",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 8",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "eFootball™ Aegis 5611",
+        "equipo":  "eFootball_Aegis_5611",
+        "nombre":  "eFootball™ Aegis 5611",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "eFootball™ Aegis 5611",
         "continenteFolder":  "Otros",
         "uniformes":  [ {
-                          "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_8/Uniforme_Entrenamiento_8_Local.png",
+                          "ruta":  "Otros/Uniformes_Especiales/eFootball_Aegis_5611/eFootball_Aegis_5611_Home.png",
                           "rol_es":  "Local",
-                          "archivo":  "Uniforme_Entrenamiento_8_Local.png",
+                          "archivo":  "eFootball_Aegis_5611_Home.png",
                           "rol":  "Home",
                           "rol_en":  "Home",
                           "color_en":  "Blue",
                           "color_es":  "Azul",
                           "color_hex":  "#2563eb"
                       } ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
-        "continente_en":  "Special \u0026 Referees",
-        "nombre_en":  "Uniforme Entrenamiento 9",
-        "equipo":  "Uniforme_Entrenamiento_9",
-        "nombre":  "Uniforme Entrenamiento 9",
-        "liga_es":  "Uniformes de Entrenamiento",
-        "liga_en":  "Training Kits",
-        "ligaFolder":  "Entrenamiento",
-        "continente_es":  "Especiales y Árbitros",
-        "liga":  "Training Kits",
-        "nombre_es":  "Uniforme Entrenamiento 9",
+        "continente_en":  "Special \u0026 Collabs",
+        "nombre_en":  "F.C. Internazionale Milano 5612",
+        "equipo":  "F_C_Internazionale_Milano_5612",
+        "nombre":  "F.C. Internazionale Milano 5612",
+        "liga_es":  "Uniformes Especiales de eFootball",
+        "liga_en":  "Special eFootball Uniforms",
+        "ligaFolder":  "Uniformes_Especiales",
+        "continente_es":  "Especiales y Colaboraciones",
+        "liga":  "Special eFootball Uniforms",
+        "nombre_es":  "F.C. Internazionale Milano 5612",
         "continenteFolder":  "Otros",
         "uniformes":  [
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_9/Uniforme_Entrenamiento_9_Local.png",
+                              "ruta":  "Otros/Uniformes_Especiales/F_C_Internazionale_Milano_5612/F_C_Internazionale_Milano_5612_Home.png",
                               "rol_es":  "Local",
-                              "archivo":  "Uniforme_Entrenamiento_9_Local.png",
+                              "archivo":  "F_C_Internazionale_Milano_5612_Home.png",
                               "rol":  "Home",
                               "rol_en":  "Home",
                               "color_en":  "Blue",
@@ -42041,9 +42041,9 @@ const CATALOG = [
                               "color_hex":  "#2563eb"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_9/Uniforme_Entrenamiento_9_Visitante.png",
+                              "ruta":  "Otros/Uniformes_Especiales/SC_Corinthians_Paulista_5612/SC_Corinthians_Paulista_5612_Away.png",
                               "rol_es":  "Visitante",
-                              "archivo":  "Uniforme_Entrenamiento_9_Visitante.png",
+                              "archivo":  "SC_Corinthians_Paulista_5612_Away.png",
                               "rol":  "Away",
                               "rol_en":  "Away",
                               "color_en":  "White",
@@ -42051,9 +42051,9 @@ const CATALOG = [
                               "color_hex":  "#f8fafc"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_9/Uniforme_Entrenamiento_9_Tercer_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/FC_Bayern_Munchen_5612/FC_Bayern_Munchen_5612_Third.png",
                               "rol_es":  "Tercer Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_9_Tercer_Uniforme.png",
+                              "archivo":  "FC_Bayern_Munchen_5612_Third.png",
                               "rol":  "Third Kit",
                               "rol_en":  "Third Kit",
                               "color_en":  "Black",
@@ -42061,9 +42061,9 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_9/Uniforme_Entrenamiento_9_Cuarto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/FC_Bayern_Munchen_5612/FC_Bayern_Munchen_5612_Fourth.png",
                               "rol_es":  "Cuarto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_9_Cuarto_Uniforme.png",
+                              "archivo":  "FC_Bayern_Munchen_5612_Fourth.png",
                               "rol":  "Fourth Kit",
                               "rol_en":  "Fourth Kit",
                               "color_en":  "Red",
@@ -42071,9 +42071,9 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_9/Uniforme_Entrenamiento_9_Quinto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/FC_Bayern_Munchen_5612/FC_Bayern_Munchen_5612_Fourth_5.png",
                               "rol_es":  "Quinto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_9_Quinto_Uniforme.png",
+                              "archivo":  "FC_Bayern_Munchen_5612_Fourth_5.png",
                               "rol":  "Fifth Kit",
                               "rol_en":  "Fifth Kit",
                               "color_en":  "Black",
@@ -42081,9 +42081,9 @@ const CATALOG = [
                               "color_hex":  "#18181b"
                           },
                           {
-                              "ruta":  "Otros/Entrenamiento/Uniforme_Entrenamiento_9/Uniforme_Entrenamiento_9_Sexto_Uniforme.png",
+                              "ruta":  "Otros/Uniformes_Especiales/FC_Bayern_Munchen_5612/FC_Bayern_Munchen_5612_Fourth_6.png",
                               "rol_es":  "Sexto Uniforme",
-                              "archivo":  "Uniforme_Entrenamiento_9_Sexto_Uniforme.png",
+                              "archivo":  "FC_Bayern_Munchen_5612_Fourth_6.png",
                               "rol":  "Sixth Kit",
                               "rol_en":  "Sixth Kit",
                               "color_en":  "Red",
@@ -42091,7 +42091,7 @@ const CATALOG = [
                               "color_hex":  "#dc2626"
                           }
                       ],
-        "continente":  "Special \u0026 Referees"
+        "continente":  "Special \u0026 Collabs"
     },
     {
         "continente_en":  "Special \u0026 Referees",
