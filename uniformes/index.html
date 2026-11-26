@@ -433,25 +433,24 @@
 
     .leagues-carousel-track {
       display: flex;
-      gap: 5px;
+      gap: 4px;
       flex-wrap: wrap;
-      overflow-x: visible;
-      scroll-behavior: smooth;
-      padding: 2px 1px 4px;
+      align-content: flex-start;
+      overflow: hidden;
+      padding: 1px 0 2px;
       flex: 1;
-      /* hide scrollbar */
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      /* Exactamente dos filas de chips; el desplegable tiene todas las ligas */
+      max-height: 54px;
     }
-    .leagues-carousel-track::-webkit-scrollbar { display: none; }
 
-    /* Chips de liga (Level 2) — mismo estilo que antes */
+    /* Chips de liga (Level 2) — compactos para caber más en dos filas */
     .subtier-btn {
       flex-shrink: 0;
-      padding: 5px 10px;
-      border-radius: 7px;
-      font-size: 0.73rem;
+      padding: 3px 7px;
+      border-radius: 6px;
+      font-size: 0.66rem;
       font-weight: 700;
+      line-height: 1.15;
       border: 1px solid #1e293b;
       background: #0f172a;
       color: #94a3b8;
@@ -459,7 +458,7 @@
       transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       white-space: nowrap;
     }
 
@@ -483,9 +482,9 @@
 
     .subtier-btn-count {
       background: rgba(0, 0, 0, 0.30);
-      padding: 1px 4px;
+      padding: 0 4px;
       border-radius: 4px;
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-family: "Consolas", monospace;
       opacity: 0.70;
     }
@@ -1282,11 +1281,13 @@
     ];
 
     // ==========================================================
-    // MAPA DE LIGAS PRINCIPALES EN PRIMER PLANO POR CONTINENTE
-    // (Ligas de 1ª División / Élite visibles directamente)
+    // MAPA DE LIGAS VISIBLES EN PRIMER PLANO POR CONTINENTE
+    // (Se muestran todas las ligas disponibles para aprovechar
+    //  las dos filas del Nivel 2; el desplegable sigue teniendo
+    //  la lista completa ordenada)
     // ==========================================================
     const MAIN_LEAGUES_MAP = {
-      // Europa: Inglaterra, España, Italia, Francia, Países Bajos, Portugal, Turquía, Alemania
+      // Europa: 1ª división, copas europeas, 2ª división y otros
       "Europa": [
         "English_League",
         "Spanish_League",
@@ -1295,35 +1296,48 @@
         "VriendenLoterij_Eredivisie",
         "Liga_Portugal_Betclic",
         "Trendyol_Super_Lig",
+        "Belgian_League",
+        "Danish_League",
+        "Scottish_Premiership",
+        "Swiss_League",
+        "English_2nd_Division",
+        "Spanish_2nd_Division",
+        "Italian_2nd_Division",
+        "Ligue_2_BKT",
         "Otros_de_Europa"
       ],
-      // Sudamérica: Brasil Serie A, Argentina, Colombia, Chile
+      // Sudamérica: Brasil, Argentina, Colombia, Chile y 2ª división brasileña
       "Sudamerica": [
         "Brasileirao_Betano",
         "Argentine_League",
         "Colombian_League",
-        "Chilean_League"
+        "Chilean_League",
+        "Brazilian_2nd_Division"
       ],
-      // Asia y Oceanía: J1 League, Champions League (ACL Elite), Corea, Tailandia, Malasia
+      // Asia y Oceanía: J1/J2, ACL Elite, ACL Two, Corea, Tailandia y Malasia
       "Asia_-_Oceania": [
         "MEIJI_YASUDA_J1_LEAGUE",
         "AFC_Champions_League_Elite",
+        "AFC_Champions_League_Two",
         "Korean_League",
+        "MEIJI_YASUDA_J2_LEAGUE",
         "Hilux_Revo_Thai_League",
         "UNIFI_LIGA_SUPER"
       ],
-      // Norteamérica: MLS, Liga MX
+      // Norteamérica: MLS, 2ª división y otros clubes
       "Norteamerica_y_Centroamerica": [
         "American_League",
+        "American_League_2",
         "Otros_de_Norteamerica"
       ],
-      // Selecciones: Europa, Sudamérica, África, Asia y Oceanía, Norteamérica
+      // Selecciones: todas las confederaciones
       "Equipos_Nacionales": [
         "Europa",
         "Sudamerica",
+        "Norteamerica_y_Centroamerica",
         "Africa",
         "Asia_-_Oceania",
-        "Norteamerica_y_Centroamerica"
+        "Resto_del_Mundo"
       ],
       // Especiales: Uniformes especiales, Clubes del Mundo, Genéricos y otros
       "Otros": [
@@ -1336,18 +1350,69 @@
       "Africa": [
         "Moroccan_League"
       ],
-      // Todos los Continentes: Principales ligas mundiales
+      // Todos los Continentes: ligas representativas de cada región
       "": [
         "English_League",
         "Spanish_League",
         "Lega_Italia",
         "Ligue_1_McDonalds",
         "VriendenLoterij_Eredivisie",
+        "Liga_Portugal_Betclic",
         "Brasileirao_Betano",
         "Argentine_League",
+        "Colombian_League",
         "MEIJI_YASUDA_J1_LEAGUE",
-        "AFC_Champions_League_Elite"
+        "AFC_Champions_League_Elite",
+        "Korean_League",
+        "American_League",
+        "Moroccan_League"
       ]
+    };
+
+    // Etiquetas cortas para los chips del Nivel 2 (el desplegable conserva el nombre completo)
+    const LEAGUE_SHORT_LABELS = {
+      "English_League": "Premier",
+      "Spanish_League": "LaLiga",
+      "Lega_Italia": "Serie A",
+      "Ligue_1_McDonalds": "Ligue 1",
+      "VriendenLoterij_Eredivisie": "Eredivisie",
+      "Liga_Portugal_Betclic": "Liga Portugal",
+      "Trendyol_Super_Lig": "Süper Lig",
+      "Belgian_League": "Pro League",
+      "Danish_League": "Superliga",
+      "Scottish_Premiership": "Premiership",
+      "Swiss_League": "Super League",
+      "English_2nd_Division": "Championship",
+      "Spanish_2nd_Division": "LaLiga 2",
+      "Italian_2nd_Division": "Serie B",
+      "Ligue_2_BKT": "Ligue 2",
+      "Otros_de_Europa": "Otros Europa",
+      "Brasileirao_Betano": "Brasileirão",
+      "Argentine_League": "Argentina",
+      "Colombian_League": "Liga BetPlay",
+      "Chilean_League": "Chile",
+      "Brazilian_2nd_Division": "Série B",
+      "American_League": "MLS",
+      "American_League_2": "USL",
+      "Otros_de_Norteamerica": "Liga MX",
+      "MEIJI_YASUDA_J1_LEAGUE": "J1 League",
+      "AFC_Champions_League_Elite": "ACL Elite",
+      "AFC_Champions_League_Two": "ACL Two",
+      "Korean_League": "K League",
+      "MEIJI_YASUDA_J2_LEAGUE": "J2 League",
+      "Hilux_Revo_Thai_League": "Thai League",
+      "UNIFI_LIGA_SUPER": "Malaysia",
+      "Moroccan_League": "Botola Pro",
+      "Europa": "Europa",
+      "Sudamerica": "Sudamérica",
+      "Norteamerica_y_Centroamerica": "N. América",
+      "Africa": "África",
+      "Asia_-_Oceania": "Asia / Oceanía",
+      "Resto_del_Mundo": "Resto Mundo",
+      "Uniformes_Especiales": "Especiales",
+      "Clubes_del_Mundo": "Clubes Mundo",
+      "Genericos": "Genéricos",
+      "Otros_de_Liga_0": "Otros clubes"
     };
 
     // Estado de la aplicación (Por defecto: Inglés 'en')
@@ -1563,9 +1628,10 @@
 
       displayPrimary.forEach(l => {
         const isActive = (selectedLeague === l.key) ? "active" : "";
+        const chipLabel = LEAGUE_SHORT_LABELS[l.key] || l.displayName;
         pillsHtml += `
-          <button class="subtier-btn ${isActive}" onclick="selectLeagueFilter('${l.key}')">
-            <span>${l.displayName}</span>
+          <button class="subtier-btn ${isActive}" onclick="selectLeagueFilter('${l.key}')" title="${l.displayName}">
+            <span>${chipLabel}</span>
             <span class="subtier-btn-count">${l.count}</span>
           </button>
         `;
