@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="docTitle">D.A.V.A.D.E.R. — eFootball Kit Archive</title>
+  <meta name="author" content="David Peñuela">
+  <meta name="copyright" content="© 2026 David Peñuela. Todos los derechos reservados.">
+  <meta property="og:title" content="D.A.V.A.D.E.R. — Compendio de Uniformes eFootball">
+  <meta property="og:description" content="Compendio de uniformes y paletas RGB para eFootball por David Peñuela.">
+  <meta property="og:image" content="https://angelqdv.github.io/davader/assets/davader_logo.svg">
   <link rel="icon" href="https://angelqdv.github.io/davader/assets/davader_logo.svg">
   <script type="importmap">
   {
@@ -1150,6 +1155,59 @@
       color: #64748b;
       margin-top: 6px;
     }
+
+    .footer-donation {
+      max-width: 760px;
+      margin: 0 auto 24px;
+      padding: 18px 24px;
+      background: linear-gradient(135deg, rgba(19, 23, 36, 0.95) 0%, rgba(12, 14, 22, 0.98) 100%);
+      border: 1px solid #28334a;
+      border-left: 4px solid #0070ba;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+    }
+
+    .donation-text {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .donation-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #0070ba 0%, #003087 100%);
+      color: #ffffff !important;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 8px 20px;
+      border-radius: 24px;
+      text-decoration: none;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 4px 14px rgba(0, 112, 186, 0.35);
+      transition: all 0.25s ease;
+    }
+
+    .donation-link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 112, 186, 0.6);
+      border-color: #7dd3fc;
+    }
+
+    .legal-link {
+      color: #38bdf8;
+      text-decoration: underline;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    .legal-link:hover {
+      color: #7dd3fc;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body class="theme-darth_vader">
@@ -1198,6 +1256,8 @@
         <a href="index.html" class="active" id="navKits">Kits</a>
         <a href="https://angelqdv.github.io/davader/gestor/" id="navManager">Manager</a>
         <a href="https://angelqdv.github.io/davader/temas/" id="navThemes">Themes</a>
+        <a href="https://angelqdv.github.io/davader/demo/index.html" id="navDemo">Demo</a>
+        <a href="https://angelqdv.github.io/davader/contacto/index.html" id="navContacto">Contact</a>
         <!-- Selector Bilingüe -->
         <button class="lang-toggle-btn" id="langToggleBtn" onclick="toggleLanguage()" title="Change language / Cambiar idioma">
           <span id="langBtnText">🌐 English (EN)</span>
@@ -1309,8 +1369,16 @@
   <!-- Pie de Página -->
   <footer class="app-footer">
     <div class="footer-content">
+      <div class="footer-donation">
+        <p class="donation-text" id="donationText">If this project helps you build better eFootball squads, you can support its development, maintenance and independent hosting. Every contribution is deeply appreciated.</p>
+        <a href="https://paypal.me/gestorhabilidades" target="_blank" rel="noopener noreferrer" class="donation-link-btn">
+          <span>☕</span>
+          <span id="donationBtn">Support the project on PayPal</span>
+        </a>
+      </div>
       <p><strong id="footerBrand">D.A.V.A.D.E.R.</strong> — David And Vader Applications, Database & eFootball Resources</p>
       <p class="copyright" id="footerCopy">eFootball kit and texture archive. Compiled and organized by D.A.V.A.D.E.R.</p>
+      <p class="copyright" id="footerLegal">© 2026 <strong>David Peñuela</strong>. All rights reserved. • <a href="../terminos.html" class="legal-link">Legal Notice & Intellectual Property</a></p>
     </div>
   </footer>
 
@@ -1330,6 +1398,8 @@
         navKits: "Kits",
         navManager: "Manager",
         navThemes: "Themes",
+        navDemo: "Demo",
+        navContacto: "Contact",
         langBtn: "🌐 English (EN)",
         heroBadge: "eFootball Kit Archive",
         heroTitle: "eFootball Kit Gallery",
@@ -1353,6 +1423,10 @@
         availableKits: "available kits",
         noResults: "No teams found matching the selected criteria.",
         footerCopy: "eFootball kit and texture archive. Compiled and organized by D.A.V.A.D.E.R.",
+        donationText: "If this project helps you build better eFootball squads, you can support its development, maintenance and independent hosting. Every contribution is deeply appreciated.",
+        donationBtn: "Support the project on PayPal",
+        footerLegal: "© 2026 David Peñuela. All rights reserved.",
+        legalLinkText: "Legal Notice & Intellectual Property",
         continents: {
           "": "All Continents",
           "Europa": "Europe",
@@ -1386,6 +1460,8 @@
         navKits: "Uniformes",
         navManager: "Gestor",
         navThemes: "Temas",
+        navDemo: "Demo",
+        navContacto: "Contacto",
         langBtn: "🌐 Español (ES)",
         heroBadge: "Archivo de Uniformes eFootball",
         heroTitle: "Galería de Uniformes eFootball",
@@ -1409,6 +1485,10 @@
         availableKits: "uniformes disponibles",
         noResults: "No se encontraron equipos con los criterios de búsqueda seleccionados.",
         footerCopy: "Archivo de texturas y uniformes eFootball. Recopilación y organización por D.A.V.A.D.E.R.",
+        donationText: "Si este proyecto y sus herramientas te resultan de valor para enriquecer tu experiencia en eFootball, puedes apoyar de manera voluntaria su desarrollo, mantenimiento continuo y alojamiento independiente. Toda contribución es profundamente agradecida y ayuda a seguir construyendo nuevas funcionalidades.",
+        donationBtn: "Apoyar el proyecto en PayPal",
+        footerLegal: "© 2026 David Peñuela. Todos los derechos reservados.",
+        legalLinkText: "Aviso Legal y Propiedad Intelectual",
         continents: {
           "": "Todos los Continentes",
           "Europa": "Europa",
@@ -1603,6 +1683,8 @@
     const navKits = document.getElementById("navKits");
     const navManager = document.getElementById("navManager");
     const navThemes = document.getElementById("navThemes");
+    const navDemo = document.getElementById("navDemo");
+    const navContacto = document.getElementById("navContacto");
     const langBtnText = document.getElementById("langBtnText");
     const heroBadge = document.getElementById("heroBadge");
     const heroTitle = document.getElementById("heroTitle");
@@ -1633,6 +1715,9 @@
     const modalTeamMeta = document.getElementById("modalTeamMeta");
     const modalKitsGrid = document.getElementById("modalKitsGrid");
     const footerCopy = document.getElementById("footerCopy");
+    const donationText = document.getElementById("donationText");
+    const donationBtn = document.getElementById("donationBtn");
+    const footerLegal = document.getElementById("footerLegal");
 
     // ==========================================================
     // CAMBIO DE IDIOMA GLOBAL (EN <-> ES)
@@ -1655,6 +1740,8 @@
       navKits.textContent = dict.navKits;
       navManager.textContent = dict.navManager;
       navThemes.textContent = dict.navThemes;
+      navDemo.textContent = dict.navDemo;
+      navContacto.textContent = dict.navContacto;
       langBtnText.textContent = dict.langBtn;
       heroBadge.textContent = dict.heroBadge;
       heroTitle.textContent = dict.heroTitle;
@@ -1670,6 +1757,9 @@
       txtAllColors.textContent = dict.txtAllColors;
       colorActiveName.textContent = dict.colors[selectedColor] || dict.allColors;
       footerCopy.textContent = dict.footerCopy;
+      donationText.textContent = dict.donationText;
+      donationBtn.textContent = dict.donationBtn;
+      footerLegal.innerHTML = `${dict.footerLegal} • <a href="../terminos.html" class="legal-link">${dict.legalLinkText}</a>`;
 
       // Estadísticas
       let totalKitsCount = 0;

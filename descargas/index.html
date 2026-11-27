@@ -39,18 +39,19 @@
     }
     .specs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
       margin: 20px 0;
       background: #0c0d12;
-      padding: 16px;
+      padding: 18px;
       border-radius: 10px;
       border: 1px solid #232a3e;
     }
     .spec-item {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 4px;
+      min-width: 0; /* Evita que el contenedor desborde o se solape en CSS Grid */
     }
     .spec-label {
       font-size: 0.74rem;
@@ -58,20 +59,34 @@
       text-transform: uppercase;
       font-weight: 700;
       font-family: "Consolas", monospace;
+      letter-spacing: 0.5px;
     }
     .spec-val {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: #f8fafc;
       font-weight: 800;
+      word-break: break-word;
+      overflow-wrap: anywhere; /* Rompe nombres largos sin espacios como el .exe */
+    }
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 16px;
+      border-radius: 12px;
+      border: 1px solid #232a3e;
+      -webkit-overflow-scrolling: touch;
     }
     .history-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 16px;
       background: #131622;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #232a3e;
+      min-width: 600px;
+    }
+    @media (max-width: 680px) {
+      .specs-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
     }
     .history-table th {
       background: #0c0d12;
@@ -92,6 +107,11 @@
       background: #171c2c;
     }
   </style>
+  <meta name="author" content="David Peñuela">
+  <meta name="copyright" content="© 2026 David Peñuela. Todos los derechos reservados.">
+  <meta property="og:title" content="D.A.V.A.D.E.R. — Centro de Descargas Desktop">
+  <meta property="og:description" content="Descarga oficial del Gestor de Habilidades portable para Windows por David Peñuela.">
+  <meta property="og:image" content="https://angelqdv.github.io/davader/assets/davader_logo.svg">
 </head>
 <body class="theme-darth_vader">
 
@@ -126,6 +146,8 @@
         <a href="../gestor/index.html">📊 Gestor Web Comercial</a>
         <a href="../uniformes/index.html">👕 Uniformes</a>
         <a href="index.html" class="active">💾 Descargas</a>
+        <a href="../demo/index.html">🎬 Demo</a>
+        <a href="../contacto/index.html">📬 Contacto</a>
       </div>
     </div>
   </nav>
@@ -144,21 +166,21 @@
       </div>
     </header>
 
-    <!-- Versión Destacada Comercial v1.1 -->
+    <!-- Versión Destacada Comercial v1.2 -->
     <div class="featured-release-card">
-      <span class="release-badge-current">⭐ VERSIÓN COMERCIAL ACTIVA</span>
+      <span class="release-badge-current">⭐ VERSIÓN COMERCIAL ACTIVA v1.2</span>
       <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
         <span style="font-size: 1.8rem;">💼</span>
-        <h2 style="color: #fff; font-size: 1.5rem; font-weight: 900;">Gestor de Habilidades Comercial v1.1</h2>
+        <h2 style="color: #fff; font-size: 1.5rem; font-weight: 900;">Gestor de Habilidades Comercial v1.2</h2>
       </div>
       <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">
-        Versión lista en limpio para distribución comercial y uso general. Permite crear y personalizar equipos propios (con modal <em>⚙️ Configurar Equipo</em> para cambiar nombres, subtítulos y cargar escudos SVG/PNG), soporte para 41 habilidades, control de stock y botón de descontado.
+        Versión oficial blindada con marcas de agua de autoría, metadatos legales en Windows y certificación de propiedad intelectual en exportaciones Excel. Permite crear y personalizar equipos propios (modal <em>⚙️ Configurar Equipo</em> para nombres, subtítulos y escudos SVG/PNG), soporte para 41 habilidades, control de stock y botón de descontado en tiempo real.
       </p>
 
       <div class="specs-grid">
         <div class="spec-item">
           <span class="spec-label">Archivo</span>
-          <span class="spec-val">Gestor_Habilidades_Comercial_v1.1_Portable.exe</span>
+          <span class="spec-val">Gestor_Habilidades_Comercial_v1.2_Portable.exe</span>
         </div>
         <div class="spec-item">
           <span class="spec-label">Sistema Operativo</span>
@@ -170,25 +192,24 @@
         </div>
         <div class="spec-item">
           <span class="spec-label">Tamaño</span>
-          <span class="spec-val">~95.4 MB</span>
+          <span class="spec-val">~96.2 MB</span>
         </div>
       </div>
 
       <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-        <a id="download-btn-v11" href="https://github.com/angelqdv/davader/releases/download/v1.1.0/Gestor_Habilidades_Comercial_v1.1_Portable.exe" class="btn-primary" style="text-decoration: none; font-size: 0.95rem; padding: 12px 24px;">
-          ⬇️ Descargar v1.1 Comercial (.exe)
+        <a id="download-btn-v12" href="https://github.com/angelqdv/davader/releases/download/v1.2.0/Gestor_Habilidades_Comercial_v1.2_Portable.exe" class="btn-primary" style="text-decoration: none; font-size: 0.95rem; padding: 12px 24px;">
+          ⬇️ Descargar v1.2 Comercial (.exe)
         </a>
         <a href="../gestor/index.html" class="btn-secondary" style="text-decoration: none; font-size: 0.95rem; padding: 12px 20px;">
           🌐 O Probar Gestor Comercial Online
         </a>
       </div>
-      <small style="display: block; color: #64748b; margin-top: 10px; font-size: 0.78rem;">
-        * Al publicar en GitHub, vincula este enlace directamente a la Release de tu repositorio.
-      </small>
+
     </div>
 
     <!-- Historial de Versiones -->
     <h3 style="color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 12px;">📜 Historial de Versiones Oficiales</h3>
+    <div class="table-responsive">
     <table class="history-table">
       <thead>
         <tr>
@@ -200,25 +221,43 @@
       </thead>
       <tbody>
         <tr>
-          <td><strong style="color: #38bdf8;">v1.1.0</strong></td>
+          <td><strong style="color: #38bdf8;">v1.2.0</strong></td>
           <td>Comercial</td>
-          <td>Equipos 100% personalizables con modal de escudos y nombres; soporte multiequipo y botón Descontar.</td>
+          <td>Protección formal de autoría, marcas de agua oficiales, exportación Excel con certificación oficial, metadatos Windows integrados y optimizaciones de seguridad.</td>
           <td><span style="color: #34d399; font-weight: 700;">Activa (Recomendada)</span></td>
         </tr>
         <tr>
-          <td><strong style="color: #cbd5e1;">v1.0.0</strong></td>
+          <td><strong style="color: #94a3b8;">v1.1.0</strong></td>
           <td>Comercial</td>
-          <td>Lanzamiento inicial en limpio con sincronización en vivo e importación/exportación Excel.</td>
-          <td><span style="color: #94a3b8;">Archivada</span></td>
+          <td>Retirada y descontinuada para proteger la autoría del proyecto (actualizada a v1.2).</td>
+          <td><span style="color: #ef4444; font-weight: 700;">Descontinuada (Retirada)</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color: #64748b;">v1.0.0</strong></td>
+          <td>Comercial</td>
+          <td>Retirada y descontinuada.</td>
+          <td><span style="color: #ef4444; font-weight: 700;">Descontinuada (Retirada)</span></td>
         </tr>
       </tbody>
     </table>
+    </div>
   </main>
 
   <footer class="app-footer">
     <div class="footer-content">
+      <div class="footer-donation">
+        <p class="donation-text">
+          Si este proyecto y sus herramientas te resultan de valor para enriquecer tu experiencia en eFootball, puedes apoyar de manera voluntaria su desarrollo, mantenimiento continuo y alojamiento independiente. Toda contribución es profundamente agradecida y ayuda a seguir construyendo nuevas funcionalidades.
+        </p>
+        <a href="https://paypal.me/gestorhabilidades" target="_blank" rel="noopener noreferrer" class="donation-link-btn">
+          <span>☕</span>
+          <span>Apoyar el proyecto en PayPal</span>
+        </a>
+      </div>
       <p><strong>D.A.V.A.D.E.R.</strong> — <em>David And Vader Applications, Database & eFootball Resources</em></p>
-      <p class="copyright">Creador: David Peñuela • Versión Desktop v1.2.1 • GitHub Pages</p>
+      <p class="copyright">
+        © 2026 <strong>David Peñuela</strong>. Todos los derechos reservados. Prohibida su reproducción o distribución no autorizada. • <a href="../terminos.html" class="legal-link">Aviso Legal y Propiedad Intelectual</a>
+      </p>
     </div>
   </footer>
 

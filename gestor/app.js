@@ -1,3 +1,13 @@
+/**
+ * D.A.V.A.D.E.R. — Gestor de Habilidades Comercial v1.1
+ * David And Vader Applications, Database & eFootball Resources
+ * 
+ * © 2026 David Peñuela. Todos los derechos reservados.
+ * Queda prohibida la reproducción, copia, distribución, ingeniería inversa con fines
+ * de plagio, o comercialización no autorizada de este código, marca y algoritmos.
+ * Portal Oficial: https://angelqdv.github.io/davader/
+ */
+
 // Gestor de Habilidades y Jugadores - Versión Comercial v1.0
 // Lógica Principal con Equipos Personalizables (Nombres, Subtítulos y Escudos) y Base Limpia
 
@@ -1630,8 +1640,41 @@ function exportToExcel() {
     { wch: 20 }  // J: Estado
   ];
 
-  XLSX.utils.book_append_sheet(wb, ws, 'Habilidades y Jugadores');
   const teamConf = getTeamConfig(state.currentTeam);
+
+  // Metadatos oficiales de autoría y propiedad en el archivo Excel
+  wb.Props = {
+    Title: `D.A.V.A.D.E.R. - ${teamConf.name}`,
+    Subject: 'Control de Habilidades eFootball',
+    Author: 'David Peñuela',
+    Manager: 'David Peñuela',
+    Company: 'D.A.V.A.D.E.R. Applications',
+    Category: 'eFootball Tools',
+    Comments: 'Generado oficialmente con D.A.V.A.D.E.R. © 2026 David Peñuela. Todos los derechos reservados. https://angelqdv.github.io/davader/'
+  };
+
+  XLSX.utils.book_append_sheet(wb, ws, 'Habilidades y Jugadores');
+
+  // Hoja complementaria de autoría y certificación oficial
+  const wsInfoData = [
+    ['D.A.V.A.D.E.R. — eFootball Skill Manager'],
+    ['David And Vader Applications, Database & eFootball Resources'],
+    [''],
+    ['Desarrollador / Creador:', 'David Peñuela'],
+    ['Versión:', 'Comercial v1.1'],
+    ['Portal Oficial:', 'https://angelqdv.github.io/davader/'],
+    ['Equipo Exportado:', teamConf.name],
+    ['Fecha de Generación:', new Date().toLocaleString()],
+    [''],
+    ['AVISO DE PROPIEDAD INTELECTUAL:'],
+    ['Este archivo fue generado utilizando la plataforma oficial D.A.V.A.D.E.R.'],
+    ['© 2026 David Peñuela. Todos los derechos reservados.'],
+    ['Prohibida la comercialización, venta o redistribución de esta herramienta sin autorización previa.']
+  ];
+  const wsInfo = XLSX.utils.aoa_to_sheet(wsInfoData);
+  wsInfo['!cols'] = [{ wch: 28 }, { wch: 60 }];
+  XLSX.utils.book_append_sheet(wb, wsInfo, 'Acerca de D.A.V.A.D.E.R.');
+
   const fileName = `${teamConf.shortName.replace(/\s+/g, '_')}_Habilidades.xlsx`;
   XLSX.writeFile(wb, fileName);
   showToast(`Archivo Excel de ${teamConf.name} exportado exitosamente`, 'success');

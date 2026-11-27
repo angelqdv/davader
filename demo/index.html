@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Oficial — Gestor de Habilidades eFootball</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #090a0f;
+      color: #e2e8f0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .theater-wrapper {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+        /* Ocultar barra superior cuando se incrusta en iframe */
+    html.in-iframe, body.in-iframe {
+      padding: 10px;
+    }
+    html.in-iframe .demo-back-nav, body.in-iframe .demo-back-nav {
+      display: none !important;
+    }
+    html.in-iframe .demo-header, body.in-iframe .demo-header {
+      margin-top: 0;
+    }
+        /* Marca de agua flotante en la demo */
+    .demo-viewport-watermark {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      z-index: 99990;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(12, 14, 22, 0.88);
+      border: 1px solid rgba(225, 29, 72, 0.4);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      font-family: "Consolas", monospace;
+      color: #cbd5e1;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      user-select: none;
+    }
+    /* Encabezado */
+    .demo-header {
+      background: linear-gradient(135deg, #131722 0%, #1a1e2f 100%);
+      border: 1px solid #232b40;
+      border-left: 6px solid #e11d48;
+      border-radius: 12px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+    .demo-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge-demo {
+      background: #2b1118;
+      color: #fda4af;
+      border: 1px solid #e11d48;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    /* Marco del Reproductor de Video */
+    .video-viewport-frame {
+      position: relative;
+      width: 100%;
+      height: 680px;
+      background: #000;
+      border: 2px solid #20273a;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.85);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Contenedor del Gestor simulado */
+    .gestor-screen-sandbox {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      background: #f8fafc;
+      color: #0f172a;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 16px 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* Puntero virtual animado */
+    #virtual-cursor {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 26px;
+      height: 26px;
+      z-index: 99999;
+      pointer-events: none;
+      transition: transform 0.08s linear;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.5));
+    }
+    #cursor-ripple {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(225, 29, 72, 0.45);
+      border: 2px solid #f43f5e;
+      transform: translate(-3px, -3px) scale(0);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s ease-out, opacity 0.35s ease-out;
+    }
+    #cursor-ripple.active {
+      transform: translate(-3px, -3px) scale(2.2);
+      opacity: 1;
+    }
+
+    /* Cartel subtítulo / narración inferior */
+    .narrator-overlay {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 13, 20, 0.94);
+      border: 1px solid #38bdf8;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+      border-radius: 30px;
+      padding: 10px 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      max-width: 90%;
+      transition: all 0.3s ease;
+    }
+    .narrator-badge {
+      background: #e11d48;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .narrator-text {
+      color: #f8fafc;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    /* Barra de Controles de Video */
+    .video-controls-bar {
+      background: #0f121d;
+      border-top: 1px solid #232b40;
+      padding: 12px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .scrubber-track {
+      width: 100%;
+      height: 6px;
+      background: #1e2436;
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+    .scrubber-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #e11d48 0%, #38bdf8 100%);
+      border-radius: 4px;
+      transition: width 0.1s linear;
+    }
+    .controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn-media {
+      background: #192033;
+      border: 1px solid #2a3552;
+      color: #f8fafc;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-media:hover {
+      background: #e11d48;
+      border-color: #f43f5e;
+    }
+    .scene-jumper {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .btn-scene-pill {
+      background: #141724;
+      border: 1px solid #28334a;
+      color: #94a3b8;
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-scene-pill:hover, .btn-scene-pill.active {
+      background: #e11d48;
+      color: #fff;
+      border-color: #f43f5e;
+    }
+
+    /* Estilos del Gestor en Sandbox */
+    .mock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .mock-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .mock-stat-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .mock-stat-lbl {
+      display: block;
+      font-size: 0.74rem;
+      color: #64748b;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .mock-stat-val {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .mock-tabs-bar {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 16px;
+    }
+    .mock-tab-btn {
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      background: transparent;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+    .mock-tab-btn.active {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+    }
+    .mock-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .mock-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .mock-table th {
+      background: #f1f5f9;
+      padding: 10px 12px;
+      text-align: left;
+      color: #475569;
+      font-weight: 800;
+      border-bottom: 2px solid #cbd5e1;
+    }
+    .mock-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+    .badge-ok {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+    .badge-warn {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fcd34d;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+    .badge-zero {
+      background: #f1f5f9;
+      color: #94a3b8;
+      border: 1px solid #cbd5e1;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+    .btn-descontar-mock {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .btn-save-stock {
+      background: #16a34a;
+      color: #fff;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .toast-popup {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #1e293b;
+      color: #fff;
+      border-left: 4px solid #10b981;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      display: none;
+      z-index: 999999;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add('in-iframe');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Barra de Retorno al Hub D.A.V.A.D.E.R. -->
+  <nav class="demo-back-nav" style="width: 100%; max-width: 1200px; margin-bottom: 16px;">
+    <a href="../index.html" style="display: inline-flex; align-items: center; gap: 8px; color: #38bdf8; font-weight: 700; font-size: 0.9rem; text-decoration: none; padding: 10px 18px; background: #0c0d14; border: 1px solid #1f2537; border-radius: 10px; transition: color 0.2s;">
+      <span style="font-size: 1.1rem;">←</span>
+      <span>Volver a D.A.V.A.D.E.R. Hub</span>
+    </a>
+  </nav>
+
+  <div class="theater-wrapper">
+
+    <!-- Encabezado de la Demo -->
+    <header class="demo-header">
+      <div>
+        <h1 class="demo-title">
+          <span>🎬</span>
+          <span>Demo Guiada en Video: Gestor de Habilidades eFootball</span>
+        </h1>
+        <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px;">
+          Demostración integral: Carga de stock, creación de jugador con 5 habilidades, descuento en vivo, perfiles modelo y detección de match.
+        </p>
+      </div>
+      
+    </header>
+
+    <!-- Marco de Reproducción -->
+    <div class="video-viewport-frame" id="viewport-frame">
+      
+      <!-- Marca de Agua Oficial -->
+      <div class="demo-viewport-watermark">
+        <svg viewBox="0 0 100 100" fill="none" style="width: 14px; height: 14px;">
+          <path d="M16 12 L52 12 C78 12 90 28 90 50 C90 72 78 88 52 88 L16 88 Z" fill="#0c0d12" stroke="#e11d48" stroke-width="6"/>
+          <path d="M 45 42 L 55 42 L 50 58 Z" fill="#f43f5e"/>
+        </svg>
+        <span>D.A.V.A.D.E.R. • © David Peñuela</span>
+      </div>
+      
+      <!-- Puntero del Ratón Virtual -->
+      <div id="virtual-cursor">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <path d="M4 2 L20 10 L13 13 L17 21 L13 22 L9 15 L4 18 Z" fill="#0c0d14" stroke="#f43f5e" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <div id="cursor-ripple"></div>
+      </div>
+
+      <!-- Toast flotante simulado -->
+      <div class="toast-popup" id="mock-toast">
+        <span id="toast-text">Toast message</span>
+      </div>
+
+      <!-- Pantalla del Gestor (Sandbox visual) -->
+      <div class="gestor-screen-sandbox" id="gestor-sandbox">
+
+        <!-- Barra Superior Gestor -->
+        <div class="mock-header">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 44px; height: 44px; background: #fee2e2; border: 1.5px solid #e11d48; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #991b1b; font-size: 1.2rem;">
+              DV
+            </div>
+            <div>
+              <h2 style="font-size: 1.15rem; font-weight: 900; color: #0f172a;">Equipo Principal</h2>
+              <span style="font-size: 0.75rem; color: #64748b; font-family: monospace;">Versión Comercial v1.1 • Control en Tiempo Real</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-media" style="background: #2563eb; color: #fff; border-color: #1d4ed8; font-size: 0.78rem;">➕ Nuevo Jugador</button>
+            <button class="btn-media" style="background: #16a34a; color: #fff; border-color: #15803d; font-size: 0.78rem;">💾 Descargar Excel</button>
+          </div>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="mock-stats-row">
+          <div class="mock-stat-card">
+            <span class="mock-stat-lbl">Habilidades Registradas</span>
+            <span class="mock-stat-val">41</span>
+          </div>
+          <div class="mock-stat-card">
+            <span class="mock-stat-lbl">Stock Total Inicial</span>
+            <span class="mock-stat-val" id="stat-stock-total">0</span>
+          </div>
+          <div class="mock-stat-card">
+            <span class="mock-stat-lbl">Habilidades Asignadas</span>
+            <span class="mock-stat-val" id="stat-assigned-total">0</span>
+          </div>
+          <div class="mock-stat-card">
+            <span class="mock-stat-lbl">Alertas de Stock</span>
+            <span class="mock-stat-val" id="stat-alerts-total" style="color: #64748b;">0</span>
+          </div>
+        </div>
+
+        <!-- Pestañas -->
+        <div class="mock-tabs-bar">
+          <button class="mock-tab-btn active" id="tab-btn-players" onclick="showTab('players')">👥 Asignación de Jugadores</button>
+          <button class="mock-tab-btn" id="tab-btn-inventory" onclick="showTab('inventory')">📦 Inventario Maestro de Habilidades</button>
+          <button class="mock-tab-btn" id="tab-btn-models" onclick="showTab('models')">⭐ Jugadores Modelo (Perfiles)</button>
+        </div>
+
+        <!-- Contenedor de Vista Activa -->
+        <div id="sandbox-content"></div>
+
+      </div>
+
+      <!-- Barra de Narración / Subtítulos -->
+      <div class="narrator-overlay" id="narrator-bar">
+        <span class="narrator-badge" id="narrator-badge">ESCENA 1/5</span>
+        <span class="narrator-text" id="narrator-text">Iniciando demostración oficial...</span>
+      </div>
+
+    </div>
+
+    <!-- Barra de Controles del Video -->
+    <div class="video-controls-bar">
+      <!-- Scrubber -->
+      <div class="scrubber-track" id="scrubber-track" onclick="seekByClick(event)">
+        <div class="scrubber-fill" id="scrubber-fill"></div>
+      </div>
+
+      <div class="controls-row">
+        <!-- Play / Pause / Tiempo -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button class="btn-media" id="btn-play-pause" onclick="togglePlayPause()">
+            <span id="play-icon">⏸️</span>
+            <span id="play-text">Pausar</span>
+          </button>
+          <button class="btn-media" onclick="restartDemo()">
+            <span>↺</span>
+            <span>Reiniciar</span>
+          </button>
+          <span style="font-family: monospace; font-size: 0.85rem; color: #94a3b8;" id="timer-label">00:00 / 02:40</span>
+        </div>
+
+        <!-- Selector de Escenas -->
+        <div class="scene-jumper">
+          <span style="font-size: 0.75rem; color: #64748b; font-weight: 700; margin-right: 4px;">SALTAR A:</span>
+          <button class="btn-scene-pill active" id="pill-s1" onclick="jumpToScene(1)">1. Carga Stock</button>
+          <button class="btn-scene-pill" id="pill-s2" onclick="jumpToScene(2)">2. Jugador 5 Hab.</button>
+          <button class="btn-scene-pill" id="pill-s3" onclick="jumpToScene(3)">3. Descuento ⬇️</button>
+          <button class="btn-scene-pill" id="pill-s4" onclick="jumpToScene(4)">4. Perfil Modelo</button>
+          <button class="btn-scene-pill" id="pill-s5" onclick="jumpToScene(5)">5. Match 🎯</button>
+        </div>
+
+        <!-- Velocidad -->
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="font-size: 0.75rem; color: #64748b;">VEL:</span>
+          <button class="btn-scene-pill active" id="speed-1" onclick="setSpeed(1)">1x</button>
+          <button class="btn-scene-pill" id="speed-15" onclick="setSpeed(1.5)">1.5x</button>
+          <button class="btn-scene-pill" id="speed-2" onclick="setSpeed(2)">2x</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ─── ESTADO DE LA DEMO ──────────────────────────────────────────
+    let isPlaying = true;
+    let playbackSpeed = 1;
+    let currentTime = 0;
+    const totalDuration = 160; // 160 segundos totales (velocidad reducida)
+
+    let appState = {
+      activeTab: 'players',
+      totalStock: 0,
+      assignedCount: 0,
+      alertsCount: 0,
+      // 5 Habilidades cargadas
+      skills: {
+        dobleToque: { name: 'Doble toque', stock: 0, assigned: 0 },
+        pasePrimerToque: { name: 'Pase al primer toque', stock: 0, assigned: 0 },
+        interceptador: { name: 'Interceptador', stock: 0, assigned: 0 },
+        marcaje: { name: 'Marcaje', stock: 0, assigned: 0 },
+        espirituLucha: { name: 'Espíritu de lucha', stock: 0, assigned: 0 },
+        // Habilidades modelo
+        tiroLargo: { name: 'Tiro de larga distancia', stock: 2, assigned: 0 },
+        finAcrobatica: { name: 'Finalización acrobática', stock: 1, assigned: 0 },
+        paseMedido: { name: 'Pase medido', stock: 3, assigned: 0 },
+        centroCruzado: { name: 'Centro cruzado', stock: 2, assigned: 0 },
+        amagoGiro: { name: 'Amago por detrás y giro', stock: 1, assigned: 0 }
+      },
+      players: [],
+      models: []
+    };
+
+    // ─── LÍNEA DE TIEMPO DE ACCIONES ────────────────────────────────
+    const scriptEvents = [
+      // ESCENA 1: Carga de Stock
+      { t: 0,  scene: 1, text: "Escena 1: Accediendo al Inventario Maestro de Habilidades...", tab: 'players', action: 'move', x: 260, y: 195 },
+      { t: 4,  scene: 1, text: "Haciendo clic en la pestaña 'Inventario Maestro'...", tab: 'players', action: 'click', x: 260, y: 195 },
+      { t: 6,  scene: 1, text: "Visualizando catálogo de 41 habilidades oficiales sin stock.", tab: 'inventory', action: 'move', x: 340, y: 310 },
+      { t: 10,  scene: 1, text: "Asignando 3 unidades de stock a 'Doble toque'...", tab: 'inventory', action: 'type_stock', skill: 'dobleToque', val: 3, x: 380, y: 330 },
+      { t: 14,  scene: 1, text: "Guardando stock de 'Doble toque' con 💾...", tab: 'inventory', action: 'click_save', skill: 'dobleToque', x: 420, y: 330 },
+      { t: 18,  scene: 1, text: "Cargando 3 unidades a 'Pase al primer toque'...", tab: 'inventory', action: 'type_stock', skill: 'pasePrimerToque', val: 3, x: 380, y: 385 },
+      { t: 22, scene: 1, text: "Guardando stock de 'Pase al primer toque'...", tab: 'inventory', action: 'click_save', skill: 'pasePrimerToque', x: 420, y: 385 },
+      { t: 26, scene: 1, text: "Cargando stock a 'Interceptador', 'Marcaje' y 'Espíritu de lucha'...", tab: 'inventory', action: 'batch_stock', val: 3, x: 380, y: 440 },
+      { t: 32, scene: 1, text: "¡Inventario cargado! 15 unidades listas en stock para asignar.", tab: 'inventory', action: 'move', x: 480, y: 140 },
+
+      // ESCENA 2: Creación de Jugador
+      { t: 38, scene: 2, text: "Escena 2: Volviendo a la pestaña de 'Asignación de Jugadores'...", tab: 'inventory', action: 'click', x: 100, y: 195 },
+      { t: 42, scene: 2, text: "Sección '➕ Agregar Nuevo Jugador' lista para registro.", tab: 'players', action: 'move', x: 220, y: 270 },
+      { t: 46, scene: 2, text: "Escribiendo nombre del jugador: 'J. Kimmich'...", tab: 'players', action: 'type_player_name', name: 'J. Kimmich', x: 220, y: 270 },
+      { t: 52, scene: 2, text: "Seleccionando las 5 habilidades con stock previamente cargadas...", tab: 'players', action: 'select_5_skills', x: 450, y: 320 },
+      { t: 58, scene: 2, text: "Validación en vivo: Las 5 habilidades se muestran en verde (En Stock).", tab: 'players', action: 'move', x: 620, y: 320 },
+      { t: 62, scene: 2, text: "Haciendo clic en '➕ Guardar'...", tab: 'players', action: 'click_save_player', x: 740, y: 360 },
+      { t: 66, scene: 2, text: "¡Jugador 'J. Kimmich' registrado con éxito! Estado: 🟢 5/5 en stock.", tab: 'players', action: 'move', x: 500, y: 460 },
+
+      // ESCENA 3: Descuento en Tiempo Real
+      { t: 72, scene: 3, text: "Escena 3: Probando el botón '⬇️ Descontar' en Pase al primer toque...", tab: 'players', action: 'move', x: 410, y: 475 },
+      { t: 78, scene: 3, text: "Haciendo clic en '⬇️ Descontar' para consumir 1 unidad del inventario...", tab: 'players', action: 'click_descontar', x: 410, y: 475 },
+      { t: 82, scene: 3, text: "¡Confirmación! Habilidad descontada del stock y casilla liberada a 'Seleccionar'.", tab: 'players', action: 'after_descontar', x: 410, y: 475 },
+      { t: 88, scene: 3, text: "El stock de Pase al primer toque bajó instantáneamente de 3 a 2 en vivo.", tab: 'players', action: 'move', x: 300, y: 140 },
+
+      // ESCENA 4: Creación de Jugador Modelo
+      { t: 96, scene: 4, text: "Escena 4: Ingresando a '⭐ Jugadores Modelo (Perfiles)'...", tab: 'players', action: 'click', x: 480, y: 195 },
+      { t: 102, scene: 4, text: "Creando perfil táctico modelo: 'Extremo Desequilibrante'...", tab: 'models', action: 'type_model_name', name: 'Extremo Desequilibrante', x: 300, y: 260 },
+      { t: 110, scene: 4, text: "Asignando 5 habilidades de desborde y regate distintas...", tab: 'models', action: 'assign_model_skills', x: 500, y: 340 },
+      { t: 116, scene: 4, text: "Guardando perfil modelo con '➕ Guardar Perfil'...", tab: 'models', action: 'click_save_model', x: 680, y: 390 },
+      { t: 120, scene: 4, text: "¡Perfil 'Extremo Desequilibrante' guardado exitosamente!", tab: 'models', action: 'move', x: 350, y: 460 },
+
+      // ESCENA 5: Jugador Receptor y Detección de Match
+      { t: 126, scene: 5, text: "Escena 5: Regresando a la plantilla para crear a 'L. Sané'...", tab: 'models', action: 'click', x: 100, y: 195 },
+      { t: 130, scene: 5, text: "Escribiendo nombre: 'L. Sané'...", tab: 'players', action: 'type_second_player', name: 'L. Sané', x: 220, y: 270 },
+      { t: 136, scene: 5, text: "Aplicando plantilla rápida 'Extremo Desequilibrante'...", tab: 'players', action: 'select_template_model', x: 450, y: 270 },
+      { t: 142, scene: 5, text: "Guardando a L. Sané con sus habilidades coincidentes...", tab: 'players', action: 'click_save_second', x: 740, y: 360 },
+      { t: 146, scene: 5, text: "Volviendo a '⭐ Jugadores Modelo' para comprobar la detección de Match...", tab: 'players', action: 'click', x: 480, y: 195 },
+      { t: 152, scene: 5, text: "🎯 ¡MATCH 5/5 DETECTADO! L. Sané es 100% compatible con el perfil.", tab: 'models', action: 'highlight_match', x: 380, y: 460 },
+      { t: 158, scene: 5, text: "Demostración Oficial completada • D.A.V.A.D.E.R. © 2026 David Peñuela • Todos los derechos reservados.", tab: 'models', action: 'finish', x: 500, y: 300 }
+    ];
+
+    // ─── RENDERIZADOR DE VISTAS EN EL SANDBOX ──────────────────────
+    function renderSandbox() {
+      const container = document.getElementById('sandbox-content');
+
+      // Actualizar estadísticas superiores
+      document.getElementById('stat-stock-total').textContent = appState.totalStock;
+      document.getElementById('stat-assigned-total').textContent = appState.assignedCount;
+      document.getElementById('stat-alerts-total').textContent = appState.alertsCount;
+
+      // Actualizar pestañas activas
+      document.querySelectorAll('.mock-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`tab-btn-${appState.activeTab}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (appState.activeTab === 'inventory') {
+        container.innerHTML = `
+          <div class="mock-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h3 style="font-size:1.05rem; font-weight:800; color:#0f172a;">📦 Inventario Maestro de Habilidades</h3>
+              <input type="text" placeholder="🔍 Filtrar habilidades..." style="padding:6px 10px; font-size:0.8rem; border:1px solid #cbd5e1; border-radius:6px;" />
+            </div>
+            <table class="mock-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Habilidad Oficial</th>
+                  <th>Stock Inicial</th>
+                  <th>Asignadas</th>
+                  <th>Disponible</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${renderInventoryRow(1, appState.skills.dobleToque, 'dobleToque')}
+                ${renderInventoryRow(2, appState.skills.pasePrimerToque, 'pasePrimerToque')}
+                ${renderInventoryRow(3, appState.skills.interceptador, 'interceptador')}
+                ${renderInventoryRow(4, appState.skills.marcaje, 'marcaje')}
+                ${renderInventoryRow(5, appState.skills.espirituLucha, 'espirituLucha')}
+                ${renderInventoryRow(6, { name: 'Pase en profundidad', stock: 0, assigned: 0 }, 'dummy')}
+                ${renderInventoryRow(7, { name: 'Pase bombeado bajo', stock: 0, assigned: 0 }, 'dummy')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else if (appState.activeTab === 'players') {
+        container.innerHTML = `
+          <!-- Tarjeta Nuevo Jugador -->
+          <div class="mock-card" style="background: #f1f5f9; border-color: #cbd5e1;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <h4 style="font-size:0.92rem; font-weight:800; color:#0f172a;">➕ Agregar Nuevo Jugador</h4>
+              <span style="font-size:0.75rem; color:#64748b;">Asignación táctica de 5 slots</span>
+            </div>
+            <div style="display:grid; grid-template-columns: 180px repeat(5, 1fr) 90px; gap:8px; align-items:center;">
+              <input type="text" id="mock-in-name" value="${appState.newPlayerDraftName || ''}" placeholder="Nombre..." style="padding:7px 10px; font-size:0.82rem; border:1px solid #cbd5e1; border-radius:6px;" />
+              
+              <div style="font-size:0.78rem; background:#fff; padding:6px; border:1px solid #cbd5e1; border-radius:6px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" id="slot-preview-1">
+                ${appState.newPlayerDraftSkills ? appState.newPlayerDraftSkills[0] : '-- Slot 1 --'}
+              </div>
+              <div style="font-size:0.78rem; background:#fff; padding:6px; border:1px solid #cbd5e1; border-radius:6px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" id="slot-preview-2">
+                ${appState.newPlayerDraftSkills ? appState.newPlayerDraftSkills[1] : '-- Slot 2 --'}
+              </div>
+              <div style="font-size:0.78rem; background:#fff; padding:6px; border:1px solid #cbd5e1; border-radius:6px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" id="slot-preview-3">
+                ${appState.newPlayerDraftSkills ? appState.newPlayerDraftSkills[2] : '-- Slot 3 --'}
+              </div>
+              <div style="font-size:0.78rem; background:#fff; padding:6px; border:1px solid #cbd5e1; border-radius:6px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" id="slot-preview-4">
+                ${appState.newPlayerDraftSkills ? appState.newPlayerDraftSkills[3] : '-- Slot 4 --'}
+              </div>
+              <div style="font-size:0.78rem; background:#fff; padding:6px; border:1px solid #cbd5e1; border-radius:6px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" id="slot-preview-5">
+                ${appState.newPlayerDraftSkills ? appState.newPlayerDraftSkills[4] : '-- Slot 5 --'}
+              </div>
+
+              <button class="btn-media" id="mock-btn-save-player" style="background:#2563eb; color:#fff; border-color:#1d4ed8; justify-content:center; font-size:0.8rem; padding:7px;">
+                ➕ Guardar
+              </button>
+            </div>
+          </div>
+
+          <!-- Tabla de Jugadores Registrados -->
+          <div class="mock-card">
+            <h4 style="font-size:0.92rem; font-weight:800; color:#0f172a; margin-bottom:10px;">👥 Plantilla de Jugadores (${appState.players.length})</h4>
+            <table class="mock-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Jugador</th>
+                  <th>Habilidad 1</th>
+                  <th>Habilidad 2</th>
+                  <th>Habilidad 3</th>
+                  <th>Habilidad 4</th>
+                  <th>Habilidad 5</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${appState.players.length === 0 ? `
+                  <tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:30px;">No hay jugadores registrados en la plantilla.</td></tr>
+                ` : appState.players.map((p, idx) => `
+                  <tr>
+                    <td style="font-weight:700; color:#64748b;">${idx + 1}</td>
+                    <td style="font-weight:800; color:#0f172a;">${p.name}</td>
+                    <td>${renderPlayerSlotCell(p.skills[0], 0, p.id)}</td>
+                    <td>${renderPlayerSlotCell(p.skills[1], 1, p.id)}</td>
+                    <td>${renderPlayerSlotCell(p.skills[2], 2, p.id)}</td>
+                    <td>${renderPlayerSlotCell(p.skills[3], 3, p.id)}</td>
+                    <td>${renderPlayerSlotCell(p.skills[4], 4, p.id)}</td>
+                    <td>${p.statusBadge}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else if (appState.activeTab === 'models') {
+        container.innerHTML = `
+          <div class="mock-card" style="background:#f8fafc; border-color:#cbd5e1;">
+            <h4 style="font-size:0.95rem; font-weight:800; color:#0f172a; margin-bottom:8px;">⭐ Nuevo Perfil Modelo</h4>
+            <div style="display:grid; grid-template-columns: 220px 1fr 120px; gap:10px; align-items:center;">
+              <input type="text" value="${appState.newModelName || ''}" placeholder="Nombre del perfil..." style="padding:8px 10px; font-size:0.83rem; border:1px solid #cbd5e1; border-radius:6px;" />
+              <div style="font-size:0.78rem; color:#475569; background:#fff; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+                ${appState.newModelSkills ? appState.newModelSkills.join(' • ') : '5 habilidades del perfil seleccionadas...'}
+              </div>
+              <button class="btn-media" style="background:#2563eb; color:#fff; border-color:#1d4ed8; justify-content:center; font-size:0.8rem;">
+                ➕ Guardar
+              </button>
+            </div>
+          </div>
+
+          <!-- Perfiles creados -->
+          <div style="display:grid; grid-template-columns: 1fr; gap:12px;">
+            ${appState.models.map(m => `
+              <div class="mock-card" style="border-left: 4px solid #2563eb; position:relative;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <div>
+                    <span style="font-size:1.05rem; font-weight:900; color:#0f172a;">👤 ${m.name}</span>
+                    <span style="display:block; font-size:0.75rem; color:#64748b;">${m.desc}</span>
+                  </div>
+                  <span style="background:#dbeafe; color:#1e40af; font-size:0.75rem; font-weight:800; padding:4px 8px; border-radius:6px;">5 Habilidades</span>
+                </div>
+                
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+                  ${m.skills.map(s => `<span class="badge-ok" style="font-size:0.75rem;">${s}</span>`).join('')}
+                </div>
+
+                <!-- Bloque de Match -->
+                <div style="background:#f1f5f9; padding:10px 14px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <span style="font-size:0.78rem; font-weight:700; color:#475569;">Jugadores con coincidencia (Match):</span>
+                    ${m.matchedPlayer ? `
+                      <span class="badge-ok" id="match-badge-result" style="font-size:0.82rem; margin-left:8px; background:#166534; color:#fff; padding:4px 10px;">
+                        🎯 ${m.matchedPlayer} (5/5 Coincidencias)
+                      </span>
+                    ` : `
+                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">Esperando jugador receptor...</span>
+                    `}
+                  </div>
+                  <button class="btn-media" style="background:#e11d48; color:#fff; border-color:#f43f5e; font-size:0.75rem; padding:4px 10px;">
+                    ⚡ Completar
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+    }
+
+    function renderInventoryRow(idx, sk, key) {
+      const avail = Math.max(0, sk.stock - sk.assigned);
+      const isOk = avail > 0;
+      return `
+        <tr>
+          <td style="color:#64748b; font-weight:700;">${idx}</td>
+          <td style="font-weight:800; color:#0f172a;">${sk.name}</td>
+          <td style="width:90px;">
+            <input type="number" value="${sk.stock}" style="width:60px; padding:4px; font-weight:800; border:1px solid #cbd5e1; border-radius:4px;" />
+          </td>
+          <td style="color:#64748b; font-weight:700;">${sk.assigned}</td>
+          <td style="font-weight:900; color:${isOk ? '#16a34a' : '#94a3b8'};">${avail}</td>
+          <td>
+            <span class="${isOk ? 'badge-ok' : 'badge-zero'}">
+              ${isOk ? `Disponible: ${avail}` : 'Agotado (0)'}
+            </span>
+          </td>
+          <td>
+            <button class="btn-save-stock" title="Guardar">💾</button>
+          </td>
+        </tr>
+      `;
+    }
+
+    function renderPlayerSlotCell(skillName, sIdx, playerId) {
+      if (!skillName || skillName === '-- Seleccionar --') {
+        return `<span style="color:#94a3b8; font-size:0.75rem;">-- Seleccionar --</span>`;
+      }
+      return `
+        <div>
+          <span style="font-weight:700; color:#0f172a; font-size:0.78rem;">${skillName}</span>
+          <div style="display:flex; align-items:center; gap:4px; margin-top:2px;">
+            <span class="badge-ok" style="font-size:0.7rem; padding:1px 5px;">En Stock</span>
+            <button class="btn-descontar-mock" title="Descontar 1 unidad del inventario">
+              ⬇️ Descontar
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // ─── CONTROL DEL PUNTERO VIRTUAL ────────────────────────────────
+    const cursor = document.getElementById('virtual-cursor');
+    const ripple = document.getElementById('cursor-ripple');
+
+    function moveCursor(x, y, duration = 600) {
+      cursor.style.transition = `left ${duration / 1000}s cubic-bezier(0.25, 1, 0.5, 1), top ${duration / 1000}s cubic-bezier(0.25, 1, 0.5, 1)`;
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
+    }
+
+    function clickCursor(x, y) {
+      moveCursor(x, y, 200);
+      setTimeout(() => {
+        ripple.classList.add('active');
+        setTimeout(() => ripple.classList.remove('active'), 350);
+      }, 200);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('mock-toast');
+      document.getElementById('toast-text').textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 3800);
+    }
+
+    // ─── MOTOR DE REPRODUCCIÓN Y EVENTOS ───────────────────────────
+    let currentEventIdx = 0;
+
+    function tick() {
+      if (!isPlaying) return;
+
+      currentTime += (0.1 * playbackSpeed);
+      if (currentTime > totalDuration) {
+        currentTime = totalDuration;
+        isPlaying = false;
+        updatePlayBtn();
+      }
+
+      // Actualizar Barra de Scrubber
+      const pct = (currentTime / totalDuration) * 100;
+      document.getElementById('scrubber-fill').style.width = `${pct}%`;
+
+      // Formato tiempo
+      const curM = Math.floor(currentTime / 60).toString().padStart(2, '0');
+      const curS = Math.floor(currentTime % 60).toString().padStart(2, '0');
+      document.getElementById('timer-label').textContent = `${curM}:${curS} / 02:40`;
+
+      // Buscar eventos correspondientes
+      const nextEvent = scriptEvents[currentEventIdx];
+      if (nextEvent && currentTime >= nextEvent.t) {
+        executeScriptEvent(nextEvent);
+        currentEventIdx++;
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    function executeScriptEvent(ev) {
+      // Actualizar subtítulos
+      document.getElementById('narrator-badge').textContent = `ESCENA ${ev.scene}/5`;
+      document.getElementById('narrator-text').textContent = ev.text;
+
+      // Actualizar pills de escena
+      document.querySelectorAll('.btn-scene-pill').forEach(p => p.classList.remove('active'));
+      const activePill = document.getElementById(`pill-s${ev.scene}`);
+      if (activePill) activePill.classList.add('active');
+
+      // Mover pestaña si es necesario
+      if (ev.tab && appState.activeTab !== ev.tab) {
+        appState.activeTab = ev.tab;
+        renderSandbox();
+      }
+
+      // Mover cursor
+      moveCursor(ev.x, ev.y, 650);
+
+      // Ejecutar lógica según acción
+      switch (ev.action) {
+        case 'click':
+          clickCursor(ev.x, ev.y);
+          break;
+        case 'type_stock':
+          clickCursor(ev.x, ev.y);
+          setTimeout(() => {
+            appState.skills[ev.skill].stock = ev.val;
+            renderSandbox();
+          }, 400);
+          break;
+        case 'click_save':
+          clickCursor(ev.x, ev.y);
+          setTimeout(() => {
+            showToast(`Stock guardado en "${appState.skills[ev.skill].name}" (Stock: 3)`);
+            appState.totalStock += 3;
+            renderSandbox();
+          }, 350);
+          break;
+        case 'batch_stock':
+          clickCursor(ev.x, ev.y);
+          setTimeout(() => {
+            appState.skills.interceptador.stock = 3;
+            appState.skills.marcaje.stock = 3;
+            appState.skills.espirituLucha.stock = 3;
+            appState.totalStock = 15;
+            showToast('Stock masivo guardado (15 unidades disponibles)');
+            renderSandbox();
+          }, 400);
+          break;
+        case 'type_player_name':
+          clickCursor(ev.x, ev.y);
+          appState.newPlayerDraftName = ev.name;
+          renderSandbox();
+          break;
+        case 'select_5_skills':
+          clickCursor(ev.x, ev.y);
+          appState.newPlayerDraftSkills = [
+            'Doble toque',
+            'Pase al primer toque',
+            'Interceptador',
+            'Marcaje',
+            'Espíritu de lucha'
+          ];
+          renderSandbox();
+          break;
+        case 'click_save_player':
+          clickCursor(ev.x, ev.y);
+          setTimeout(() => {
+            appState.players.push({
+              id: 'p1',
+              name: 'J. Kimmich',
+              skills: [
+                'Doble toque',
+                'Pase al primer toque',
+                'Interceptador',
+                'Marcaje',
+                'Espíritu de lucha'
+              ],
+              statusBadge: '<span class="badge-ok">🟢 5/5 en stock</span>'
+            });
+            appState.assignedCount = 5;
+            appState.newPlayerDraftName = '';
+            appState.newPlayerDraftSkills = null;
+            showToast("Jugador 'J. Kimmich' agregado con éxito");
+            renderSandbox();
+          }, 400);
+          break;
+        case 'click_descontar':
+          clickCursor(ev.x, ev.y);
+          setTimeout(() => {
+            showToast("Habilidad 'Pase al primer toque' descontada del inventario maestro (Stock: 2)");
+            // Descontar
+            appState.skills.pasePrimerToque.stock = 2;
+            appState.totalStock = 14;
+            appState.assignedCount = 4;
+            appState.players[0].skills[1] = '-- Seleccionar --';
+            appState.players[0].statusBadge = '<span class="badge-warn">🟡 4 en stock (1 vacía)</span>';
+            renderSandbox();
+          }, 400);
+          break;
+        case 'type_model_name':
+          clickCursor(ev.x, ev.y);
+          appState.newModelName = ev.name;
+          renderSandbox();
+          break;
+        case 'assign_model_skills':
+          clickCursor(ev.x, ev.y);
+          appState.newModelSkills = [
+            'Tiro de larga distancia',
+            'Finalización acrobática',
+            'Pase medido',
+            'Centro cruzado',
+            'Amago por detrás y giro'
+          ];
+          renderSandbox();
+          break;
+        case 'click_save_model':
+          clickCursor(ev.x, ev.y);
+          setTimeout(() => {
+            appState.models.push({
+              id: 'm1',
+              name: 'Extremo Desequilibrante',
+              desc: 'Perfil veloz con desborde, regate y disparo exterior',
+              skills: [
+                'Tiro de larga distancia',
+                'Finalización acrobática',
+                'Pase medido',
+                'Centro cruzado',
+                'Amago por detrás y giro'
+              ],
+              matchedPlayer: null
+            });
+            showToast("Perfil 'Extremo Desequilibrante' creado");
+            appState.newModelName = '';
+            appState.newModelSkills = null;
+            renderSandbox();
+          }, 400);
+          break;
+        case 'type_second_player':
+          clickCursor(ev.x, ev.y);
+          appState.newPlayerDraftName = ev.name;
+          renderSandbox();
+          break;
+        case 'select_template_model':
+          clickCursor(ev.x, ev.y);
+          setTimeout(() => {
+            appState.newPlayerDraftSkills = [
+              'Tiro de larga distancia',
+              'Finalización acrobática',
+              'Pase medido',
+              'Centro cruzado',
+              'Amago por detrás y giro'
+            ];
+            showToast("Habilidades del perfil modelo 'Extremo Desequilibrante' aplicadas");
+            renderSandbox();
+          }, 400);
+          break;
+        case 'click_save_second':
+          clickCursor(ev.x, ev.y);
+          setTimeout(() => {
+            appState.players.push({
+              id: 'p2',
+              name: 'L. Sané',
+              skills: [
+                'Tiro de larga distancia',
+                'Finalización acrobática',
+                'Pase medido',
+                'Centro cruzado',
+                'Amago por detrás y giro'
+              ],
+              statusBadge: '<span class="badge-ok">🟢 5/5 en stock</span>'
+            });
+            appState.assignedCount += 5;
+            appState.newPlayerDraftName = '';
+            appState.newPlayerDraftSkills = null;
+            if (appState.models[0]) {
+              appState.models[0].matchedPlayer = 'L. Sané';
+            }
+            showToast("Jugador 'L. Sané' registrado con éxito");
+            renderSandbox();
+          }, 400);
+          break;
+        case 'highlight_match':
+          clickCursor(ev.x, ev.y);
+          renderSandbox();
+          break;
+      }
+    }
+
+    // ─── CONTROLES DE USUARIO ──────────────────────────────────────
+    function togglePlayPause() {
+      isPlaying = !isPlaying;
+      updatePlayBtn();
+      if (isPlaying) requestAnimationFrame(tick);
+    }
+
+    function updatePlayBtn() {
+      document.getElementById('play-icon').textContent = isPlaying ? '⏸️' : '▶️';
+      document.getElementById('play-text').textContent = isPlaying ? 'Pausar' : 'Reproducir';
+    }
+
+    function restartDemo() {
+      currentTime = 0;
+      currentEventIdx = 0;
+      appState = {
+        activeTab: 'players',
+        totalStock: 0,
+        assignedCount: 0,
+        alertsCount: 0,
+        skills: {
+          dobleToque: { name: 'Doble toque', stock: 0, assigned: 0 },
+          pasePrimerToque: { name: 'Pase al primer toque', stock: 0, assigned: 0 },
+          interceptador: { name: 'Interceptador', stock: 0, assigned: 0 },
+          marcaje: { name: 'Marcaje', stock: 0, assigned: 0 },
+          espirituLucha: { name: 'Espíritu de lucha', stock: 0, assigned: 0 }
+        },
+        players: [],
+        models: []
+      };
+      isPlaying = true;
+      updatePlayBtn();
+      renderSandbox();
+      requestAnimationFrame(tick);
+    }
+
+    function jumpToScene(sceneNum) {
+      const targetEvent = scriptEvents.find(e => e.scene === sceneNum);
+      if (targetEvent) {
+        currentTime = targetEvent.t;
+        // Reconstruir estado previo a este tiempo
+        rebuildStateUpTo(currentTime);
+        currentEventIdx = scriptEvents.findIndex(e => e.t >= currentTime);
+        renderSandbox();
+      }
+    }
+
+    function rebuildStateUpTo(targetT) {
+      // Reconstrucción rápida de datos según tiempo
+      if (targetT < 36) {
+        appState.activeTab = 'inventory';
+        appState.players = [];
+        appState.models = [];
+      } else if (targetT < 70) {
+        appState.activeTab = 'players';
+        appState.skills.dobleToque.stock = 3;
+        appState.skills.pasePrimerToque.stock = 3;
+        appState.skills.interceptador.stock = 3;
+        appState.skills.marcaje.stock = 3;
+        appState.skills.espirituLucha.stock = 3;
+        appState.totalStock = 15;
+      } else if (targetT < 94) {
+        appState.activeTab = 'players';
+        appState.players = [{
+          id: 'p1',
+          name: 'J. Kimmich',
+          skills: ['Doble toque', 'Pase al primer toque', 'Interceptador', 'Marcaje', 'Espíritu de lucha'],
+          statusBadge: '<span class="badge-ok">🟢 5/5 en stock</span>'
+        }];
+        appState.totalStock = 15;
+        appState.assignedCount = 5;
+      } else if (targetT < 124) {
+        appState.activeTab = 'models';
+        appState.players = [{
+          id: 'p1',
+          name: 'J. Kimmich',
+          skills: ['Doble toque', '-- Seleccionar --', 'Interceptador', 'Marcaje', 'Espíritu de lucha'],
+          statusBadge: '<span class="badge-warn">🟡 4 en stock (1 vacía)</span>'
+        }];
+        appState.totalStock = 14;
+        appState.assignedCount = 4;
+      } else {
+        appState.activeTab = 'models';
+        appState.models = [{
+          id: 'm1',
+          name: 'Extremo Desequilibrante',
+          desc: 'Perfil veloz con desborde, regate y disparo exterior',
+          skills: ['Tiro de larga distancia', 'Finalización acrobática', 'Pase medido', 'Centro cruzado', 'Amago por detrás y giro'],
+          matchedPlayer: 'L. Sané'
+        }];
+      }
+    }
+
+    function seekByClick(e) {
+      const rect = document.getElementById('scrubber-track').getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, clickX / rect.width));
+      currentTime = pct * totalDuration;
+      rebuildStateUpTo(currentTime);
+      currentEventIdx = scriptEvents.findIndex(e => e.t >= currentTime);
+      renderSandbox();
+    }
+
+    function setSpeed(sp) {
+      playbackSpeed = sp;
+      document.querySelectorAll('#speed-1, #speed-15, #speed-2').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`speed-${sp === 1.5 ? '15' : sp}`);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function showTab(t) {
+      appState.activeTab = t;
+      renderSandbox();
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSandbox();
+      requestAnimationFrame(tick);
+    });
+  </script>
+  <footer style="margin-top: 24px; text-align: center; font-size: 0.8rem; color: #64748b;">
+    © 2026 <strong>David Peñuela</strong>. Todos los derechos reservados. • <a href="../terminos.html" style="color: #38bdf8; text-decoration: underline; font-weight: 700;">Aviso Legal y Propiedad Intelectual</a>
+  </footer>
+</body>
+</html>
