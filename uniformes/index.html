@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="docTitle">D.A.V.A.D.E.R. — eFootball Kit Archive</title>
   <link rel="icon" href="https://angelqdv.github.io/davader/assets/davader_logo.svg">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./visor3d/three.module.js",
+      "three/addons/": "./visor3d/jsm/"
+    }
+  }
+  </script>
   <style>
     /* ==========================================================
        D.A.V.A.D.E.R. Estilos Maestros
@@ -926,12 +934,157 @@
       height: 430px;
     }
 
+    .modal-content.modal-3d-team {
+      padding: 16px;
+    }
+
+    .modal-content.modal-3d-team .modal-kits-grid {
+      gap: 12px;
+    }
+
+    .modal-content.modal-3d-team .modal-kit-card {
+      padding: 10px;
+      gap: 8px;
+    }
+
+    .modal-content.modal-3d-team .modal-kit-card img.modal-kit-combinada.render3d {
+      height: 250px;
+    }
+
     .modal-kit-combinada-label {
       font-size: 0.68rem;
       color: #94a3b8;
       font-family: "Consolas", monospace;
       text-transform: uppercase;
       margin-top: -6px;
+    }
+
+    .modal-kit-3d-btn {
+      margin-top: -4px;
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      border: 1px solid #3b82f6;
+      color: #fff;
+      border-radius: 7px;
+      padding: 7px 13px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      font-family: "Consolas", monospace;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: transform 0.15s, filter 0.15s;
+    }
+
+    .modal-kit-3d-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.15);
+    }
+
+    #visor3DOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      background: rgba(4, 6, 12, 0.82);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #visor3DOverlay.open {
+      display: flex;
+    }
+
+    .visor3d-panel {
+      position: relative;
+      height: min(92vh, 760px);
+      aspect-ratio: 444 / 586;
+      width: auto;
+      max-width: 94vw;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 38%, #17243c 0%, #0d1524 100%);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+    }
+
+    .visor3d-panel canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: none;
+    }
+
+    .visor3d-title {
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      pointer-events: none;
+      text-shadow: 0 2px 10px #000;
+    }
+
+    .visor3d-title strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .visor3d-title span {
+      font-size: 0.72rem;
+      color: #94a3b8;
+    }
+
+    .visor3d-close {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #475569;
+      background: rgba(15, 23, 42, 0.85);
+      color: #e2e8f0;
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .visor3d-tools {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: max-content;
+      max-width: 94%;
+    }
+
+    .visor3d-tools button {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid #475569;
+      color: #cbd5e1;
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-size: 0.68rem;
+      font-family: "Consolas", monospace;
+      cursor: pointer;
+    }
+
+    .visor3d-tools button.active {
+      background: #2563eb;
+      border-color: #60a5fa;
+      color: #fff;
+    }
+
+    .visor3d-loading {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      pointer-events: none;
     }
 
     .modal-kit-badges-row {
@@ -1163,6 +1316,7 @@
 
   <!-- Script de Navegación y Renderizado -->
   <script src="catalogo_uniformes.js"></script>
+  <script src="./visor3d/kits3d.js"></script>
   <script>
     // ==========================================================
     // DICCIONARIOS DE IDIOMA PUROS (Inglés por defecto | Español)
@@ -1473,6 +1627,7 @@
     const btnColorAll = document.getElementById("btnColorAll");
     const kitsGrid = document.getElementById("kitsGrid");
     const modal = document.getElementById("kitModal");
+    const modalContent = modal.querySelector(".modal-content");
     const modalClose = document.getElementById("modalClose");
     const modalTeamName = document.getElementById("modalTeamName");
     const modalTeamMeta = document.getElementById("modalTeamMeta");
@@ -1861,15 +2016,41 @@
       modalTeamName.textContent = teamName;
       modalTeamMeta.textContent = `${continentName} • ${leagueName} • ${t.uniformes.length} ${dict.availableKits}`;
 
+      // Visor 3D disponible para todos los uniformes con textura 3D incluida.
+      // El listado se genera en visor3d/kits3d.js desde las texturas descargadas.
+      const KITS_CON_VISOR_3D = window.KITS_3D || new Set();
+      // Imagen horneada desde el render 3D real del juego, con fondo transparente.
+      const RENDER3D_UNIFORMES = {};
+      for (const id of KITS_CON_VISOR_3D) {
+        RENDER3D_UNIFORMES[id] = `./visor3d/renders/${id}.webp`;
+      }
+      const kitIdDe = k => {
+        const m = (k.silueta || "").match(/u\d+_[pg]\d+/);
+        return m ? m[0] : null;
+      };
+      const hayRender3D = t.uniformes.some(k => {
+        const id = kitIdDe(k);
+        return id && RENDER3D_UNIFORMES[id];
+      });
+      modalContent.classList.toggle("modal-3d-team", hayRender3D);
+
       modalKitsGrid.innerHTML = t.uniformes.map(k => {
         const roleLabel = isEn ? (k.rol_en || k.rol) : (k.rol_es || k.rol);
         const colorLabel = isEn ? k.color_en : k.color_es;
         const colorHex = k.color_hex || "#64748b";
+        const kitId3D = kitIdDe(k);
+        const tiene3D = kitId3D && KITS_CON_VISOR_3D.has(kitId3D);
+        const render3D = tiene3D && RENDER3D_UNIFORMES[kitId3D];
+        const imgSrc = render3D || k.combinada || k.ruta;
+        const imgClase = render3D ? "modal-kit-combinada render3d" : (k.combinada ? "modal-kit-combinada" : "");
+        const imgLabel = render3D
+          ? (isEn ? "3D kit render" : "Render 3D del kit")
+          : dict.silhouetteLabel;
 
         return `
           <div class="modal-kit-card">
-            ${k.combinada ? `<img class="modal-kit-combinada" src="${encodeURI(k.combinada)}" alt="${teamName} - ${dict.silhouetteLabel}">` : `<img src="${encodeURI(k.ruta)}" alt="${teamName} - ${roleLabel}">`}
-            ${k.combinada ? `<div class="modal-kit-combinada-label">${dict.silhouetteLabel}</div>` : ""}
+            <img class="${imgClase}" src="${encodeURI(imgSrc)}" alt="${teamName} - ${roleLabel}">
+            ${(render3D || k.combinada) ? `<div class="modal-kit-combinada-label">${imgLabel}</div>` : ""}
             <div class="modal-kit-badges-row">
               <span class="modal-kit-badge">${roleLabel}</span>
               <span class="modal-color-tag">
@@ -1877,9 +2058,16 @@
                 <span>${colorLabel}</span>
               </span>
             </div>
+            ${tiene3D ? `<button class="modal-kit-3d-btn" data-kit3d="${kitId3D}" data-label="${teamName} · ${roleLabel}">${isEn ? "🧊 View 3D" : "🧊 Ver 3D"}</button>` : ""}
           </div>
         `;
       }).join("");
+
+      modalKitsGrid.querySelectorAll(".modal-kit-3d-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (window.__visor3D) window.__visor3D.open(btn.dataset.kit3d, btn.dataset.label);
+        });
+      });
     }
 
     modalClose.onclick = () => {
@@ -1914,6 +2102,225 @@
     // INICIALIZACIÓN
     // ==========================================================
     applyLanguage();
+  </script>
+
+  <!-- VISOR 3D: se abre desde el botón de cada uniforme compatible -->
+  <div id="visor3DOverlay" aria-hidden="true">
+    <div class="visor3d-panel" id="visor3DPanel">
+      <canvas id="visor3DCanvas"></canvas>
+      <div class="visor3d-loading" id="visor3DLoading">Cargando modelo 3D…</div>
+      <div class="visor3d-title">
+        <strong id="visor3DTitle">Uniforme 3D</strong>
+        <span>eFootball Kit Archive · modelo original del juego</span>
+      </div>
+      <button class="visor3d-close" id="visor3DClose" title="Cerrar">×</button>
+      <div class="visor3d-tools">
+        <button data-view="front" class="active">Front</button>
+        <button data-view="side">Side</button>
+        <button data-view="back">Back</button>
+        <button data-view="spin">360°</button>
+        <button data-mode="full" class="active">Full Kit</button>
+        <button data-mode="shirt">Shirt</button>
+        <button data-mode="shorts">Shorts</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+    const overlay = document.getElementById('visor3DOverlay');
+    const panel = document.getElementById('visor3DPanel');
+    const canvas = document.getElementById('visor3DCanvas');
+    const loading = document.getElementById('visor3DLoading');
+    const titleEl = document.getElementById('visor3DTitle');
+    const closeBtn = document.getElementById('visor3DClose');
+    const tools = [...panel.querySelectorAll('.visor3d-tools button')];
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
+    const scene = new THREE.Scene();
+    scene.background = null;
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 0.75;
+    controls.maxDistance = 5.2;
+    controls.minPolarAngle = 0.15;
+    controls.maxPolarAngle = Math.PI * 0.85;
+
+    scene.add(new THREE.HemisphereLight(0xf8fafc, 0x334155, 0.95));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.38));
+    function dir(color, intensity, x, y, z) {
+      const l = new THREE.DirectionalLight(color, intensity);
+      l.position.set(x, y, z);
+      scene.add(l);
+    }
+    dir(0xffffff, 1.25, 0.45, 1.35, 2.45);
+    dir(0xf1f5f9, 0.72, -1.85, 1.05, 1.85);
+    dir(0xf8fafc, 0.62, 2.1, 1.35, 0.45);
+    dir(0xffffff, 1.25, -0.25, 1.45, -2.35);
+    dir(0xe2e8f0, 0.48, 1.1, 1.85, -1.55);
+
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.16;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    let model = null;
+    let parts = null;
+    let viewMode = 'full';
+    let preset = 'front';
+    let currentKit = null;
+    const textureCache = new Map();
+
+    function framing() {
+      if (viewMode === 'shirt') return { targetY: 1.24, camY: 1.24, dist: 1.22 };
+      if (viewMode === 'shorts') return { targetY: 0.56, camY: 0.58, dist: 1.62 };
+      return { targetY: 0.85, camY: 0.88, dist: 2.3 };
+    }
+
+    function syncTools() {
+      tools.forEach(b => {
+        if (b.dataset.view === 'spin') {
+          b.classList.toggle('active', controls.autoRotate);
+          return;
+        }
+        const key = b.dataset.view ? 'view' : 'mode';
+        const val = b.dataset.view || b.dataset.mode;
+        const active = key === 'view' ? (preset === val && !controls.autoRotate) : (viewMode === val);
+        b.classList.toggle('active', active);
+      });
+    }
+
+    function setCamera(p) {
+      const f = framing();
+      if (p === 'side') camera.position.set(f.dist, f.camY, 0);
+      else if (p === 'back') camera.position.set(0, f.camY, -f.dist);
+      else camera.position.set(0, f.camY, f.dist);
+      controls.target.set(0, f.targetY, 0);
+      controls.autoRotate = p === 'spin';
+      if (p === 'spin') controls.autoRotateSpeed = 10;
+      preset = p === 'spin' ? 'front' : p;
+      controls.update();
+      syncTools();
+    }
+
+    function applyMode() {
+      if (!parts) return;
+      const showShirt = viewMode === 'full' || viewMode === 'shirt';
+      const showLower = viewMode === 'full' || viewMode === 'shorts';
+      if (parts.shirt) parts.shirt.visible = showShirt;
+      if (parts.collar) parts.collar.visible = showShirt;
+      if (parts.pants) parts.pants.visible = showLower;
+      if (parts.socks) parts.socks.visible = showLower;
+      setCamera(preset);
+    }
+
+    function resize() {
+      const w = panel.clientWidth, h = panel.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+
+    function applyTexture(tex, kitId) {
+      if (currentKit !== kitId) return;
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.flipY = false;
+      tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+      const mat = new THREE.MeshStandardMaterial({
+        map: tex, roughness: 0.76, metalness: 0.02, side: THREE.DoubleSide
+      });
+      mat.onBeforeCompile = shader => {
+        shader.fragmentShader = shader.fragmentShader.replace(
+          '#include <map_fragment>',
+          '#include <map_fragment>\nif (!gl_FrontFacing) { diffuseColor.rgb *= 0.36; }'
+        );
+      };
+      model.traverse(o => {
+        if (o.isMesh && !o.name.startsWith('Mannequin_')) o.material = mat;
+      });
+      loading.style.display = 'none';
+      setCamera('front');
+    }
+
+    function loadKit(kitId) {
+      currentKit = kitId;
+      loading.style.display = 'grid';
+      loading.textContent = 'Cargando modelo 3D…';
+      const texLoader = new THREE.TextureLoader();
+      const path = './visor3d/textures/' + kitId + '.webp';
+      if (textureCache.has(kitId)) {
+        applyTexture(textureCache.get(kitId), kitId);
+        return;
+      }
+      texLoader.load(path, tex => {
+        textureCache.set(kitId, tex);
+        applyTexture(tex, kitId);
+      }, undefined, () => {
+        loading.textContent = 'Textura 3D no disponible para este uniforme';
+      });
+    }
+
+    const loader = new GLTFLoader();
+    function ensureModel(done) {
+      if (model) { done(); return; }
+      loader.load('./visor3d/SK_Uniform_Mannequin.glb', gltf => {
+        model = gltf.scene;
+        scene.add(model);
+        const body = model.getObjectByName('Mannequin_Body');
+        if (body) body.visible = false;
+        parts = {
+          shirt: model.getObjectByName('Shirt'),
+          pants: model.getObjectByName('Pants'),
+          socks: model.getObjectByName('Socks'),
+          collar: model.getObjectByName('Collar_Crew')
+        };
+        for (const n of ['Collar_Crew', 'Collar_V', 'Collar_Polo', 'Collar_Mao']) {
+          const c = model.getObjectByName(n);
+          if (c) c.visible = n === 'Collar_Crew';
+        }
+        done();
+      });
+    }
+
+    window.__visor3D = {
+      open(kitId, label) {
+        currentKit = null;
+        viewMode = 'full';
+        preset = 'front';
+        titleEl.textContent = label || kitId;
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        resize();
+        loading.style.display = 'grid';
+        ensureModel(() => loadKit(kitId));
+      },
+      close() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        controls.autoRotate = false;
+      }
+    };
+
+    tools.forEach(b => b.onclick = () => {
+      if (b.dataset.view) setCamera(b.dataset.view);
+      else { viewMode = b.dataset.mode; applyMode(); }
+    });
+    closeBtn.onclick = () => window.__visor3D.close();
+    overlay.addEventListener('click', e => { if (e.target === overlay) window.__visor3D.close(); });
+    controls.addEventListener('start', () => { preset = null; syncTools(); });
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) window.__visor3D.close();
+    });
+    window.addEventListener('resize', () => { if (overlay.classList.contains('open')) resize(); });
+
+    function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); }
+    animate();
   </script>
 </body>
 </html>

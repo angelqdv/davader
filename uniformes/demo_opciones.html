@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Custom scrollbar and subtle transitions */
+    .custom-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+    .color-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .color-dot:hover {
+      transform: scale(1.18);
+    }
+    .color-dot.active {
+      transform: scale(1.22);
+      box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #e11d48;
+    }
+  </style>
+</head>
+<body class="bg-[#08090d] text-slate-100 antialiased p-3 sm:p-5 font-sans select-none">
+
+  <!-- Header del Demo -->
+  <div class="max-w-4xl mx-auto space-y-4">
+    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800">
+      <div>
+        <span class="inline-block text-[11px] font-mono tracking-wider font-bold uppercase px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800">
+          Laboratorio Interactivo UI/UX
+        </span>
+        <h1 class="text-lg font-black tracking-tight text-white mt-1">Comparativa de Opciones para Nivel 2 & Filtro de Colores</h1>
+      </div>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-slate-400 font-medium">Idioma Demo:</span>
+        <button id="langToggle" onclick="toggleLang()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-400 font-bold border border-slate-700 transition">
+          🌐 ES / EN
+        </button>
+      </div>
+    </div>
+
+    <!-- Selector de Opciones (Tabs) -->
+    <div class="space-y-1.5">
+      <div class="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
+        Selecciona una opción para probar su comportamiento en vivo:
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <button onclick="setOption('A')" id="btnTabA" class="tab-btn px-3 py-2 rounded-lg text-xs font-bold border text-left transition flex flex-col gap-0.5 bg-rose-900/60 border-rose-600 text-white shadow-lg shadow-rose-950/50">
+          <span class="flex items-center justify-between">
+            <span class="font-extrabold">Opción A</span>
+            <span class="text-[10px] uppercase font-mono px-1 py-0.2 rounded bg-rose-950 text-rose-300">Top</span>
+          </span>
+          <span class="text-[11px] opacity-80 font-normal">Dropdown + Chips Destacados</span>
+        </button>
+
+        <button onclick="setOption('B')" id="btnTabB" class="tab-btn px-3 py-2 rounded-lg text-xs font-bold border text-left transition flex flex-col gap-0.5 bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700">
+          <span class="font-extrabold">Opción B</span>
+          <span class="text-[11px] opacity-80 font-normal">Carrusel Deslizable ⟨ ⟩</span>
+        </button>
+
+        <button onclick="setOption('C')" id="btnTabC" class="tab-btn px-3 py-2 rounded-lg text-xs font-bold border text-left transition flex flex-col gap-0.5 bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700">
+          <span class="font-extrabold">Opción C</span>
+          <span class="text-[11px] opacity-80 font-normal">Colapsable (+Ver más)</span>
+        </button>
+
+        <button onclick="setOption('D')" id="btnTabD" class="tab-btn px-3 py-2 rounded-lg text-xs font-bold border text-left transition flex flex-col gap-0.5 bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700">
+          <span class="font-extrabold">Opción D</span>
+          <span class="text-[11px] opacity-80 font-normal">Sub-pestañas Jerárquicas</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Contenedor Interactivo de la Opción Seleccionada -->
+    <div class="bg-[#10131d] border border-slate-800 rounded-xl p-4 shadow-xl space-y-4">
+      
+      <!-- Encabezado de la Opción -->
+      <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+          <span id="optTitle" class="text-xs font-mono font-bold uppercase text-sky-400">
+            Nivel 2 • Ligas & Competiciones (Opción A en vivo)
+          </span>
+        </div>
+        <span id="activeSelectionLabel" class="text-[11px] text-slate-400 font-mono">
+          Liga activa: <strong class="text-white" id="lblCurrentLeague">Todas (43)</strong>
+        </span>
+      </div>
+
+      <!-- ZONA DE RENDERIZADO DINÁMICO DE LA OPCIÓN -->
+      <div id="optionContainer" class="min-h-[60px] flex flex-col justify-center">
+        <!-- Inyectado por JS -->
+      </div>
+
+      <!-- ========================================================== -->
+      <!-- FILTRO DE COLORES INTERACTIVO (Común para todas las opciones) -->
+      <!-- ========================================================== -->
+      <div class="pt-3 border-t border-slate-800/80 space-y-2">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">
+              🎨 Filtro de Color:
+            </span>
+            <span class="text-[11px] text-slate-400 font-mono">
+              Filtra uniformes por su color predominante
+            </span>
+          </div>
+          <div id="currentColorTag" class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+            Color: <strong class="text-white">Todos</strong>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 bg-[#090a10] p-2.5 rounded-lg border border-slate-800/80">
+          <!-- Botón Todos -->
+          <button onclick="selectColor('')" id="colAll" class="px-2.5 py-1 rounded text-xs font-bold border border-rose-600 bg-rose-900/60 text-white transition">
+            Todos
+          </button>
+          <div class="h-4 w-px bg-slate-800 mx-1"></div>
+
+          <!-- Puntos de Colores -->
+          <button onclick="selectColor('Red')" id="colRed" title="Rojo / Red" class="color-dot bg-red-600 border border-red-400 shadow-sm shadow-red-900"></button>
+          <button onclick="selectColor('Blue')" id="colBlue" title="Azul / Blue" class="color-dot bg-blue-600 border border-blue-400 shadow-sm shadow-blue-900"></button>
+          <button onclick="selectColor('White')" id="colWhite" title="Blanco / White" class="color-dot bg-white border border-slate-300 shadow-sm shadow-slate-700"></button>
+          <button onclick="selectColor('Black')" id="colBlack" title="Negro / Black" class="color-dot bg-zinc-900 border border-zinc-700 shadow-sm shadow-black"></button>
+          <button onclick="selectColor('Yellow')" id="colYellow" title="Amarillo / Yellow" class="color-dot bg-amber-400 border border-amber-200 shadow-sm shadow-amber-900"></button>
+          <button onclick="selectColor('Green')" id="colGreen" title="Verde / Green" class="color-dot bg-emerald-600 border border-emerald-400 shadow-sm shadow-emerald-900"></button>
+          <button onclick="selectColor('Orange')" id="colOrange" title="Naranja / Orange" class="color-dot bg-orange-500 border border-orange-300 shadow-sm shadow-orange-900"></button>
+          <button onclick="selectColor('LightBlue')" id="colLightBlue" title="Celeste / Sky Blue" class="color-dot bg-sky-400 border border-sky-200 shadow-sm shadow-sky-900"></button>
+          <button onclick="selectColor('Purple')" id="colPurple" title="Morado / Purple" class="color-dot bg-purple-600 border border-purple-400 shadow-sm shadow-purple-900"></button>
+          <button onclick="selectColor('Pink')" id="colPink" title="Rosa / Pink" class="color-dot bg-pink-500 border border-pink-300 shadow-sm shadow-pink-900"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Simulación de Resultados Filtrados en Tiempo Real -->
+    <div class="space-y-2">
+      <div class="flex items-center justify-between text-xs text-slate-400">
+        <span>Simulación de Tarjetas (Reactivas a Liga y Color):</span>
+        <span id="matchCountBadge" class="font-mono text-sky-400 font-bold">Mostrando 4 equipos muestra</span>
+      </div>
+
+      <div id="sampleCardsGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <!-- Inyectado por JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================================
+    // DATOS DE MUESTRA PARA EL DEMO
+    // ==========================================================
+    const SAMPLE_LEAGUES = [
+      { id: "all", name_es: "Todas las Ligas", name_en: "All Leagues", count: 43, isTop: false },
+      { id: "premier", name_es: "Liga Inglesa (Premier)", name_en: "English League (Premier)", count: 20, isTop: true, tier: "t1" },
+      { id: "laliga", name_es: "Liga Española (LaLiga)", name_en: "Spanish League (LaLiga)", count: 20, isTop: true, tier: "t1" },
+      { id: "seriea", name_es: "Liga Italiana (Serie A)", name_en: "Italian League (Serie A)", count: 20, isTop: true, tier: "t1" },
+      { id: "ucl", name_es: "Liga de Campeones (ACL)", name_en: "Asian Champions League", count: 33, isTop: true, tier: "cup" },
+      { id: "ligue1", name_es: "Francia (Ligue 1)", name_en: "French League (Ligue 1)", count: 18, isTop: true, tier: "t1" },
+      { id: "brasileirao", name_es: "Brasil (Brasileirão)", name_en: "Brazilian League", count: 20, isTop: true, tier: "t1" },
+      { id: "eredivisie", name_es: "Países Bajos (Eredivisie)", name_en: "Dutch League (Eredivisie)", count: 18, isTop: false, tier: "t1" },
+      { id: "turkey", name_es: "Turquía (Süper Lig)", name_en: "Turkish Super Lig", count: 19, isTop: false, tier: "t1" },
+      { id: "portugal", name_es: "Liga Portugal", name_en: "Portuguese League", count: 18, isTop: false, tier: "t1" },
+      { id: "jleague", name_es: "Japón (J1 League)", name_en: "Japanese League (J1)", count: 20, isTop: false, tier: "t1" },
+      { id: "jleague2", name_es: "Japón (J2 League)", name_en: "Japanese 2nd Division (J2)", count: 20, isTop: false, tier: "t2" },
+      { id: "laliga2", name_es: "España (Segunda)", name_en: "Spanish 2nd Division", count: 22, isTop: false, tier: "t2" },
+      { id: "ligue2", name_es: "Francia (Ligue 2)", name_en: "French 2nd Division", count: 18, isTop: false, tier: "t2" },
+      { id: "nat_eu", name_es: "Selecciones Europa", name_en: "European National Teams", count: 55, isTop: false, tier: "cup" },
+      { id: "nat_sa", name_es: "Selecciones Sudamérica", name_en: "South American National Teams", count: 10, isTop: false, tier: "cup" }
+    ];
+
+    const SAMPLE_TEAMS = [
+      { id: "ars", name: "Arsenal FC", leagueId: "premier", leagueName: "English League", color: "Red", colorHex: "#dc2626", kitImg: "🔴 Camiseta Roja" },
+      { id: "cfc", name: "Chelsea FC", leagueId: "premier", leagueName: "English League", color: "Blue", colorHex: "#2563eb", kitImg: "🔵 Camiseta Azul" },
+      { id: "rma", name: "Real Madrid", leagueId: "laliga", leagueName: "Spanish League", color: "White", colorHex: "#f8fafc", kitImg: "⚪ Camiseta Blanca" },
+      { id: "juv", name: "Juventus FC", leagueId: "seriea", leagueName: "Italian League", color: "Black", colorHex: "#18181b", kitImg: "⚫ Camiseta Negra" },
+      { id: "bvb", name: "Borussia D.", leagueId: "ucl", leagueName: "Champions", color: "Yellow", colorHex: "#facc15", kitImg: "🟡 Camiseta Amarilla" },
+      { id: "cel", name: "Celtic FC", leagueId: "ucl", leagueName: "Champions", color: "Green", colorHex: "#059669", kitImg: "🟢 Camiseta Verde" },
+      { id: "mci", name: "Manchester B.", leagueId: "premier", leagueName: "English League", color: "LightBlue", colorHex: "#38bdf8", kitImg: "🔷 Camiseta Celeste" },
+      { id: "arg", name: "Argentina", leagueId: "nat_sa", leagueName: "Selecciones", color: "LightBlue", colorHex: "#38bdf8", kitImg: "🔷 Celeste y Blanca" }
+    ];
+
+    let currentOption = "A";
+    let selectedLeague = "all";
+    let selectedColor = "";
+    let isEnglish = false;
+    let isExpandedC = false;
+    let activeSubtierD = "t1";
+
+    function setOption(opt) {
+      currentOption = opt;
+      document.querySelectorAll(".tab-btn").forEach(b => {
+        b.classList.remove("bg-rose-900/60", "border-rose-600", "text-white", "shadow-lg");
+        b.classList.add("bg-slate-900", "border-slate-800", "text-slate-400");
+      });
+      const activeBtn = document.getElementById("btnTab" + opt);
+      if (activeBtn) {
+        activeBtn.classList.remove("bg-slate-900", "border-slate-800", "text-slate-400");
+        activeBtn.classList.add("bg-rose-900/60", "border-rose-600", "text-white", "shadow-lg");
+      }
+      renderOption();
+    }
+
+    function toggleLang() {
+      isEnglish = !isEnglish;
+      document.getElementById("langToggle").textContent = isEnglish ? "🌐 EN / ES" : "🌐 ES / EN";
+      renderOption();
+      renderCards();
+    }
+
+    function selectLeague(id) {
+      selectedLeague = id;
+      const leagueObj = SAMPLE_LEAGUES.find(l => l.id === id);
+      const name = leagueObj ? (isEnglish ? leagueObj.name_en : leagueObj.name_es) : id;
+      document.getElementById("lblCurrentLeague").textContent = name;
+      renderOption();
+      renderCards();
+    }
+
+    function selectColor(color) {
+      selectedColor = color;
+      document.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
+      const allBtn = document.getElementById("colAll");
+      if (!color) {
+        allBtn.classList.add("border-rose-600", "bg-rose-900/60", "text-white");
+        document.getElementById("currentColorTag").innerHTML = `Color: <strong class="text-white">${isEnglish ? 'All' : 'Todos'}</strong>`;
+      } else {
+        allBtn.classList.remove("border-rose-600", "bg-rose-900/60", "text-white");
+        const activeDot = document.getElementById("col" + color);
+        if (activeDot) activeDot.classList.add("active");
+        document.getElementById("currentColorTag").innerHTML = `Color: <strong class="text-rose-400">${color}</strong>`;
+      }
+      renderCards();
+    }
+
+    // ==========================================================
+    // RENDERIZADO DE LAS 4 OPCIONES
+    // ==========================================================
+    function renderOption() {
+      const c = document.getElementById("optionContainer");
+      const title = document.getElementById("optTitle");
+
+      if (currentOption === "A") {
+        title.textContent = isEnglish ? "Level 2 • Option A: Top Chips + Searchable Select" : "Nivel 2 • Opción A: Chips Principales + Selector Desplegable";
+        const topLeagues = SAMPLE_LEAGUES.filter(l => l.isTop);
+        c.innerHTML = `
+          <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+            <!-- Barra de Chips de Ligas Top -->
+            <div class="flex items-center gap-1.5 flex-wrap flex-1">
+              <button onclick="selectLeague('all')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition border ${selectedLeague === 'all' ? 'bg-rose-900 text-white border-rose-600' : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-slate-700'}">
+                ${isEnglish ? 'All' : 'Todas'} (43)
+              </button>
+              ${topLeagues.map(l => `
+                <button onclick="selectLeague('${l.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition border ${selectedLeague === l.id ? 'bg-sky-900 text-white border-sky-500' : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-slate-700'}">
+                  ${isEnglish ? l.name_en : l.name_es}
+                </button>
+              `).join('')}
+            </div>
+
+            <!-- Selector Desplegable con todas las ligas -->
+            <div class="w-full md:w-56">
+              <select onchange="selectLeague(this.value)" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-2.5 py-2 font-bold focus:outline-none focus:border-rose-500">
+                <option value="all">${isEnglish ? '— Browse All 43 Leagues —' : '— Ver las 43 Ligas —'}</option>
+                ${SAMPLE_LEAGUES.filter(l => l.id !== 'all').map(l => `
+                  <option value="${l.id}" ${selectedLeague === l.id ? 'selected' : ''}>
+                    ${isEnglish ? l.name_en : l.name_es} (${l.count})
+                  </option>
+                `).join('')}
+              </select>
+            </div>
+          </div>
+        `;
+      } 
+      else if (currentOption === "B") {
+        title.textContent = isEnglish ? "Level 2 • Option B: Horizontal Carousel ⟨ ⟩" : "Nivel 2 • Opción B: Carrusel Deslizable Horizontal ⟨ ⟩";
+        c.innerHTML = `
+          <div class="relative flex items-center">
+            <button onclick="scrollCarousel(-160)" class="z-10 p-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-l-lg text-slate-300 font-black">⟨</button>
+            <div id="carouselTrack" class="flex items-center gap-2 overflow-x-auto custom-scroll py-1 px-2 scroll-smooth">
+              ${SAMPLE_LEAGUES.map(l => `
+                <button onclick="selectLeague('${l.id}')" class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition border whitespace-nowrap ${selectedLeague === l.id ? 'bg-sky-900 text-white border-sky-500' : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-slate-700'}">
+                  ${isEnglish ? l.name_en : l.name_es} <span class="text-[10px] opacity-70">(${l.count})</span>
+                </button>
+              `).join('')}
+            </div>
+            <button onclick="scrollCarousel(160)" class="z-10 p-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-r-lg text-slate-300 font-black">⟩</button>
+          </div>
+        `;
+      } 
+      else if (currentOption === "C") {
+        title.textContent = isEnglish ? "Level 2 • Option C: Collapsible Accordion" : "Nivel 2 • Opción C: Menú Colapsable (+Ver Más)";
+        const visibleLeagues = isExpandedC ? SAMPLE_LEAGUES : SAMPLE_LEAGUES.slice(0, 7);
+        c.innerHTML = `
+          <div class="space-y-2">
+            <div class="flex flex-wrap gap-2">
+              ${visibleLeagues.map(l => `
+                <button onclick="selectLeague('${l.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition border ${selectedLeague === l.id ? 'bg-sky-900 text-white border-sky-500' : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-slate-700'}">
+                  ${isEnglish ? l.name_en : l.name_es} (${l.count})
+                </button>
+              `).join('')}
+            </div>
+            <div class="pt-1">
+              <button onclick="toggleExpandC()" class="text-xs font-mono font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+                ${isExpandedC ? (isEnglish ? '▴ Show Less' : '▴ Mostrar Menos') : (isEnglish ? `▾ Show All Leagues (+${SAMPLE_LEAGUES.length - 7})` : `▾ Ver Todas las Ligas (+${SAMPLE_LEAGUES.length - 7})`)}
+              </button>
+            </div>
+          </div>
+        `;
+      } 
+      else if (currentOption === "D") {
+        title.textContent = isEnglish ? "Level 2 • Option D: Hierarchical Tier Tabs" : "Nivel 2 • Opción D: Sub-pestañas Jerárquicas";
+        const filteredTierLeagues = SAMPLE_LEAGUES.filter(l => l.tier === activeSubtierD || l.id === "all");
+        c.innerHTML = `
+          <div class="space-y-2.5">
+            <!-- Mini Pestañas de Nivel -->
+            <div class="flex items-center gap-1 text-xs border-b border-slate-800 pb-1.5">
+              <button onclick="setSubtierD('t1')" class="px-2.5 py-1 rounded font-bold transition ${activeSubtierD === 't1' ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'text-slate-400 hover:text-white'}">
+                ${isEnglish ? '1st Tier Leagues' : 'Primeras Divisiones'}
+              </button>
+              <button onclick="setSubtierD('t2')" class="px-2.5 py-1 rounded font-bold transition ${activeSubtierD === 't2' ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'text-slate-400 hover:text-white'}">
+                ${isEnglish ? '2nd Tier Leagues' : 'Segundas Divisiones'}
+              </button>
+              <button onclick="setSubtierD('cup')" class="px-2.5 py-1 rounded font-bold transition ${activeSubtierD === 'cup' ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'text-slate-400 hover:text-white'}">
+                ${isEnglish ? 'Cups & Tournaments' : 'Copas y Selecciones'}
+              </button>
+            </div>
+
+            <!-- Botones de Ligas del Tier Activo -->
+            <div class="flex flex-wrap gap-1.5">
+              ${filteredTierLeagues.map(l => `
+                <button onclick="selectLeague('${l.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold transition border ${selectedLeague === l.id ? 'bg-sky-900 text-white border-sky-500' : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-slate-700'}">
+                  ${isEnglish ? l.name_en : l.name_es} (${l.count})
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function scrollCarousel(amt) {
+      const track = document.getElementById("carouselTrack");
+      if (track) track.scrollLeft += amt;
+    }
+
+    function toggleExpandC() {
+      isExpandedC = !isExpandedC;
+      renderOption();
+    }
+
+    function setSubtierD(tier) {
+      activeSubtierD = tier;
+      renderOption();
+    }
+
+    // ==========================================================
+    // RENDERIZADO DE LAS TARJETAS FILTRADAS
+    // ==========================================================
+    function renderCards() {
+      const grid = document.getElementById("sampleCardsGrid");
+      const filtered = SAMPLE_TEAMS.filter(t => {
+        const matchLeague = (selectedLeague === "all") || (t.leagueId === selectedLeague);
+        const matchColor = !selectedColor || (t.color === selectedColor);
+        return matchLeague && matchColor;
+      });
+
+      document.getElementById("matchCountBadge").textContent = `${isEnglish ? 'Found' : 'Encontrados'}: ${filtered.length} ${isEnglish ? 'teams' : 'equipos'}`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-8 text-center text-slate-400 text-xs border border-dashed border-slate-800 rounded-xl">
+            ${isEnglish ? 'No teams match this league and color combination.' : 'No hay equipos con esta combinación de liga y color.'}
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(t => `
+        <div class="bg-[#0b0d14] border border-slate-800 rounded-xl p-3 flex flex-col gap-2 hover:border-rose-900 transition shadow-lg">
+          <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+            <span class="truncate max-w-[90px]">${t.leagueName}</span>
+            <span class="w-2.5 h-2.5 rounded-full border border-black/40" style="background-color: ${t.colorHex}"></span>
+          </div>
+          <div class="font-bold text-xs text-white truncate">${t.name}</div>
+          <div class="h-20 bg-slate-950/80 rounded-lg flex items-center justify-center border border-slate-900/80 text-xs font-mono font-bold" style="color: ${t.colorHex === '#18181b' ? '#a1a1aa' : t.colorHex}">
+            ${t.kitImg}
+          </div>
+          <div class="text-[10px] text-center font-mono text-slate-400">
+            ${isEnglish ? 'Color detected' : 'Color detectado'}: <strong class="text-slate-200">${t.color}</strong>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Inicialización
+    renderOption();
+    renderCards();
+  </script>
+</body>
+</html>
