@@ -2001,7 +2001,7 @@
             <div class="kit-thumb-item ${isActive}" 
                  onclick="switchCardKit(event, '${t.continenteFolder}', '${t.equipo}', ${kIdx})"
                  title="${kRole} (${kColorName})">
-              <img class="kit-thumb-img" src="${kUrl}" alt="${kRole}">
+              <img class="kit-thumb-img" src="${kUrl}" alt="${kRole}" loading="lazy" decoding="async">
               <span>${kRole}</span>
             </div>
           `;
@@ -2037,6 +2037,7 @@
                    src="${previewUrl}" 
                    alt="${teamName} - ${roleLabel}" 
                    loading="lazy" 
+                   decoding="async"
                    onerror="this.style.opacity='0.2'">
             </div>
 
